@@ -5,7 +5,7 @@ description:  徐永康
 url: http://babyvector.github.io
 
 # 自定义post url
-permalink: /blog/:title.html
+
 timezone: Asia/Kaifeng
 
 # Overriden by GitHub Pages: https://help.github.com/articles/using-jekyll-with-pages#configuring-jekyll
