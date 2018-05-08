@@ -5,3 +5,10 @@
 layout: home
 ---
 <div>this is your first time to tell me somethings!!!this is ...</div>
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
