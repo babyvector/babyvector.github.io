@@ -1,7 +1,8 @@
 ---
 layout: default
 ---
-
+<html>
+<head></head>
 <body>
   <div class="index-wrapper">
     <div class="aside">
@@ -26,3 +27,4 @@ layout: default
     </div>
   </div>
 </body>
+</html>
