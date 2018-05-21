@@ -2,7 +2,7 @@
 # Feel free to add content and custom Front Matter to this file.
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
-layout: default
+layout: post
 ---
 >http://open.163.com/movie/2010/12/E/P/M6UTT5U0I_M6V2U4BEP.html
 

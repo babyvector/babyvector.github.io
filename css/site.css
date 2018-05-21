@@ -16,7 +16,49 @@ body {
   /*自定义line-height: 170%; body对象行与行的间距*/
   font-size: 100%;
 }
+/*
+ul{
+	border-radius:100%;
+	list-style-type:disc;
+}
+*/
 
+ul{
+
+	padding:0;
+	margin:0;
+
+} 
+
+li{
+	width:auto;
+	list-style:none;
+	float:left;
+	background-color:prink;
+	margin-top:5px;
+	margin-bottom:10px;
+	margin-left:20%
+}
+
+.li_container{
+	align:center;
+	width:60%;
+	height:55px;
+	background-color:transparent;#blue;
+	margin-top:8px;
+	margin-left:20%;
+	margin-right:20%;
+}
+.li_container_date{
+	
+	font-size:4px;
+	float:left;
+	background-color:transparent;
+	margin-top:8px;
+	font-family:Microsoft YaHe;
+	color:#9dacad;
+}
+style="font-size:4px;float:left;background-color:transparent;margin-top:8px;font-family:Arial,Helvetica,sans-serif,SimSun;"
 p{
   text-align: justify;
   margin: 1em 0;
@@ -24,13 +66,17 @@ p{
 
 /*添加段与段之间的分割线样式*/
 hr {
+	margin-top:10px;
+	width:100%;
+	/*
     border-bottom: 1px dashed #f9f9f9;
     border-top: 2px dashed #22c3aa;
     margin-top:2em;
     margin-bottom: 2em;
+	*/
 }
 
-p {
+p{
     margin: 0px 0px 10px;
     /*使左右两边对齐*/
     text-align:justify;
@@ -50,10 +96,20 @@ table td, table th {
   padding: 0.4em;
 }
 
+.content_container{
+	width:80%;
+	background-color:transparent;#black;
+	text-align:center;
+	#margin:0 auto;
+	margin-left:10%;
+	#margin-right:10%;
+}
+
 
 /* Common */
 
 a {
+  
   color: #e74c3c;
   text-decoration: none;
 }
@@ -288,17 +344,17 @@ header .logo a, header .logo a:hover {
   border-radius: 50%;
   max-width: 50px;
   vertical-align: -9px;
-  margin-left: 12px;
+  margin-left: 5px;
   box-shadow: 0px 0px 0px 4px #FFF, 0px 0px 4px 4px #4D4D4D;
 }
 
 /*图像旋转*/
 .avatar:hover {
-    -webkit-animation: spin 2s linear infinite;
-    -moz-animation: spin 2s linear infinite;
-    -ms-animation: spin 2s linear infinite;
-    -o-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
+   # -webkit-animation: spin 20s linear infinite;
+   # -moz-animation: spin 20s linear infinite;
+   # -ms-animation: spin 20s linear infinite;
+   # -o-animation: spin 20s linear infinite;
+   # animation: spin 20s linear infinite;
 }
 
 @-webkit-keyframes spin {
@@ -342,11 +398,11 @@ header .logo a, header .logo a:hover {
   list-style-type: none;
   font-size: 1.4em;
 }
-
+/*
 .links li {
   padding: 0.5em 0;
 }
-
+*/
 .about-me .speak-french {
   line-height: 3.8em;
 }
@@ -380,12 +436,12 @@ footer .linkings {
 footer .links {
   border: none;
 }
-
+/*
 footer .links li {
   display: inline;
   padding: 0 0.2em;
 }
-
+*/
 footer .links a:hover {
   text-decoration: none;
 }

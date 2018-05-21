@@ -2,7 +2,7 @@
 # Feel free to add content and custom Front Matter to this file.
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
-layout: default
+layout: page
 ---
 #<center>size_t数据类型</center>
 <p align="right">yongkangxuuest@gmail.com</p>

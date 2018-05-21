@@ -1,14 +1,7 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
 ---
-#<center> 排序算法（详见维基百科）</center>
-<p align = "right">yongkangxuuest@gmail.com</p>
-<p align = "right">04.12.2018</p>
------
-##比较排序
+#比较排序
 1.	冒泡排序
 	
 		冒泡排序（英语：Bubble Sort）是一种简单的排序算法。它重复地走访过要排序的数列，
@@ -296,7 +289,7 @@ layout: default
 		递归：function（n）{n = function(n-1)}
 7.	归并排序#
 
-<center>![](https://upload.wikimedia.org/wikipedia/commons/c/cc/Merge-sort-example-300px.gif)</center>
+<center>![]](https://upload.wikimedia.org/wikipedia/commons/c/cc/Merge-sort-example-300px.gif)</center>
 
 		递归法（Top-down）
 		1申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列
@@ -376,4 +369,4 @@ layout: default
 1.	哈希表排序#
 2.	桶排序#(使用空间多，不是基于比较的方法)
 3.	基数排序#
-![](https://img-blog.csdn.net/20161009171515225)
+![]](https://img-blog.csdn.net/20161009171515225)
