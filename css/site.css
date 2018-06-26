@@ -46,6 +46,7 @@ li{
 	height:55px;
 	background-color:transparent;#blue;
 	margin-top:8px;
+	float:left;
 	margin-left:20%;
 	margin-right:20%;
 }
@@ -98,13 +99,24 @@ table td, table th {
 
 .content_container{
 	width:80%;
-	background-color:transparent;#black;
+	background-color:transparent;
 	text-align:center;
 	#margin:0 auto;
 	margin-left:10%;
 	#margin-right:10%;
 }
-
+.sort-tag{
+	margin:0 auto;
+	width:60%;
+	background-color:black;
+}
+.sort-tag-box{
+	float:right;
+	
+}
+.content_container a{
+	
+}
 
 /* Common */
 
@@ -409,6 +421,8 @@ header .logo a, header .logo a:hover {
 
 /* Footer */
 footer {
+	
+  width:100%
   font-size: small;
   line-height: 2em;
   color: #858585;

@@ -6,22 +6,45 @@ layout: post
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="../css/post.css">
+
 </head>
 <body class="body-post">
+
   <div class="post-wrapper">
+  $\sum_{i=0}^N\int_{a}^{b}g(t,i)\text{d}t$
 	<h1 align="center">{{ page.title }}</h1>
-    
     {{ content }}
 <!--   
    {% include disqus.html %}
 -->
+	<div class="footer-container">
+		<br>
+		<br>
+		<br>
+		<br>
+		<div  style="border-bottom: 1px solid #888"></div>
+		<p class="post-date">{{ page.date|date:"%Y-%m-%d" }}</p>
+		<p>QQ:2561258938</p>
+		<p>微信：m13323966598</p>
+		<p>邮箱：yongkangxuuest@gmial.com</p>
+	</div>
    </div>
 <!--
   {% include about.html %}
 -->
-  <hr>
-  <p class="post-date">{{ page.date|date:"%Y-%m-%d" }}</p>
+ 
+  
   <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
   <script src="/js/post.js" type="text/javascript"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+
 </body>
 </html>

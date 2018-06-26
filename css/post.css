@@ -1,16 +1,63 @@
+/*header and body css*/
 body{
-	width:90%;
+	width:100%;
 	margin:0 auto;
-	
+	background-color:#d0d0d0;
+	font-family: "Arial","PingHei","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
 }
-
+/*总体央样式*/
+.post-wrapper{
+	width:70%;
+	margin:0 auto;
+	background-color:white;
+	padding-left:5%;
+	padding-right:5%;
+	padding-top:50px;
+	padding-bottom:50px;
+}
 .post-title{
 	margin:0 auto;
 }
 .post-date{
 	float:right;
 }
-
+img{
+	width:100%;
+	vertical-align:middle;
+	
+}
+/*部件的相关样式*/
+blockquote {
+ background-color: #eae6f3;
+ border-left: 1em solid #5236a0;
+ margin: 1.0em 0 1.0em;
+ padding: 0.5em 0.5em 0.5em 0.5em;
+ position: relative;
+ color: #888;
+}
+blockquote a{
+	text-decoration:none;
+	
+}
+/*
+blockquote:before {
+  color: #392570;
+  content: "\201C";
+  font-size: 5em;
+  line-height: 0em;
+  margin-right: 0em;
+  vertical-align: -0.4em;
+}
+blockquote:after {
+  color: #392570;
+  content: "\201D";
+  font-size: 5em;
+  position:absolute;
+  right:3px;
+  bottom: 0em;
+  line-height: 0.1em;
+}
+*/
 h1{
 	align:center;
 }
@@ -18,6 +65,66 @@ h1{
 code{
 	#background-color:;
 }
+pre{
+	font:#b0b4bd;
+	font-size: 14px; font-family: "微软雅黑"; color:#b0b4bd;
+	border:0.5px solid #ccc;
+	#box-shadow: -10px 10px 5px #888888;
+	border-radius:1.5px;
+	background-color:#282c35;
+	font:
+	margin:0 auto;
+	overflow:auto;
+	}
+/*
 .highlight{
-	background-color:#656D78
+	background-color:#eee
+	border-radius:10px;
+	border:2px solid;
 }
+*/
+
+
+/*footer*/
+.footer-container{
+	font-family: "PingHei","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
+	font-size:5px;
+}
+/*table 相关属性*/
+
+/*
+table{  
+     margin:5px auto;  
+     width:60%;  
+     padding:5px;  
+     }  
+  th{  
+     background-color:#76B7BC;  
+     font-size:14px;  
+     padding:5px;  
+     }  
+  .even td{
+      background-color:#BCD7DA;  
+      padding:5px 6px;  
+      }  
+    
+  .odd td{  
+      background-color:#FFF;;  
+          padding:5px 6px;}  
+*/
+table{  
+ margin:5px auto;  
+ width:60%;  
+ padding:5px;  
+ }  
+th{  
+ background-color:#d0d0d0;  
+ font-size:14px;  
+ padding:5px;  
+ }  
+table tr:nth-child(even) {  
+	background: #e5e5e5;  
+}  
+table tr:nth-child(odd) {  
+	background: White;  
+} 

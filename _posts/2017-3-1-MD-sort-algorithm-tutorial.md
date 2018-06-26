@@ -1,11 +1,9 @@
 ---
 layout: post
 title: 排序算法总结
+categories: [数据结构与算法]
 ---
-#<center> 排序算法（详见维基百科）</center>
-<p align = "right">yongkangxuuest@gmail.com</p>
-<p align = "right">04.12.2018</p>
------
+
 ##比较排序
 1.	冒泡排序
 	

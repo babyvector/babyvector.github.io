@@ -327,16 +327,18 @@ ul.posts .description {
   font-size:       1.5em;
 }
 
-img[alt=drawing] { width: 60%; }
+img[alt=drawing] { width: 100%; }
 
 .category-listing-seperator {
-    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+    width: 80%;
+	font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
     /**font-size: 3em;**/
     font-weight: 400;
     list-style-type: none;
     display: block;
     text-decoration: none;
     font-size:x-large;
+	margin-left: 0px;
     margin-top: 40px;
     margin-bottom: 20px;
 }
@@ -432,6 +434,7 @@ img[alt=drawing] { width: 60%; }
 }
 
 .post-link-in-posts {
+	
     display: block;
     overflow: hidden;
     list-style-type: none;
@@ -441,6 +444,9 @@ img[alt=drawing] { width: 60%; }
     border-bottom: 1px dashed #d0d0d0;
     /* color: #a00; */
     color: #555;
+	
+	float:left;
+	width:100%;
 }
 
 @media (min-width: 768px)
