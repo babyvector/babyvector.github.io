@@ -18,6 +18,83 @@ categories: [linux命令积累]
 
 	ctrl+b
 
+## linux中的ps
+
+ps命令用于查看系统中正在运行的进程
+参数格式：
+
+- e 显示所有进程。
+- f 全格式。
+- h 不显示标题。
+- l 长格式。
+- w 宽输出。
+- a 显示终端上的所有进程，包括其他用户的进程。
+- r 只显示正在运行的进程。
+- x 显示没有控制终端的进程。
+
+最常用的几个命令
+
+- ps -ef 查看全格式的全部进程
+- ps -ax 查看全部进程
+- ps -ef|grep <进程名> 查看并筛选 跟进程名有关的进程，该进程名可以是进程的全部或者部分
+
+## linux中的netstat命令
+
+netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。
+
+语法
+
+netstat(选项)
+
+选项
+
+- a或--all：显示所有连线中的Socket；
+- A<网络类型>或--<网络类型>：列出该网络类型连线中的相关地址；
+- c或--continuous：持续列出网络状态；
+- C或--cache：显示路由器配置的快取信息；
+- e或--extend：显示网络其他相关信息；
+- F或--fib：显示FIB；
+- g或--groups：显示多重广播功能群组组员名单；
+- h或--help：在线帮助；
+- i或--interfaces：显示网络界面信息表单；
+- l或--listening：显示监控中的服务器的Socket；
+- M或--masquerade：显示伪装的网络连线；
+- n或--numeric：直接使用ip地址，而不通过域名服务器；
+- N或--netlink或--symbolic：显示网络硬件外围设备的符号连接名称；
+- o或--timers：显示计时器；
+- p或--programs：显示正在使用Socket的程序识别码和程序名称；
+- r或--route：显示Routing Table；
+- s或--statistice：显示网络工作信息统计表；
+- t或--tcp：显示TCP传输协议的连线状况；
+- u或--udp：显示UDP传输协议的连线状况；
+- v或--verbose：显示指令执行过程；
+- V或--version：显示版本信息；
+- w或--raw：显示RAW传输协议的连线状况；
+- x或--unix：此参数的效果和指定"-A unix"参数相同；
+-- ip或--inet：此参数的效果和指定"-A inet"参数相同。
+
+实例
+
+列出所有端口 (包括监听和未监听的)
+
+- netstat -a     #列出所有端口
+- netstat -at    #列出所有tcp端口
+- netstat -au    #列出所有udp端口     
+-                         
+列出所有处于监听状态的 Sockets
+
+- netstat -l        #只显示监听端口
+- netstat -lt       #只列出所有监听 tcp 端口
+- netstat -lu       #只列出所有监听 udp 端口
+- netstat -lx       #只列出所有监听 UNIX 端口
+
+
+在netstat输出中显示 PID 和进程名称
+
+- netstat -pt
+
+[详细查看](http://man.linuxde.net/netstat)
+
 ## linux中的expect命令
 
 1. send:用于向进程发送字符
