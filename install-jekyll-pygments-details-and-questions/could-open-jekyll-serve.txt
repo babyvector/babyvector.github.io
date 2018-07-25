@@ -1,0 +1,4 @@
+有时候我们可能无法启动jekyll-serve那么我们就要
+在cmd中输入
+netstat -aon | findstr "4000"
+找到4000端口被那个进程占据，找到相应的PID开启进程管理器杀死即可

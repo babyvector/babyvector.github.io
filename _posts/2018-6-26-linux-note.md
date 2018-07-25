@@ -17,6 +17,8 @@ categories: [linux命令积累]
 	ctrl+f
 
 	ctrl+b
+3. vim中的进行撤销的命令
+	U
 
 ## linux中的ps
 
@@ -88,7 +90,7 @@ netstat(选项)
 - netstat -lu       #只列出所有监听 udp 端口
 - netstat -lx       #只列出所有监听 UNIX 端口
 
-
+dd
 在netstat输出中显示 PID 和进程名称
 
 - netstat -pt

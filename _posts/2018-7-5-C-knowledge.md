@@ -217,3 +217,41 @@ int main(){
 	return 0;
 }
 ```
+
+###平时积累的编程中的错误点
+```
+申请内存并进行初始化的时候
+int container[500] = {0};
+//这样的初始化是正确的，里面的所有数字都会被初始化为0
+int container[500] = {-1};
+//这样的初始化是错误的只有第一个数字被初始化成为-1其余的全部被初始化为0
+
+
+```
+###另外注意在for循环中的++号的使用
+```
+	for (position_to_insert,increments = 0; increments<porper_number;//这一步成立就行，自己使用break_if_repeat特别容易犯错
+				increments++){
+			position_to_insert = (input_num_container[i] + increments*increments) % porper_number;
+			/*
+			以上for语句与下面的for语句不同：
+			for (position_to_insert,increments = 0; increments<porper_number;//这一步成立就行，自己使用break_if_repeat特别容易犯错
+					position_to_insert = (input_num_container[i] + increments*increments++) % porper_number;){
+			这样执行下来一定会比上的少一步，因为得到position之后increments就+1；
+			而上面的的是先+1之后再得到position
+				
+			*/
+			
+			printf("position_to_insert:%d\n",position_to_insert);
+		
+			if (!is_be_filled[position_to_insert]){
+
+			
+				//result[i] = position_to_insert;
+				is_be_filled[position_to_insert] = 1;
+				p = position_to_insert;
+
+				break;
+			}
+		}
+```
