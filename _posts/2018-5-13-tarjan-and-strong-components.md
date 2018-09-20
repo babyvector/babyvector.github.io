@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 有向图中使用Tarjan算法找强连通分量的个数
+title: 图|连通图|有向图中使用Tarjan算法找强连通分量的个数
 categories: [数据结构与算法]
 ---
 

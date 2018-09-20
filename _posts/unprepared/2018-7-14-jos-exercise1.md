@@ -306,6 +306,47 @@ https://www.cnblogs.com/ck1020/p/6115200.html
 ### sub $0x2c,%esp
 $0x2c-%esp之后放入esp中
 
+###leave指令
+在16位汇编下相当于:
+mov bp,sp
+pop bp
+ 
+在32位汇编下相当于:
+mov esp,ebp
+pop ebp
+###ret指令
+
+###call指令
+
+对于以上两个命令最简化的说法就是执行call的时候push prt
+但是执行ret的时候就是pop IP这样就实现了函数的调用
+
+稍微详细的解释
+call：
+CPU执行指令“call far ptr 标号”时，相当于进行：
+
+push CS
+
+push IP
+
+jmp far ptr 标号
+
+ret：
+CPU执行ret指令时，相当于进行：
+
+pop IP
+
+ 
+
+CPU执行retf指令时，相当于进行：
+
+pop IP
+
+pop CS
+详细的解释见：
+http://www.cppblog.com/luqingfei/archive/2010/08/04/122170.aspx
+ 
+
 
 
 

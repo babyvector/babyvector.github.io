@@ -11,7 +11,8 @@ permalink: /blog/:title.html
 safe: true
 lsi: false
 
-markdown: kramdown
+markdown: kramdown 
+#由于使用的是markdown pad为了适应kramdown语法在使用# header的时候要有空格且要空一行
 #highlighter:  pygments
 
 #kramdown:

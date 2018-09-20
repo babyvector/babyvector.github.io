@@ -19,6 +19,8 @@ categories: [linux命令积累]
 	ctrl+b
 3. vim中的进行撤销的命令
 	U
+   vim中的前进命令
+	ctrl+r
 
 ## linux中的ps
 
@@ -116,6 +118,23 @@ interact
 如果想要运行这个sh就要使用命令：
 /usr/bin/expect xx.sh
 这样做的原因是由于spawn是内嵌在expect内的命令如果不这样做就会出现命令找不到的情况。
+
+##linux中的<的用法
+./a.out <t.sh
+./a.out是一个运行程序
+t.sh是命令行的内容
+	 > y
+	cat < y | sort | uniq | wc > y1
+	cat y1
+	rm y1
+	ls |  sort | uniq | wc
+	rm y
+也就是运行几行命令
+
+##linux中的git简单用法
+git add.//将代码更新
+git commit -m "commit message"//评论新新增的代码
+
 
 
 ## linux中的dd命令
