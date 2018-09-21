@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 求素数的方法
-categories: [操作系统]
+categories: [数据结构与算法]
 ---
 
 #hashtable
