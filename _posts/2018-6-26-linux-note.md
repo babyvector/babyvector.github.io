@@ -21,6 +21,9 @@ categories: [linux命令积累]
 	U
    vim中的前进命令
 	ctrl+r
+4. vim中的如何移动到首行和末行
+	1. gg将光标移动到首行
+	2. G将光标移动到最后一行
 
 ## linux中的ps
 
@@ -135,6 +138,19 @@ t.sh是命令行的内容
 git add.//将代码更新
 git commit -m "commit message"//评论新新增的代码
 
+//从remote端创建一个分支
+git clone remote
+	e.g. git clone https://pdos.csail.mit.edu/6.828/2017/jos.git
+//创建分支（这个我还没有实验）
+git branch lab1
+//切换分支（我目前的经验就是在一个分支中才能切换分支）
+git checkout lab2
+//创建并切换分支(我目前的经验也是在一个分支中才能进行创建和切换)
+git checkout -b lab3
+//在远端分支origin/lab4的基础上创建一个分支并转到这个分支lab4
+git checkout -b lab4 origin/lab4
+//列出所有的分支信息
+git branch -a
 
 
 ## linux中的dd命令
