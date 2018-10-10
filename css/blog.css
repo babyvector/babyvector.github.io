@@ -255,6 +255,7 @@ ul.posts li {
 }
 
 .listing-item {
+
     list-style-type: none;
     display: block;
     font-size: 0.9rem;

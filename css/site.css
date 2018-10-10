@@ -51,7 +51,7 @@ li{
 	padding-top:10px;
 	margin-left:20%;
 	margin-right:20%;
-	border-bottom:1px dotted #9dacad;
+	#border-bottom:1px dotted #9dacad;
 }
 .li_container_date{
 	display:inline-block;
