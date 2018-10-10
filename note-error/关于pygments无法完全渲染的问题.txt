@@ -1,0 +1,9 @@
+当pygments无法将所有的代码渲染完的时候一般都是
+
+cout<<"yournamge"<<position_x<<endl;
+
+中<<符号的问题，改成
+
+cout << "yournamge" << position_x << endl;
+
+中间加上空格就能渲染成功。

@@ -33,6 +33,7 @@ ul{
 li{
 	width:auto;
 	list-style:none;
+	display:inline-block;
 	float:left;
 	background-color:prink;
 	margin-top:5px;
@@ -47,11 +48,13 @@ li{
 	background-color:transparent;#blue;
 	margin-top:8px;
 	float:left;
+	padding-top:10px;
 	margin-left:20%;
 	margin-right:20%;
+	border-bottom:1px dotted #9dacad;
 }
 .li_container_date{
-	
+	display:inline-block;
 	font-size:4px;
 	float:left;
 	background-color:transparent;
@@ -60,6 +63,8 @@ li{
 	color:#9dacad;
 }
 style="font-size:4px;float:left;background-color:transparent;margin-top:8px;font-family:Arial,Helvetica,sans-serif,SimSun;"
+
+
 p{
   text-align: justify;
   margin: 1em 0;
@@ -105,19 +110,43 @@ table td, table th {
 	margin-left:10%;
 	#margin-right:10%;
 }
-.sort-tag{
-	margin:0 auto;
-	width:60%;
-	background-color:black;
-}
+
 .sort-tag-box{
-	float:right;
+	max-width:760px;
+	width:70%;
+	height:auto;
+	margin:0 auto;
 	
+}
+.sort-tag-box a{
+	float:right;
+	color: #555555;
+    text-decoration: none;
+	border:1px dashed #000000;
+	#padding:3px 3px 3px 3px;
+}
+.sort-tag-box a:hover{
+	border:1px solid #000000;
+	text-decoration: none;
 }
 .content_container a{
 	
 }
-
+.blog_list{
+	height:10px;
+	width:70%;
+	max-width:760px;
+	margin:2px auto;
+	#background-color:black;
+	
+}
+.blog_list a{
+	float:right;
+	margin-left:3px;
+	margin-top:5px;
+	border:1px solid #000000;
+	padding:3px 3px 3px 3px;
+}
 /* Common */
 
 a {
@@ -444,7 +473,7 @@ footer .linkings {
   width: 100%;
   display: block;
   border: none;
-  line-height:140%
+  line-height:240%
 }
 
 footer .links {

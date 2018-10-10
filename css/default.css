@@ -1,8 +1,8 @@
 pre .hll { background-color: #ffffcc }
-pre  { background: #202020; }
+pre  { background: #f0f0f0; }
 pre .c { color: #60a0b0; font-style: italic } /* Comment */
-pre .err { border: 1px solid #FF0000 } /* Error */
-pre .k { color: #007020; font-weight: bold } /* Keyword */
+pre .err { border: 2px dashed  #FF0000; border-style:none none dashed none ; } /* Error */
+pre .k { color: #0000ff; font-weight: bold } /* Keyword */
 pre .o { color: #666666 } /* Operator */
 pre .ch { color: #60a0b0; font-style: italic } /* Comment.Hashbang */
 pre .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
@@ -31,11 +31,11 @@ pre .s { color: #4070a0 } /* Literal.String */
 pre .na { color: #4070a0 } /* Name.Attribute */
 pre .nb { color: #007020 } /* Name.Builtin */
 pre .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
-pre .no { color: #60add5 } /* Name.Constant */
+pre .no { color: #ff00ff } /* Name.Constant */
 pre .nd { color: #555555; font-weight: bold } /* Name.Decorator */
 pre .ni { color: #d55537; font-weight: bold } /* Name.Entity */
 pre .ne { color: #007020 } /* Name.Exception */
-pre .nf { color: #06287e } /* Name.Function */
+pre .nf { color: #3424A8 } /* Name.Function */
 pre .nl { color: #002070; font-weight: bold } /* Name.Label */
 pre .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
 pre .nt { color: #062873; font-weight: bold } /* Name.Tag */
@@ -45,7 +45,7 @@ pre .w { color: #bbbbbb } /* Text.Whitespace */
 pre .mb { color: #40a070 } /* Literal.Number.Bin */
 pre .mf { color: #40a070 } /* Literal.Number.Float */
 pre .mh { color: #40a070 } /* Literal.Number.Hex */
-pre .mi { color: #40a070 } /* Literal.Number.Integer */
+pre .mi { color: #00ee00 } /* Literal.Number.Integer */
 pre .mo { color: #40a070 } /* Literal.Number.Oct */
 pre .sa { color: #4070a0 } /* Literal.String.Affix */
 pre .sb { color: #4070a0 } /* Literal.String.Backtick */

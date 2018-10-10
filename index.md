@@ -14,7 +14,10 @@ layout: default
 			 <a style="color:black;" href="{{ post.url }}">{{ post.title }}</a>
 			 
 			</li>
+			
+			<!--
 			<hr style=" height:2px;border:none;border-top:1px dotted #9dacad;" />
+			-->
 			<!--
 			<hr style='background-color:blue;'>
 			-->

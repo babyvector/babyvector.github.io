@@ -2,7 +2,7 @@
 body{
 	width:100%;
 	margin:0 auto;
-	background-color:#d0d0d0;
+	background-color:white;
 	font-family: "Arial","PingHei","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
 	font-size:20px;
 }
@@ -21,6 +21,15 @@ body{
 }
 .post-date{
 	float:right;
+}
+.blog_list{
+	width:70%;
+	background-color:black;
+	
+}
+.blog_list a{
+	border:1px solid #000000;
+	
 }
 img{
 	width:100%;
@@ -66,18 +75,20 @@ h1{
 code{
 	#background-color:;
 }
+
 pre{
-	font:#b0b4bd;
-	font-size: 14px; font-family: "微软雅黑"; color:#b0b4bd;
-	border:0.5px solid #ccc;
+	font:black;
+	font-size: 14px; font-family: "consolas"; color:black;
+	border:1px solid #ccc;
 	#box-shadow: -10px 10px 5px #888888;
-	border-radius:1.5px;
-	background-color:#282c35;
-	font:
+	border-radius:3.5px;
+	background-color:#f5f5f5;
+	width:100%;
 	margin:0 auto;
 	overflow:auto;
 	}
-/*
+
+	/*
 .highlight{
 	background-color:#eee
 	border-radius:10px;
@@ -133,6 +144,7 @@ table tr:nth-child(even) {
 table tr:nth-child(odd) {  
 	background: White;  
 } 
+
 /*
 https://segmentfault.com/a/1190000008317350
 如何更改数学公式的样式

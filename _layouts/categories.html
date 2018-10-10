@@ -53,7 +53,6 @@
       </nav>
       {% elsif page.url == '/cn/project' %}
       <nav>
-	  
         <a class="{% if page.category == 'about-zh' %} selected {% endif %}" href="/cn/">关于</a>
         <a class="{% if page.category == 'project-zh' %} selected {% endif %}" href="/cn/project">项目</a>
         <!--<a class="{% if page.category == 'resume' %} selected {% endif %}" href="/resume/">Resume</a>-->
@@ -65,7 +64,9 @@
 		    <a href="/timeline/">时间线</a>
         <a href="http://babyvector.github.io">GitHub</a>
       </nav>
+	  
       {% else %}
+	  
       <nav>
 	  <a style="font-size:20px;">Knowledge Sharer</a>
         <a class="{% if page.category == 'about' %} selected {% endif %}" href="/">About</a>
@@ -73,12 +74,13 @@
 
 		<a href="https://github.com/babyvector">GitHub</a>
       </nav>
+	  
 	  {% endif %}
 
       <div class="pull-right right logo">
         <a href="../pdf/yongkangxu.pdf"><img class="avatar" src="../image/head_01.jpg" alt="My profile picture" /></a>
       </div>
-	  
+
       <div class="clear">
 	  </div>
 	  
@@ -86,28 +88,52 @@
    
   </div>
 
-  <div class="content_container">
+<div class="content_container">
   <p class="post-date">{{ page.date|date:"%Y-%m-%d" }}</p>
-  <a href="./index.html">按时间分类</a>
-  <a href="./categories.html">按内容分类</a>
+  
+  
+  <div class="sort-tag-box">
+	<a href="/index.html" style="border:1px,solid,#eee;border-radius:3px;">时间顺序</a>
+  </div>
+  
+  <br>
+  <br>
   
 	{{content}}
  
  </div>
-  <div class="separator"></div>
-   <center>
-  <div style="width:100%;float:left;">
-		<br>
-		<br>
-		<br>
-		<br>
-		<div  style="border-bottom: 1px solid #eee"></div>
-		<p class="post-date">{{ page.date|date:"%Y-%m-%d" }}</p>
-		<center><p align="center">QQ:2561258938</p></center>
-		<center><p>微信：m13323966598</p></center>
-		<center><p>邮箱：yongkangxuuest@gmial.com</p></center>
-  </div>
-  </center>
+ 
+ 
+ 
+  
+  <footer>
+    <div  style="border-bottom: 0px solid #eee"></div>
+
+	<center>
+    <p class="linkings">                                
+	</p>
+	</center>
+	 
+	 
+	<p> <br></p>
+	<hr style="border:0;background-color:#ff0000;height:0px;">
+	<br>
+	<br>
+	<hr style="border:0;background-color:#ddd;height:1px;">
+
+	
+    <center>
+	<p>
+	  Email:<a href="maito:yongkangxuuest@gmail.com">yongkangxuuest@gmail.com</a>  |  <a href="maito:2561258938@qq.com">2561258938@qq.com</a>.
+       Made with <a href="http://jekyllrb.com/">Jekyll</a>,
+      hosted on <a href="babyvector.github.io">Github Pages</a>. Inspired by <a href="http://yongyuan.name">willard</a>, designed by <a href="http://babyvector.github.io">yongkangxu</a>.
+    </p>
+	</center>
+
+	
+  </footer>
+  
+  
 </body>
 	
 </html>

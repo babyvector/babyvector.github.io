@@ -16,19 +16,21 @@ markdown: kramdown
 #highlighter:  pygments
 
 #kramdown:
-#    input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
-#    extensions:
-#    - autolink
-#    - footnotes
-#    - smart
+ #   input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
+  #  extensions:
+    #- autolink
+   # - footnotes
+    #- smart
 encoding: utf-8
 
 #hard_wrap: false
 #  use_coderay: true
 #syntax_highlighter: rouge
-#  coderay:
-#  coderay_line_numbers:  nil
+# coderay:
+ # coderay_line_numbers:  nil
 
 # White-listed plugins
-plugins:
-  - jekyll-sitemap
+#plugins:
+ # - jekyll-sitemap
+  
+  

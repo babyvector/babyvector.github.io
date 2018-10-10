@@ -192,7 +192,7 @@ int main(){
 						container[stack[j]][stack[j + 1]].current_flow += temp_min;
 						container[stack[j + 1]][stack[j]].current_flow -= temp_min;
 					}
-					cout << "the temp_min is:"<<temp_min << endl;
+					cout << "the temp_min is:" << temp_min << endl;
 					continue;
 				}
 				//如果没有达到目的地就将下一个节点推入到堆栈中，并将所有的父亲节点也一并推入
