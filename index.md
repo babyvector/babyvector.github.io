@@ -4,7 +4,7 @@
 
 layout: default
 ---
-<div class="">
+<section class="inner">
 	<ul>
 	  {% for post in site.posts %}
 		<div class="li_container">
@@ -33,4 +33,4 @@ layout: default
 		</div>
 	{% endfor %}
 	</ul>
-</div>
+</section>
