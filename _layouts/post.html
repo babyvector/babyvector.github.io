@@ -47,18 +47,19 @@ layout: post
 	  jax: ["input/TeX", "output/HTML-CSS"],
       tex2jax: {
         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-        inlineMath: [['$','$']]
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
       },
 	  
-
 	  "HTML-CSS": {
 		preferredFont: "STIX",
-		scale: 80,
+		scale: 100,
 		styles: {
 		  "@media print": {
 			".MathJax_Display": {
+			   "font-size":"50pt",
 			   "background-color": "blue",
-			   border: 0
+			   "border": "0"
 			}
 		  }
 		}

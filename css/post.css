@@ -37,6 +37,16 @@ img{
 	
 }
 /*部件的相关样式*/
+a{
+	text-decoration: none;
+}
+
+a:link {color: blue}?/* 未被访问的链接 蓝色 */
+a:visited {color: blue}?/* 已被访问过的链接 蓝色 */
+a:hover {color: blue}?/* 鼠标悬浮在上的链接 蓝色 */
+a:active {color: blue} /* 鼠标点中激活链接 蓝色 */
+
+
 blockquote {
  background-color: #eae6f3;
  border-left: 1em solid #5236a0;
@@ -155,5 +165,5 @@ https://segmentfault.com/a/1190000008317350
 	text-align:left;
 	width:60%;
 }
-.MathJax_Display{overflow-x:auto;overflow-y:hidden;font-size:12%;text-align:left;}
-
+.MathJax_Display{overflow-x:auto;overflow-y:hidden;font-size:100%;text-align:left;}
+.MathJax{font-size:100%}

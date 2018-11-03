@@ -97,10 +97,8 @@ categories: [linux命令积累]
 	while
 	$(())
 ```
-
-2. 常见运算和操作
+2. 常见运算和操作.
 ```
-
 	1. 使用let用法举例如下
 		let fileNumber--                 #let fileNumber=$fileNumber-1
 	2. 使用expr用法如下
@@ -118,10 +116,8 @@ categories: [linux命令积累]
 		res3=`expr $num1 \* $num2 \* $num3`  
 		res4=`expr $num1 \/ $num2 \/ $num3`  
 		res5=`expr $num1 \% $num2 \% $num3` 
- 
 ```
-
-3. shell截取字符串
+3. shell截取字符串.
 ```
 	${var#*/}//比较常用
 	${var##*/}
@@ -133,10 +129,9 @@ categories: [linux命令积累]
 	${var:0-start}
 	https://www.cnblogs.com/fengbohello/p/5954895.html
 ```
-4. if语法
-
-```
+4. if语法.
 	- if简单语法规则
+	```
 		if [ command ];then
 		   符合该条件执行的语句
 		elif [ command ];then
@@ -144,11 +139,15 @@ categories: [linux命令积累]
 		else
 		   符合该条件执行的语句
 		fi
-	- 常见错误
-		1. if[   f [之间一定要有空格否则怎么都没法排除错误
-		2. if [ "$string1" == "$string2" ]
-			//-> == 是用于判断字符串是否相等，-eq判断的（应该）是数字是否相等
+	```
+	- 常见错误.
+	```
+		if[   f [之间一定要有空格否则怎么都没法排除错误
+		if [ "$string1" == "$string2" ]
+			 == 是用于判断字符串是否相等，-eq判断的（应该）是数字是否相等
+	```
 	- 文件/文件夹（目录）判断
+	```
 		[ -b FILE ] 如果 FILE 存在且是一个块特殊文件则为真。
 		[ -c FILE ] 如果 FILE 存在且是一个字特殊文件则为真。
 		[ -d DIR ] 如果 FILE 存在且是一个目录则为真。
@@ -168,7 +167,8 @@ categories: [linux命令积累]
 		[ -L FILE ] 如果 FILE 存在且是一个符号连接则为真。
 		[ -N FILE ] 如果 FILE 存在 and has been mod如果ied since it was last read则为真。
 		[ -S FILE ] 如果 FILE 存在且是一个套接字则为真。
-		[ FILE1 -nt FILE2 ] 如果 FILE1 has been changed more recently than FILE2, or 如果 FILE1 exists and FILE2 does not则为真。
+		[ FILE1 -nt FILE2 ] 如果 FILE1 has been changed more recently than FILE2, or 
+							如果 FILE1 exists and FILE2 does not则为真。
 		[ FILE1 -ot FILE2 ] 如果 FILE1 比 FILE2 要老, 或者 FILE2 存在且 FILE1 不存在则为真。
 		[ FILE1 -ef FILE2 ] 如果 FILE1 和 FILE2 指向相同的设备和节点号则为真。
 		-e FILE 测试文件是否存在
@@ -177,7 +177,9 @@ categories: [linux命令积累]
 	    -r file 测试文件对当前用户是否可读
 	    -w file 测试文件对当前用户是否可写
 	    -x file 测试文件对当前用户是都可执行
+	```
 	- 字符串判断
+	```
 		[ -z STRING ] 如果STRING的长度为零则为真 ，即判断是否为空，空即是真；
 		[ -n STRING ] 如果STRING的长度非零则为真 ，即判断是否为非空，非空即是真；
 		[ STRING1 = STRING2 ] 如果两个字符串相同则为真 ；
@@ -185,14 +187,18 @@ categories: [linux命令积累]
 		[ STRING1 ]　 如果字符串不为空则为真,与-n类似
 		-z string 测试指定字符是否为空，空着真，非空为假
 	    -n string 测试指定字符串是否为不空，空为假 非空为真
+	```
 	- 数值判断
+	```
 		INT1 -eq INT2           INT1和INT2两数相等为真 ,=
 		INT1 -ne INT2           INT1和INT2两数不等为真 ,<>
 		INT1 -gt INT2            INT1大于INT1为真 ,>
 		INT1 -ge INT2           INT1大于等于INT2为真,>=
 		INT1 -lt INT2             INT1小于INT2为真 ,<</div>
 		INT1 -le INT2             INT1小于等于INT2为真,<=
+	```
 	- 整数比较
+	```
 		-eq 等于,如:if [ "$a" -eq "$b" ]
 		-ne 不等于,如:if [ "$a" -ne "$b" ]
 		-gt 大于,如:if [ "$a" -gt "$b" ]
@@ -202,7 +208,9 @@ categories: [linux命令积累]
 		大于(需要双括号),如:(("$a" > "$b"))
 		>= 大于等于(需要双括号),如:(("$a" >= "$b"))
 		小数据比较可使用AWK
+	```
 	- 字符串比较
+	```
 		== 等于  两边要有空格
 	    != 不等
 	    >  大于
@@ -215,7 +223,9 @@ categories: [linux命令积累]
 		3
 		4 [ $a == z* ] # File globbing 和word splitting将会发生
 		5 [ "$a" == "z*" ] # 如果$a等于z*(字符匹配),那么结果为true 
+	```
 	- 复杂逻辑判断
+	```
 		-a 与
 		-o 或
 		! 非
@@ -236,9 +246,8 @@ categories: [linux命令积累]
 		if [ $a -gt $b -o $a -lt $c ]
 	 
 		注："||"和"&&"在SHELL里可以用，也就是第一个写成if [ a>b && a<c]
-
-```
-5. shell与用户交互
+	```
+5. shell与用户交互.
 ```
 	if利用read传参判断
 	举例子：查看分数	
@@ -354,7 +363,7 @@ $jobs
     htop动态显示内存和CPU的占用情况
     atop动态显示内存CPU和GPU的使用情况
 ```
-## shuf
+## shuf 抽取随机数
 ```
 	shuf train.txt -o test.txt -n 30 从train中随机选取30行导入到test中
 ```
@@ -382,7 +391,8 @@ $jobs
 ```
 	find ./total/ -name "*.tif" -exec cp {} /amyfile/train/ \;
 	这里加入了\;这样才能正常运行否则就不能正常的运行。
-	这样做能构保证当复制大量的文件的时候不会出现参数列表过长出现无法复制的情况，因为使用普通的mv和cp的时候因为参数列表没法进行复制。
+	这样做能构保证当复制大量的文件的时候不会出现参数列表过长出现无法复制的情况，
+	因为使用普通的mv和cp的时候因为参数列表没法进行复制。
 ```
 	（0）限定搜索的层数
 ```	
@@ -461,7 +471,7 @@ $jobs
 	输出文件的前3000行
 	head -n 3000 test.txt >temp.txt
 ```
-## eval
+## eval 执行字符串中内容
 ```
     eval  使用方法
 	command1='firstPicName="06_"$firstDirCount".tif"'
@@ -477,11 +487,36 @@ $jobs
 ## scp
 ``` 
 	从远程端口拷贝到本地
-		scp -P 46907 root@47.92.83.74:/root/NETLearning/out/out_iter_500000.caffemodel /home/xuyongkang/atest/out_iter_500000.caffemodel
+		scp -P 46907 root@47.92.83.74:/root/NETLearning/out/out_iter_500000.caffemodel  
+										/home/xuyongkang/atest/out_iter_500000.caffemodel
+		scp -P 46907 root@47.92.83.74:文件路径1 文件路径2
 	从本地拷贝到远程端口
 		scp -P 46907 /home/xuyongkang/atest/NETLearing.tar.gz root@47.92.83.74:/temp
 ```
+## cmp 比较文件
+```
+比较任意两个类型的文件，把结果输出到标准输出上
+默认：文件相同不输出
+	 不同文件输出不同
+参数：
+	-c显示不同的信息
+	-l列出所有的不同信息
+	-s错误信息不提示
+```
+## diff 比较文件内容
+```
+作用：
+	用于比较文件内容，找到不同的地方
+输出：
+	diff程序的输出被成为补丁(patch)，linux系统中有一个patch命令，可以根据diff的输出将a文件内容改成b。这个功能非常有用，比如打补丁。
+命令参数：
+	-a diff预设会逐行比较文本文件
+	-b或者--ignore-blank-change 不检查空格字符的不同
+	-B或者--ignore-blank-lines  不检查空白行
+	-c 显示全部内文，并标出不同之处
+	-p 若比较文件为C语言的程序文件时，显示差异所在的函数名称
 
+```
 ## tar
 ```
 	tar -xzvf X.tar.gz 解压*.tar.gz文件
@@ -507,7 +542,8 @@ $jobs
 ```
 ## grep sed awk  
 ```
-	->其中文本文件非常重要，因为unix提供 很多了实用程序（utility），这些程序功能相对独立，但可以通过管道来实现进程间通信（IPC），这样松散的耦合可以完成复杂的操作。
+	其中文本文件非常重要，因为unix提供 很多了实用程序（utility），这些程序功能相对独立，
+	但可以通过管道来实现进程间通信（IPC），这样松散的耦合可以完成复杂的操作。
 	grep搜索
 	sed 修改和编辑文本文件中某些行
 	awk 是访问文本文件，操纵文本文件中某些数据
@@ -559,7 +595,8 @@ $jobs
 		64 bytes from 111.13.100.92: icmp_seq=10 ttl=53 time=15.5 ms
 
 		10 packets transmitted, 10 received, 0% packet loss, time 9015ms
-		icmpICMP是“Internet Control Message Protocol”（Internet控制消息协议）的缩写。它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息
+		icmpICMP是“Internet Control Message Protocol”（Internet控制消息协议）的缩写。
+		它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息
 	
 ```
 ## netstat
@@ -823,7 +860,9 @@ dd应用实例
 14. 修复硬盘：
 ```
 	#dd if=/dev/sda of=/dev/sda 或dd if=/dev/hda of=/dev/hda
-	当硬盘较长时间(一年以上)放置不使用后，磁盘上会产生magnetic flux point，当磁头读到这些区域时会遇到困难，并可能导致I/O错误。当这种情况影响到硬盘的第一个扇区时，可能导致硬盘报废。上边的命令有可能使这些数 据起死回生。并且这个过程是安全、高效的。
+	当硬盘较长时间(一年以上)放置不使用后，磁盘上会产生magnetic flux point，当磁头读到这些区域时会遇到困难，
+	并可能导致I/O错误。当这种情况影响到硬盘的第一个扇区时，可能导致硬盘报废。
+	上边的命令有可能使这些数 据起死回生。并且这个过程是安全、高效的。
 ```
 15. 利用netcat远程备份
 ```
@@ -966,7 +1005,8 @@ Deleting contents of a file, but preserving the file itself, with all attendant 
 	 swapon $FILE # 激活交换文件.
 	 echo "Swap file created and activated."
 	 exit $SUCCESS 
-	关于 /dev/zero 的另一个应用是为特定的目的而用零去填充一个指定大小的文件， 如挂载一个文件系统到环回设备 （loopback device）或"安全地" 删除一个文件
+	关于 /dev/zero 的另一个应用是为特定的目的而用零去填充一个指定大小的文件， 
+	如挂载一个文件系统到环回设备 （loopback device）或"安全地" 删除一个文件
 	例子创建ramdisk
 	#!/bin/bash
 	 # ramdisk.sh
@@ -1086,114 +1126,120 @@ CLOSED：没有任何连接状态
 
 ## dir(类似于linux中的ls命令)
 
-# shell脚本例子
+
+<h1 align="center"> shell脚本例子<h1>
+
+
+
 ## 实例1
 {% highlight ruby %}
-	#apply variable
-	#mkdir fakePairFolder
-	countNum=0
-	countNew=1
-	countMax=40
-	firstPicName="2.bmp"
-	secondPicName="3.bmp"
-	countPairNum=5760
-	maxPairNum=6000
-	for firstFolderNum in $(seq 1 $countMax)	
-		#find the first folder name
-		do
-		#       firstFolderName=`find -name "FERET-*" | grep 'FERET-0\{0,2\}'$firstFolderNum'$'`
-			firstFolderName=$firstFolderNum
-			firstPicSrc=$firstFolderName"/"$firstPicName
-			
-			let firstFolderNum+=1		
-			for secondFolderNum in $(seq $firstFolderNum $countMax)
-			#loop the second folder name
-				do	
-		#			secondFolderName=`find -name "FERET-*" | grep 'FERET-0\{0,2\}'$secondFolderNum'$'`
-					secondFolderName=$secondFolderNum
-					secondPicSrc=$secondFolderName"/"$secondPicName
+#apply variable
+#mkdir fakePairFolder
+countNum=0
+countNew=1
+countMax=40
+firstPicName="2.bmp"
+secondPicName="3.bmp"
+countPairNum=5760
+maxPairNum=6000
+for firstFolderNum in $(seq 1 $countMax)	
+	#find the first folder name
+	do
+	#       firstFolderName=`find -name "FERET-*" | grep 'FERET-0\{0,2\}'$firstFolderNum'$'`
+		firstFolderName=$firstFolderNum
+		firstPicSrc=$firstFolderName"/"$firstPicName
+		
+		let firstFolderNum+=1		
+		for secondFolderNum in $(seq $firstFolderNum $countMax)
+		#loop the second folder name
+			do	
+	#			secondFolderName=`find -name "FERET-*" | grep 'FERET-0\{0,2\}'$secondFolderNum'$'`
+				secondFolderName=$secondFolderNum
+				secondPicSrc=$secondFolderName"/"$secondPicName
+				
+				
+				let countPairNum+=1
+				cp $firstPicSrc ./fakePairFolder/"ATFakePair"$countPairNum"_1.bmp"
+				echo -n "ATFakePair"$countPairNum"_1.bmp ">>fakePairFolder/fakePairTxt.txt
 					
-					
-					let countPairNum+=1
-					cp $firstPicSrc ./fakePairFolder/"ATFakePair"$countPairNum"_1.bmp"
-					echo -n "ATFakePair"$countPairNum"_1.bmp ">>fakePairFolder/fakePairTxt.txt
-						
-					cp $secondPicSrc ./fakePairFolder/"ATFakePair"$countPairNum"_2.bmp"
-					echo  "ATFakePair"$countPairNum"_2.bmp  0">>fakePairFolder/fakePairTxt.txt
-					echo $firstPicSrc
-					echo $secondPicSrc
-					if [ "$countPairNum" -eq "$maxPairNum" ]
-						then
-						break
-					fi
-				done
-					if [ "$countPairNum" -eq "$maxPairNum" ]
-						then
-						break
-					fi
-		done
-	echo "done"
-	echo $countPairNum pairs
+				cp $secondPicSrc ./fakePairFolder/"ATFakePair"$countPairNum"_2.bmp"
+				echo  "ATFakePair"$countPairNum"_2.bmp  0">>fakePairFolder/fakePairTxt.txt
+				echo $firstPicSrc
+				echo $secondPicSrc
+				if [ "$countPairNum" -eq "$maxPairNum" ]
+					then
+					break
+				fi
+			done
+				if [ "$countPairNum" -eq "$maxPairNum" ]
+					then
+					break
+				fi
+	done
+echo "done"
+echo $countPairNum pairs
 
 {% endhighlight %}
+
 ## 实例2
 {% highlight ruby %}
 
-	#apply variable
-	mkdir realPairFolder
-	countPairNum=4200
-	maxPicNum=10
-	countMax=40
-	
-	#nameInFind="FERET-*"
-	#nameInGrep='FERET-0\{0,2\}'
-	for nowInThisFolderNum in $(seq 1 $countMax)
-		do
-			#nowInThisFolderName=`find -name "FERET-*"| grep 'FERET-0\{0,2\}'$nowInThisFolderNum'$'`
-			nowInThisFolderName=$nowInThisFolderNum
-			let maxPicNumForLoopOne=maxPicNum-1	
-			for firstPicNum in $(seq 1 $maxPicNumForLoopOne)
-				do
-					firstPicName=$firstPicNum".bmp"
-					firstPicSrc=$nowInThisFolderName"/"$firstPicName
-					let startNumForLoopTwo=firstPicNum+1
-					for secondPicNum in $(seq $startNumForLoopTwo $maxPicNum)
-						do
-							secondPicName=$secondPicNum".bmp"
-							secondPicSrc=$nowInThisFolderName"/"$secondPicName
-							let countPairNum+=1
-							cp $firstPicSrc ./realPairFolder/"ATRealPair"$countPairNum"_1.bmp"
-							echo -n "ATRealPair"$countPairNum"_1.bmp ">>realPairFolder/realPairTxt.txt
+#apply variable
+mkdir realPairFolder
+countPairNum=4200
+maxPicNum=10
+countMax=40
+
+#nameInFind="FERET-*"
+#nameInGrep='FERET-0\{0,2\}'
+for nowInThisFolderNum in $(seq 1 $countMax)
+	do
+		#nowInThisFolderName=`find -name "FERET-*"| grep 'FERET-0\{0,2\}'$nowInThisFolderNum'$'`
+		nowInThisFolderName=$nowInThisFolderNum
+		let maxPicNumForLoopOne=maxPicNum-1	
+		for firstPicNum in $(seq 1 $maxPicNumForLoopOne)
+			do
+				firstPicName=$firstPicNum".bmp"
+				firstPicSrc=$nowInThisFolderName"/"$firstPicName
+				let startNumForLoopTwo=firstPicNum+1
+				for secondPicNum in $(seq $startNumForLoopTwo $maxPicNum)
+					do
+						secondPicName=$secondPicNum".bmp"
+						secondPicSrc=$nowInThisFolderName"/"$secondPicName
+						let countPairNum+=1
+						cp $firstPicSrc ./realPairFolder/"ATRealPair"$countPairNum"_1.bmp"
+						echo -n "ATRealPair"$countPairNum"_1.bmp ">>realPairFolder/realPairTxt.txt
+					
+						cp $secondPicSrc ./realPairFolder/"ATRealPair"$countPairNum"_2.bmp"
+						echo  "ATRealPair"$countPairNum"_2.bmp  1">>realPairFolder/realPairTxt.txt
 						
-							cp $secondPicSrc ./realPairFolder/"ATRealPair"$countPairNum"_2.bmp"
-							echo  "ATRealPair"$countPairNum"_2.bmp  1">>realPairFolder/realPairTxt.txt
-							
-							
-							#echo "pair"$countPairNum
-							#echo "pair 1:"$firstPicSrc
-							#echo "pair 2:"$secondPicSrc
-						done
-				done
-		done
-	echo "done."
+						
+						#echo "pair"$countPairNum
+						#echo "pair 1:"$firstPicSrc
+						#echo "pair 2:"$secondPicSrc
+					done
+			done
+	done
+echo "done."
 	
 {% endhighlight %}
 
 ## 实例3
+
 {% highlight ruby %}
 
-	for folderName in $(seq 1 40)
-		do
-			cd $folderName
-			for picName in `find -name "*.bmp"`
-				do
-					let count+=1
-					mv $picName $count".bmp"
-				done
-			let count=0
-			cd ..
-	
-		done
+for folderName in $(seq 1 40)
+	do
+		cd $folderName
+		for picName in `find -name "*.bmp"`
+			do
+				let count+=1
+				mv $picName $count".bmp"
+			done
+		let count=0
+		cd ..
+
+	done
 
 
 {% endhighlight %}
