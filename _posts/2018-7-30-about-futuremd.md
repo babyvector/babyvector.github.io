@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 未来建议
-categories: [未来建议]
+categories: [生活指导]
 ---
 
 #1
