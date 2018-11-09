@@ -69,7 +69,22 @@ layout: post
   </script>
   <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
   <!--这一部分是为了支持数学表达式-->
-  
+  <!--判断访问者的设备，是移动设备端还是PC端-->
+<script type="text/javascript">
+	
+	
+	try{
+		if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			document.getElementsByClassName("post-wrapper")[0].style.width='100%'; //post-wrapper
+			//window.location.href="www.baidu.com";
+		}else{
+			document.getElementsByClassName("post-wrapper")[0].style.width='70%';
+			//window.location.href="www.qq.com";
+		}
+	}catch(e){}
+	
+	
+</script>
 </body>
 
 

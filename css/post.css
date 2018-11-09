@@ -7,6 +7,17 @@ body{
 	font-size:12px;
 }
 /*总体央样式*/
+@media screen and (max-width: 100px) {
+   .post-wrapper{
+	width:120%;
+	margin:0 auto;
+	background-color:white;
+	padding-left:5%;
+	padding-right:5%;
+	padding-top:50px;
+	padding-bottom:50px;
+}
+}
 .post-wrapper{
 	width:70%;
 	margin:0 auto;
