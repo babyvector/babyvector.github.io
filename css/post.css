@@ -59,8 +59,9 @@ a:active {color: blue} /* 鼠标点中激活链接 蓝色 */
 
 
 blockquote {
+ width:100%;
  background-color: #eae6f3;
- border-left: 1em solid #5236a0;
+ border-left: 0.5em solid #8266f0;
  margin: 1.0em 0 1.0em;
  padding: 0.5em 0.5em 0.5em 0.5em;
  position: relative;
