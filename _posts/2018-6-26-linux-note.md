@@ -34,7 +34,7 @@ categories: [linux命令积累]
 ```
 6. 剪切、复制模式
 ```
-	v进入剪切模式下 
+	v进入剪切模式下
 	x剪切
 	p粘贴
 ```
@@ -42,7 +42,7 @@ categories: [linux命令积累]
 ```
 - 打开多个窗口
 	打开多个窗口的命令以下几个：
-	
+
 	横向切割窗口
 		:new+窗口名(保存后就是文件名)
 		:split+窗口名，也可以简写为:sp+窗口名
@@ -51,7 +51,7 @@ categories: [linux命令积累]
 - 关闭多窗口
 	可以用：q!，也可以使用：close，最后一个窗口不能使用close关闭。
 	使用close只是暂时关闭窗口，其内容还在缓存中，只有使用q!、w!或x才能真能退出。
-	
+
 	:tabc 关闭当前窗口
 	:tabo 关闭所有窗口
 - 窗口切换
@@ -88,6 +88,149 @@ categories: [linux命令积累]
 	:shell 可以在不关闭vi的情况下切换到shell命令行
 	:exit 从shell回到vi
 ```
+10. 保存文件到特定的路径
+: saveas 文件路径
+
+
+## bash
+bash配置文件->环境变量常用变量如下：
+1. PATH  决定了shell将到那些目录中寻找命令或程序
+2. HOME  当前用户的主目录
+3. HISTSIZE  历史记录数
+4. LOGNAME  当前用户的登录名
+5. HOSTNAME  指主机的名称
+6. SHELL  当前用户的shell类型
+7. LANG  语言相关的环境变量，多语言可以修改此环境变量
+8. MAIL  当前用户的邮件存放目录
+
+## ls
+ls=list  -a -l -h -d -i
+  ls 显示当前目录下的文件
+  ls/显示根目录下的文件
+     ls /home
+  ls -a(all)显示所有文件包括隐藏文件（前面加.表示，所以隐藏文件时候前面加点)
+  ls -l(long长格式显示)显示较为详细的文件信息
+  ls -h(human)更人性化的显示文件大小(ls -lh=ls -hl=显示更为详细的文件信息）
+  ls -d指定目录查看
+  ls -i查看文件的i节点就像省份证号一样
+       一般可以组合使用 ls -asSh  为显示文件的大小 S是对文件进行大小排序
+
+## sudo
+
+sudo 只有拥有root 权限的用户才能使用
+     sudo adduser  创建一个新用户
+       sudo adduser lilei 创建一个lilei的新用户
+     sudo usermod   为用户添加用户组
+       sudo usermod -G sudo lilei  将lilei加入sudo组
+     sudo chown   变更文件所有者
+       sudo chown shiyanlou iphone6 将iphone6文件变更给shiyanlou
+     sudo deluser  删除一个用户
+       sudo deluser lilei  删除一个名叫lilei的用户
+
+## su
+	su -l lilei 用lilei进行登陆
+
+## who
+who 进行用户查看
+     -a  能打印的全都打印  
+     -d  打印死掉的进程		
+     -m  
+     -q  打印当前登录的用户数及用户名
+     -u  打印当前登录用户的登陆信息
+     -r  打印运行等级
+## chmod
+chmod 对文件的权限进行修改
+      chomd 700 iphone6 是指将iphone6文件的权限修改为-rwx------
+
+## cat
+	cat进行文件的读取
+	cat 文件查看
+    cat filename      //其实实际上cat有很多很多的用法
+	cat -n passwd  cat 参数  文件  -n表示列出行号
+## echo
+	 echo 打印字符
+	 echo hello world >iphone6    向iphone6文件中写入hello world
+## touch
+			touch  命令用于创建一个空白文件
+			touch test 创建一个test空白文件
+      touch zhongguo.txt
+## groups
+		groups  进行用户组查询
+		groups shiyanlou
+## nl
+		nl  使用方式跟cat一样只是更专业
+		    -b : 指定添加行号的方式，主要有两种：
+		        -b a:表示无论是否为空行，同样列出行号("cat -n"就是这种方式)
+		        -b t:只列出非空行的编号并列出（默认为这种方式）
+		    -n : 设置行号的样式，主要有三种：
+		        -n ln:在行号字段最左端显示
+		        -n rn:在行号字段最右边显示，且不加 0
+		        -n rz:在行号字段最右边显示，且加 0
+		    -w : 行号字段占用的位数(默认为 6 位)
+## more
+more  阅读器
+   more 文件名
+   enter键向下翻一行
+   space翻一整篇
+   h  help
+   q  quit
+## less
+
+## file
+	这个功能用来显示文件类型，例如echo就是一个二进制类型文件
+
+## 环境变量
+
+### set
+	显示当前 Shell 所有环境变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量
+### env
+	显示与当前用户相关的环境变量，还可以让命令在指定环境中运行
+### export
+	显示从 Shell 中导出成环境变量的变量，也能通过它将自定义变量导出为环境变量 //存在时间应该是最长的
+### 相关测试
+		$ temp=shiyanlou
+	  $ export temp_env=shiyanlou
+	  $ env|sort>env.txt
+	  $ export|sort>export.txt
+	  $ set|sort>set.txt
+	  上述操作将命令输出通过管道|使用sort命令排序，再重定向到对象文本文件中。
+## 常用的命令有如下几个whereis ;which;find;locate
+
+## whereis
+ 	简单快捷
+         whereis who
+
+## locate 快而全可以用来查找指定目录下的不同类型的文件
+
+      如locate /etc/sh 用来查找/etc下所有的sh开头的文件
+      locate /usr/share/\*jpg查找/usr/share/下的所有jpg文件
+## which
+			which 小而精通常是用来确定是否安装了某个软件
+			如 which man
+
+## rename
+rename 用perl正则表达式来作为一个参数进行重命名
+        touch file{1..5}.txt
+       # 使用通配符批量创建 5 个文件
+       $ touch file{1..5}.txt
+
+       # 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件
+       $ rename 's/\.txt/\.c/' *.txt
+
+       # 批量将这 5 个文件，文件名改为大写
+       $ rename 'y/a-z/A-Z/' *.c
+
+## 正则表达式
+			touch file{1..5}.txt
+			# 使用通配符批量创建 5 个文件
+			$ touch file{1..5}.txt
+
+			# 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件
+			$ rename 's/\.txt/\.c/' *.txt
+
+			# 批量将这 5 个文件，文件名改为大写
+			$ rename 'y/a-z/A-Z/' *.c
+
 
 ## shell用法
 1. shell脚本中最常用的命令
@@ -104,7 +247,7 @@ categories: [linux命令积累]
 	2. 使用expr用法如下
 		Expr expression1 操作符expression2
 		操作符必须加’\’用于转义，并且操作符和两个expression之间必须有空格（这一点与let不同）且Expr 不适合小数的运算。
-	
+
 	3. 常见的算数操作分类：
 		加法：+
 		减法：-
@@ -115,7 +258,7 @@ categories: [linux命令积累]
 		res2=`expr $num1 \- $num2 \- $num3`  
 		res3=`expr $num1 \* $num2 \* $num3`  
 		res4=`expr $num1 \/ $num2 \/ $num3`  
-		res5=`expr $num1 \% $num2 \% $num3` 
+		res5=`expr $num1 \% $num2 \% $num3`
 ```
 3. shell截取字符串.
 ```
@@ -124,7 +267,7 @@ categories: [linux命令积累]
 	${var%/*}
 	${var%%/*}
 	${var:start:len}//比较常用
-	${var:start}//比较常用 
+	${var:start}//比较常用
 	${var:0-start:len}
 	${var:0-start}
 	https://www.cnblogs.com/fengbohello/p/5954895.html
@@ -167,7 +310,7 @@ categories: [linux命令积累]
 		[ -L FILE ] 如果 FILE 存在且是一个符号连接则为真。
 		[ -N FILE ] 如果 FILE 存在 and has been mod如果ied since it was last read则为真。
 		[ -S FILE ] 如果 FILE 存在且是一个套接字则为真。
-		[ FILE1 -nt FILE2 ] 如果 FILE1 has been changed more recently than FILE2, or 
+		[ FILE1 -nt FILE2 ] 如果 FILE1 has been changed more recently than FILE2, or
 							如果 FILE1 exists and FILE2 does not则为真。
 		[ FILE1 -ot FILE2 ] 如果 FILE1 比 FILE2 要老, 或者 FILE2 存在且 FILE1 不存在则为真。
 		[ FILE1 -ef FILE2 ] 如果 FILE1 和 FILE2 指向相同的设备和节点号则为真。
@@ -222,7 +365,7 @@ categories: [linux命令积累]
 		2 [[ $a == "z*" ]] # 如果$a等于z*(字符匹配),那么结果为true
 		3
 		4 [ $a == z* ] # File globbing 和word splitting将会发生
-		5 [ "$a" == "z*" ] # 如果$a等于z*(字符匹配),那么结果为true 
+		5 [ "$a" == "z*" ] # 如果$a等于z*(字符匹配),那么结果为true
 	```
 	- 复杂逻辑判断
 	```
@@ -237,20 +380,20 @@ categories: [linux命令积累]
 		if [[ $a > $b ]] && [[ $a < $c ]]
 		或者
 		if [ $a -gt $b -a $a -lt $c ]
-		
+
 		exp2:如果a>b或a<c
 		if (( a > b )) || (( a < c ))
 		或者
 		if [[ $a > $b ]] || [[ $a < $c ]]
 		或者
 		if [ $a -gt $b -o $a -lt $c ]
-	 
+
 		注："||"和"&&"在SHELL里可以用，也就是第一个写成if [ a>b && a<c]
 	```
 5. shell与用户交互.
 ```
 	if利用read传参判断
-	举例子：查看分数	
+	举例子：查看分数
 	#!/bin/bash
 	#echo -n "please input your score:"
 	#read score
@@ -289,7 +432,7 @@ ls -l|find *|wc -l
 ```
 	1.嵌套建立文件夹
 	mkdir -p /home/xuyongkang/test   ->直接建立嵌套的文件夹
-	mkdir test1 test2 
+	mkdir test1 test2
 ```
 
 
@@ -330,25 +473,25 @@ defunct
 ## jobs
 ```
 jobs -l显示所有的后台运行进程
-$jobs 
-	[2] + running tar tv3 * & 
-	[1] - running find/ -name README -print > logfile& 
+$jobs
+	[2] + running tar tv3 * &
+	[1] - running find/ -name README -print > logfile&
 ```
 ## fg
 ```
 	jobs是和fg配合使用的
-	$ fg %find 
-	find/-name README -print > logfile 
-	注意,显示的命令行末尾没有&符号.下面的命令能产生同样的效果: 
+	$ fg %find
+	find/-name README -print > logfile
+	注意,显示的命令行末尾没有&符号.下面的命令能产生同样的效果:
 	$ fg %1
 ```
 ## bg
 ```
-	它是把前台进程换到后台执行,其使用格式是: 
-	bg [job...] 
-	其中,job还是一个或多个进程的PID,命令名称或作业号,在参数前要带%号.例如,在cc(C编译命令)命令执行过程中,按 
-	Z键,使作业挂起.然后键入以下命令: 
-	$ bg %cc 
+	它是把前台进程换到后台执行,其使用格式是:
+	bg [job...]
+	其中,job还是一个或多个进程的PID,命令名称或作业号,在参数前要带%号.例如,在cc(C编译命令)命令执行过程中,按
+	Z键,使作业挂起.然后键入以下命令:
+	$ bg %cc
 	该挂起的作业在后台重新开始运行.........  <<<这个非常的重要能够经常的用到>>>
 ```
 ## export
@@ -381,7 +524,7 @@ $jobs
 		安装一个新软件包（参见下文的aptitude）
 	apt-get remove packagename
 		卸载一个已安装的软件包（保留配置文档）
-``` 
+```
 ## find
 	使用方法
 ```  
@@ -395,12 +538,12 @@ $jobs
 	因为使用普通的mv和cp的时候因为参数列表没法进行复制。
 ```
 	（0）限定搜索的层数
-```	
-		find ./ -maxdepth 1 搜索本地目录，限定搜索的层数最大层数为测层 
+```
+		find ./ -maxdepth 1 搜索本地目录，限定搜索的层数最大层数为测层
 ```
 	（1）反向查找
 ```
-		除了查找满足条件的文件之外，我们还可以查找不满足条件的所有文件。当我们知道要在查找中排除哪些文件时，这个选项就能发挥作用了。	
+		除了查找满足条件的文件之外，我们还可以查找不满足条件的所有文件。当我们知道要在查找中排除哪些文件时，这个选项就能发挥作用了。
 		find ./test -not -name "*.php"
 ```
 	（2）结合多个查找条件
@@ -423,7 +566,7 @@ $jobs
 ```
 	（4）查找属于特定用户的文件
 ```
-		查找当前目录下，属于 bob 的文件。	
+		查找当前目录下，属于 bob 的文件。
 		$ find . -user bob
 		查找属于特定用户组的文件
 		# find /var/www -group developer
@@ -447,9 +590,9 @@ $jobs
 
 	(9) 结合-exec
 ```
-		我们使用 find 命令找到文件后，只能看到文件路径。如果想进一步查看文件信息，可以结合 ls 命令来实现。	
+		我们使用 find 命令找到文件后，只能看到文件路径。如果想进一步查看文件信息，可以结合 ls 命令来实现。
 		$ find . -exec ls -ld {} \;
-		drwxrwxr-x 4 enlightened enlightened 4096 Aug 11 19:01 . 
+		drwxrwxr-x 4 enlightened enlightened 4096 Aug 11 19:01 .
 		-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:25 ./abc.txt
 		drwxrwxr-x 2 enlightened enlightened 4096 Aug 11 16:48 ./abc
 		drwxrwxr-x 2 enlightened enlightened 4096 Aug 11 16:26 ./subdir
@@ -471,6 +614,11 @@ $jobs
 	输出文件的前3000行
 	head -n 3000 test.txt >temp.txt
 ```
+## tail
+```
+与head仿照相似即可的
+```
+
 ## eval 执行字符串中内容
 ```
     eval  使用方法
@@ -485,7 +633,7 @@ $jobs
 	ssh root@47.92.83.74 -p 46907
 ```
 ## scp
-``` 
+```
 	从远程端口拷贝到本地
 		scp -P 46907 root@47.92.83.74:/root/NETLearning/out/out_iter_500000.caffemodel  
 										/home/xuyongkang/atest/out_iter_500000.caffemodel
@@ -517,7 +665,13 @@ $jobs
 	-p 若比较文件为C语言的程序文件时，显示差异所在的函数名称
 
 ```
-## tar
+## 文件的打包与压缩
+
+文件的打包与解压一般包括三个命令zip rar tar
+### 压缩命令
+1. zip -r(进行递归压缩) -9（压缩都为9） -q（安静解压模式）/*-e（加密压缩）*/ -o（文件名） shiyanlou.zip /home/shiyanlou
+
+2. tar
 ```
 	tar -xzvf X.tar.gz 解压*.tar.gz文件
 	tar -xvf *.tar
@@ -529,6 +683,17 @@ $jobs
 	unrar e *.rar
 	unzip *.zip
 ```
+tar对文件进行打包
+ tar -c(表明创建一个tar文件)f（表示文件名） shiyanlou.tar ~
+ tar -czf shiyanlou.tar.gz ~创建文件包并以gz的形式进行压缩
+ tar -xzf shiyanlou.tar.gz 将创建的gz文件进行解压
+ 
+### 解压命令
+
+  unzip shiyanlou.zip  解压到当前文件夹
+  unzip -q shiyanlou.zip -d ziptest 解压到指定文件夹
+  unrar e shiyanlou.rar tmp/  将shiyanlou文件解压到tmp/目录下
+
 ## wc 查看文件中的行数或者字数
 ```
 	用法：wc
@@ -548,7 +713,7 @@ $jobs
 	sed 修改和编辑文本文件中某些行
 	awk 是访问文本文件，操纵文本文件中某些数据
 ```
-## echo 
+## echo
 ```
 	echo 中  \b表示退格的意思因此也就可以实现原位置显示百分比了。
 	#eg:start#
@@ -559,7 +724,7 @@ $jobs
 		echo -n "#">>dirnameandnum.txt
 		find $line |wc -l >>dirnameandnum.txt
 
-		#echo -en "\b\b\b\b\b\b\b\b\b\b" `echo $line` 
+		#echo -en "\b\b\b\b\b\b\b\b\b\b" `echo $line`
 	done
 	#eg:end#
 	-n 代表不换行输出到文本文件中否则则进行换行
@@ -597,7 +762,7 @@ $jobs
 		10 packets transmitted, 10 received, 0% packet loss, time 9015ms
 		icmpICMP是“Internet Control Message Protocol”（Internet控制消息协议）的缩写。
 		它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息
-	
+
 ```
 ## netstat
 
@@ -918,7 +1083,7 @@ total 4
 -rw-r--r--    1 oracle   dba          1024 Jul 15 16:56 test.txt
 #find / -name access_log  2>/dev/null
 ```
-1. 使用/dev/null 
+1. 使用/dev/null
 把/dev/null看作"黑洞"， 它等价于一个只写文件，所有写入它的内容都会永远丢失.，而尝试从它那儿读取内容则什么也读不到。然而， /dev/null对命令行和脚本都非常的有用
 
 禁止标准输出
@@ -947,7 +1112,7 @@ total 4
 
 自动清空日志文件的内容
 
-Deleting contents of a file, but preserving the file itself, with all attendant permissions (from Example 2-1 and Example 2-3): 
+Deleting contents of a file, but preserving the file itself, with all attendant permissions (from Example 2-1 and Example 2-3):
 ```
 #cat /dev/null > /var/log/messages
 #  : > /var/log/messages   有同样的效果， 但不会产生新的进程.（因为:是内建的）
@@ -1004,8 +1169,8 @@ Deleting contents of a file, but preserving the file itself, with all attendant 
 	 mkswap FILEblocks # 将此文件建为交换文件（或称交换分区）.
 	 swapon $FILE # 激活交换文件.
 	 echo "Swap file created and activated."
-	 exit $SUCCESS 
-	关于 /dev/zero 的另一个应用是为特定的目的而用零去填充一个指定大小的文件， 
+	 exit $SUCCESS
+	关于 /dev/zero 的另一个应用是为特定的目的而用零去填充一个指定大小的文件，
 	如挂载一个文件系统到环回设备 （loopback device）或"安全地" 删除一个文件
 	例子创建ramdisk
 	#!/bin/bash
@@ -1060,7 +1225,7 @@ df -h人性化显示硬盘情况
 ```
 	ls -l|find *|wc -l
 ```
-## linux中垃圾箱的位置 
+## linux中垃圾箱的位置
 ```
 /home/xuyongkang/.local/share/Trash/files->垃圾箱位置内容
 ```
@@ -1142,26 +1307,26 @@ firstPicName="2.bmp"
 secondPicName="3.bmp"
 countPairNum=5760
 maxPairNum=6000
-for firstFolderNum in $(seq 1 $countMax)	
+for firstFolderNum in $(seq 1 $countMax)
 	#find the first folder name
 	do
 	#       firstFolderName=`find -name "FERET-*" | grep 'FERET-0\{0,2\}'$firstFolderNum'$'`
 		firstFolderName=$firstFolderNum
 		firstPicSrc=$firstFolderName"/"$firstPicName
-		
+
 		let firstFolderNum+=1		
 		for secondFolderNum in $(seq $firstFolderNum $countMax)
 		#loop the second folder name
-			do	
+			do
 	#			secondFolderName=`find -name "FERET-*" | grep 'FERET-0\{0,2\}'$secondFolderNum'$'`
 				secondFolderName=$secondFolderNum
 				secondPicSrc=$secondFolderName"/"$secondPicName
-				
-				
+
+
 				let countPairNum+=1
 				cp $firstPicSrc ./fakePairFolder/"ATFakePair"$countPairNum"_1.bmp"
 				echo -n "ATFakePair"$countPairNum"_1.bmp ">>fakePairFolder/fakePairTxt.txt
-					
+
 				cp $secondPicSrc ./fakePairFolder/"ATFakePair"$countPairNum"_2.bmp"
 				echo  "ATFakePair"$countPairNum"_2.bmp  0">>fakePairFolder/fakePairTxt.txt
 				echo $firstPicSrc
@@ -1196,7 +1361,7 @@ for nowInThisFolderNum in $(seq 1 $countMax)
 	do
 		#nowInThisFolderName=`find -name "FERET-*"| grep 'FERET-0\{0,2\}'$nowInThisFolderNum'$'`
 		nowInThisFolderName=$nowInThisFolderNum
-		let maxPicNumForLoopOne=maxPicNum-1	
+		let maxPicNumForLoopOne=maxPicNum-1
 		for firstPicNum in $(seq 1 $maxPicNumForLoopOne)
 			do
 				firstPicName=$firstPicNum".bmp"
@@ -1209,11 +1374,11 @@ for nowInThisFolderNum in $(seq 1 $countMax)
 						let countPairNum+=1
 						cp $firstPicSrc ./realPairFolder/"ATRealPair"$countPairNum"_1.bmp"
 						echo -n "ATRealPair"$countPairNum"_1.bmp ">>realPairFolder/realPairTxt.txt
-					
+
 						cp $secondPicSrc ./realPairFolder/"ATRealPair"$countPairNum"_2.bmp"
 						echo  "ATRealPair"$countPairNum"_2.bmp  1">>realPairFolder/realPairTxt.txt
-						
-						
+
+
 						#echo "pair"$countPairNum
 						#echo "pair 1:"$firstPicSrc
 						#echo "pair 2:"$secondPicSrc
@@ -1221,7 +1386,7 @@ for nowInThisFolderNum in $(seq 1 $countMax)
 			done
 	done
 echo "done."
-	
+
 {% endhighlight %}
 
 ## 实例3
