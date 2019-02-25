@@ -4,6 +4,165 @@ title: linux命令
 categories: [linux命令积累]
 ---
 
+## ls
+ls=list  -a -l -h -d -i
+
+  ls   显示当前目录下的文件
+
+  ls/  显示根目录下的文件
+
+	* ls /home
+
+  ls -a(all)显示所有文件包括隐藏文件（前面加.表示，所以隐藏文件时候前面加点)
+
+  ls -l(long长格式显示)显示较为详细的文件信息
+
+  ls -h(human)更人性化的显示文件大小(ls -lh=ls -hl=显示更为详细的文件信息）
+
+  ls -d指定目录查看
+
+  ls -i查看文件的i节点就像省份证号一样
+       一般可以组合使用 ls -asSh  为显示文件的大小 S是对文件进行大小排序
+
+例子：
+```
+ls -lR  ->R代表子目录
+ls -l|find *|wc -l
+```
+
+## su
+
+	su -l lilei 用lilei进行登陆
+## nl
+	nl  使用方式跟cat一样只是更专业
+	    -b : 指定添加行号的方式，主要有两种：
+	        -b a:表示无论是否为空行，同样列出行号("cat -n"就是这种方式)
+	        -b t:只列出非空行的编号并列出（默认为这种方式）
+	    -n : 设置行号的样式，主要有三种：
+	        -n ln:在行号字段最左端显示
+	        -n rn:在行号字段最右边显示，且不加 0
+	        -n rz:在行号字段最右边显示，且加 0
+	    -w : 行号字段占用的位数(默认为 6 位)
+## mv
+
+```
+
+移动或者重命名文件
+
+mv 源目录文件  目的目录
+mv 旧的文件名  新的文件名
+
+```
+## ps
+
+ps命令用于查看系统中正在运行的进程
+```
+参数格式：
+- e 显示所有进程。
+- f 全格式。
+- h 不显示标题。
+- l 长格式。
+- w 宽输出。
+- a 显示终端上的所有进程，包括其他用户的进程。
+- r 只显示正在运行的进程。
+- x 显示没有控制终端的进程。
+```
+
+最常用的几个命令
+```
+- ps -ef 查看全格式的全部进程
+- ps -ax 查看全部进程
+- ps -ef|grep <进程名> 查看并筛选 跟进程名有关的进程，该进程名可以是进程的全部或者部分
+```
+例子
+```
+ps -ef|grep nginx
+```
+defunct
+```
+	表示一个进程僵尸，僵尸进程的父亲进程的查看方式
+	ps -ef | grep defunct_process_pid（从网络上查看的）
+```
+## fg
+```
+	jobs是和fg配合使用的
+	$ fg %find
+	find/-name README -print > logfile
+	注意,显示的命令行末尾没有&符号.下面的命令能产生同样的效果:
+	$ fg %1
+```
+## rm
+
+```
+删除一个文件或者目录
+rm test 删除test文件
+rm -f test 强制删除文件，忽视权限限制
+rm -r family 删除一个目录
+```
+## bg
+```
+	它是把前台进程换到后台执行,其使用格式是:
+	bg [job...]
+	其中,job还是一个或多个进程的PID,命令名称或作业号,在参数前要带%号.例如,在cc(C编译命令)命令执行过程中,按
+	Z键,使作业挂起.然后键入以下命令:
+	$ bg %cc
+	该挂起的作业在后台重新开始运行.........  <<<这个非常的重要能够经常的用到>>>
+```
+
+## cat
+
+	cat进行文件的读取
+	cat 文件查看
+    cat filename      //其实实际上cat有很多很多的用法
+	cat -n passwd  cat 参数  文件  -n表示列出行号
+## wc
+查看文件中的行数或者字数
+```
+用法：wc
+	[选项]...[文件]...
+	-c打印字节数
+	-m打印字符数
+	-l打印换行数
+	-L显示最长行的长度
+	-w统计单词个数
+	eg.wc file1 file2
+
+用途：统计文件中的单词数量（Word Count）等信息
+格式:wc [选项]…  目标文件…
+	显示的是  行数量  字数量  字节数
+
+```
+
+## dir
+(类似于linux中的ls命令)
+
+## jobs
+```
+jobs -l显示所有的后台运行进程
+$jobs
+	[2] + running tar tv3 * &
+	[1] - running find/ -name README -print > logfile&
+```
+
+## git
+```
+git add.//将代码更新
+git commit -m "commit message"//评论新新增的代码
+
+//从remote端创建一个分支
+git clone remote
+	e.g. git clone https://pdos.csail.mit.edu/6.828/2017/jos.git
+//创建分支（这个我还没有实验）
+git branch lab1
+//切换分支（我目前的经验就是在一个分支中才能切换分支）
+git checkout lab2
+//创建并切换分支(我目前的经验也是在一个分支中才能进行创建和切换)
+git checkout -b lab3
+//在远端分支origin/lab4的基础上创建一个分支并转到这个分支lab4
+git checkout -b lab4 origin/lab4
+//列出所有的分支信息
+git branch -a
+```
 ## vim
 
 1. 查找
@@ -91,38 +250,65 @@ categories: [linux命令积累]
 10. 保存文件到特定的路径
 : saveas 文件路径
 
+## who
+who 进行用户查看
 
-## bash
-bash配置文件->环境变量常用变量如下：
-1. PATH  决定了shell将到那些目录中寻找命令或程序
-2. HOME  当前用户的主目录
-3. HISTSIZE  历史记录数
-4. LOGNAME  当前用户的登录名
-5. HOSTNAME  指主机的名称
-6. SHELL  当前用户的shell类型
-7. LANG  语言相关的环境变量，多语言可以修改此环境变量
-8. MAIL  当前用户的邮件存放目录
+     -a  能打印的全都打印  
+     -d  打印死掉的进程		
+     -m  
+     -q  打印当前登录的用户数及用户名
+     -u  打印当前登录用户的登陆信息
+     -r  打印运行等级
+## ssh
+```
+	远程登录
+	ssh root@47.92.83.74 -p 46907
+```
+## scp
+```
+	从远程端口拷贝到本地
+		scp -P 46907 root@47.92.83.74:/root/NETLearning/out/out_iter_500000.caffemodel  
+										/home/xuyongkang/atest/out_iter_500000.caffemodel
+		scp -P 46907 root@47.92.83.74:文件路径1 文件路径2
+	从本地拷贝到远程端口
+		scp -P 46907 /home/xuyongkang/atest/NETLearing.tar.gz root@47.92.83.74:/temp
+```
+## cmp
+```
+比较任意两个类型的文件，把结果输出到标准输出上
+默认：文件相同不输出
+	 不同文件输出不同
+参数：
+	-c显示不同的信息
+	-l列出所有的不同信息
+	-s错误信息不提示
+```
+## diff
+```
+作用：
+	用于比较文件内容，找到不同的地方
+输出：
+	diff程序的输出被成为补丁(patch)，linux系统中有一个patch命令，可以根据diff的输出将a文件内容改成b。这个功能非常有用，比如打补丁。
+命令参数：
+	-a diff预设会逐行比较文本文件
+	-b或者--ignore-blank-change 不检查空格字符的不同
+	-B或者--ignore-blank-lines  不检查空白行
+	-c 显示全部内文，并标出不同之处
+	-p 若比较文件为C语言的程序文件时，显示差异所在的函数名称
 
-## ls
-ls=list  -a -l -h -d -i
+格式：diff [选项]… 文件1 文件2
+常见命令选项
+	-c 显示全部内文，并标出不同之处
+-b不检查空格字符的不同
+-r比较子目录中的文件
+-s若没有发现任何差异，仍然显示信息
+		diff  test1.c  test/test.c 命令使用的例子
+		diff –u test1.c  test/test.c显示的信息中---表示旧文件，+++表示新文件；通常是用来打补丁使用的（用来生成补丁文件，可以用patch命令来打补丁）显示的文本中带有+的表示是要增加的，如果是减的话表示是要减去的。
+		打补丁的例子
+		diff -uN test/test.c test1.c>test.c.patch生成补丁文件
+patch -p0 test1.c test.c.patch利用补丁命令进行打补丁
 
-  ls   显示当前目录下的文件
-
-  ls/  显示根目录下的文件
-
-	* ls /home
-
-  ls -a(all)显示所有文件包括隐藏文件（前面加.表示，所以隐藏文件时候前面加点)
-
-  ls -l(long长格式显示)显示较为详细的文件信息
-
-  ls -h(human)更人性化的显示文件大小(ls -lh=ls -hl=显示更为详细的文件信息）
-
-  ls -d指定目录查看
-
-  ls -i查看文件的i节点就像省份证号一样
-       一般可以组合使用 ls -asSh  为显示文件的大小 S是对文件进行大小排序
-
+```
 ## sudo
 
 sudo 只有拥有root 权限的用户才能使用
@@ -136,37 +322,6 @@ sudo 只有拥有root 权限的用户才能使用
      sudo deluser  删除一个用户
      sudo deluser lilei  删除一个名叫lilei的用户
 
-## su
-
-	su -l lilei 用lilei进行登陆
-
-## who
-who 进行用户查看
-
-     -a  能打印的全都打印  
-     -d  打印死掉的进程		
-     -m  
-     -q  打印当前登录的用户数及用户名
-     -u  打印当前登录用户的登陆信息
-     -r  打印运行等级
-
-## chmod
-chmod 对文件的权限进行修改
-
-      chomd 700 iphone6 是指将iphone6文件的权限修改为-rwx------
-
-## cat
-
-	cat进行文件的读取
-	cat 文件查看
-    cat filename      //其实实际上cat有很多很多的用法
-	cat -n passwd  cat 参数  文件  -n表示列出行号
-
-## echo
-
-	 echo 打印字符
-	 echo hello world >iphone6    向iphone6文件中写入hello world
-
 ## touch
 	 touch  命令用于创建一个空白文件
 	 touch test 创建一个test空白文件
@@ -174,26 +329,7 @@ chmod 对文件的权限进行修改
 ## groups
 		groups  进行用户组查询
 		groups shiyanlou
-## nl
-		nl  使用方式跟cat一样只是更专业
-		    -b : 指定添加行号的方式，主要有两种：
-		        -b a:表示无论是否为空行，同样列出行号("cat -n"就是这种方式)
-		        -b t:只列出非空行的编号并列出（默认为这种方式）
-		    -n : 设置行号的样式，主要有三种：
-		        -n ln:在行号字段最左端显示
-		        -n rn:在行号字段最右边显示，且不加 0
-		        -n rz:在行号字段最右边显示，且加 0
-		    -w : 行号字段占用的位数(默认为 6 位)
-## mv
 
-```
-
-移动或者重命名文件
-
-mv 源目录文件  目的目录
-mv 旧的文件名  新的文件名
-
-```
 
 ## more
 more  阅读器
@@ -210,6 +346,380 @@ Less命令
 
 ## file
 	这个功能用来显示文件类型，例如echo就是一个二进制类型文件
+## chmod
+chmod 对文件的权限进行修改
+
+      chomd 700 iphone6 是指将iphone6文件的权限修改为-rwx------
+
+
+
+## echo
+
+	 echo 打印字符
+	 echo hello world >iphone6    向iphone6文件中写入hello world
+
+```
+	echo 中  \b表示退格的意思因此也就可以实现原位置显示百分比了。
+	#eg:start#
+	cat dirname.txt|while read line
+	do
+
+		echo -n $line >>dirnameandnum.txt
+		echo -n "#">>dirnameandnum.txt
+		find $line |wc -l >>dirnameandnum.txt
+
+		#echo -en "\b\b\b\b\b\b\b\b\b\b" `echo $line`
+	done
+	#eg:end#
+	-n 代表不换行输出到文本文件中否则则进行换行
+```
+
+## whereis-which-find-locate
+
+## whereis
+
+简单快捷
+         whereis who
+
+## locate
+
+快而全可以用来查找指定目录下的不同类型的文件
+	如locate /etc/sh 用来查找/etc下所有的sh开头的文件
+	locate /usr/share/\*jpg查找/usr/share/下的所有jpg文件
+
+## which
+
+	which 小而精通常是用来确定是否安装了某个软件
+	如 which man
+
+## rename
+
+```
+rename 用perl正则表达式来作为一个参数进行重命名
+        touch file{1..5}.txt
+       # 使用通配符批量创建 5 个文件
+       $ touch file{1..5}.txt
+
+       # 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件
+       $ rename 's/\.txt/\.c/' *.txt
+
+       # 批量将这 5 个文件，文件名改为大写
+       $ rename 'y/a-z/A-Z/' *.c
+```
+
+## head
+```
+	输出文件的前3000行
+	head -n 3000 test.txt >temp.txt
+```
+## tail
+
+```
+与head仿照相似即可的
+```
+
+## eval
+
+执行字符串中内容
+```
+    eval  使用方法
+	command1='firstPicName="06_"$firstDirCount".tif"'
+	eval command1;
+	这个时候相当于执行了一句firstPicName="06_"$firstDirCount".tif"
+```
+## mkdir
+
+```
+	1.嵌套建立文件夹(-p如果不存在父目录创建父级目录)
+	mkdir -p /home/xuyongkang/test   ->直接建立嵌套的文件夹
+	mkdir test1 test2
+```
+
+
+
+
+## and符号
+```
+	command&  将命令放入后台运行
+```
+
+## export
+
+    export的作用是增加系统的环境变量
+	CPLUS_LIBRARY_PATH -> c++编译的环境变量的路径
+	LD_LIBRARY_PATH ->动态链接库的环境变量的路径
+	例子：
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/data
+
+## top-htop-atop
+
+```
+    top动态显示进程的运行状况
+    htop动态显示内存和CPU的占用情况
+    atop动态显示内存CPU和GPU的使用情况
+```
+## shuf
+
+抽取随机数
+```
+	shuf train.txt -o test.txt -n 30 从train中随机选取30行导入到test中
+```
+## history
+
+```
+	查看历史记录
+    history 1000 >./history.txt    ->将1000条的历史命令放入到history.txt中
+```
+## apt-get
+
+```
+    sudo apt-get clean 清理以前安装过的文件
+    sudo apt-get update 更新安装的软件
+	sudo apt-get upgrade 对软件进行升级
+	apt-get install packagename
+		安装一个新软件包（参见下文的aptitude）
+	apt-get remove packagename
+		卸载一个已安装的软件包（保留配置文档）
+```
+## grep
+```
+用途：在文件中查找并显示包含制定字符串的行
+格式：grep  [选项]…. 查找条件 目标文件
+常用命令选项
+	-i:查找时忽略大小写
+	-v：反转查找，输出与查找条件不相符的行
+查找条件设置
+	要查找的字符串以双引号括起来
+	“^……”表示以……开头，”……$”表示以……结尾
+    “^$”表示空行
+grep –n  “/dev” tst(-n是显示行号的意思，整个意思是在tst文件中搜索带有/dev字符的文件
+以下是一个例子grep -n "iostream" /home/xuyongkang/Desktop/test.c)<这是grep配合字符串搜索使用>
+
+grep –n “sdc[0-6]” tst  <这是grep配合正则表达式使用>
+Eg：ls –al | grep ^d(显示以d打头的目录，grep进行筛选)
+
+```
+## find
+
+使用方法
+
+```  
+	find [path] [option] [expression]
+```
+
+例子
+
+```
+	find ./total/ -name "*.tif" -exec cp {} /amyfile/train/ \;
+	这里加入了\;这样才能正常运行否则就不能正常的运行。
+	这样做能构保证当复制大量的文件的时候不会出现参数列表过长出现无法复制的情况，
+	因为使用普通的mv和cp的时候因为参数列表没法进行复制。
+```
+更详细的功能
+	
+* （0）限定搜索的层数
+
+```
+find ./ -maxdepth 1 搜索本地目录，限定搜索的层数最大层数为测层
+```
+
+* （1）反向查找
+
+```
+除了查找满足条件的文件之外，我们还可以查找不满足条件的所有文件。当我们知道要在查找中排除哪些文件时，这个选项就能发挥作用了。
+
+find ./test -not -name "*.php"
+```
+
+* （2）结合多个查找条件
+
+```		
+我们可以同时使用多个查找条件来指定文件名并排除某些文件。
+		
+find ./test -name 'abc*' ! -name '*.php'
+```  
+ 	
+* （3）只查找文件或目录
+
+```
+有时我们只想通过某个名字查找对应的文件或对应的目录，我们可以很容易实现这个要求。
+	$ find ./test -name abc*
+		./test/abc.txt
+		./test/abc
+只查找文件
+	$ find ./test -type f -name "abc*"
+		./test/abc.txt
+只查找目录
+	$ find ./test -type d -name "abc*"
+		./test/abc
+```
+	
+* （4）查找属于特定用户的文件
+
+```
+查找当前目录下，属于 bob 的文件。
+	$ find . -user bob
+查找属于特定用户组的文件
+	# find /var/www -group developer
+```
+	
+* （5）查找过去的第 N 天被修改过的文件
+
+```
+# find / -mtime 50
+```
+* （6） 查找过去的 N 分钟内状态发生改变的文件
+
+```
+$ find /home/bob -cmin -60
+```
+	
+* （7）基于文件大小的查找
+
+```
+查找指定大小的文件
+	$ find / -size 50M
+查找大小在一定范围内的文件
+	$ find / -size +50M -size -100M
+```
+
+* （8）高级操作
+
+* （9）结合-exec
+
+```
+我们使用 find 命令找到文件后，只能看到文件路径。如果想进一步查看文件信息，可以结合 ls 命令来实现。
+
+$ find . -exec ls -ld {} \;
+	drwxrwxr-x 4 enlightened enlightened 4096 Aug 11 19:01 .
+	-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:25 ./abc.txt
+	drwxrwxr-x 2 enlightened enlightened 4096 Aug 11 16:48 ./abc
+	drwxrwxr-x 2 enlightened enlightened 4096 Aug 11 16:26 ./subdir
+	-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:26 ./subdir/how.php
+	-rw-rw-r-- 1 enlightened enlightened 29 Aug 11 19:13 ./abc.php
+	-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:25 ./cool.php
+```
+
+```
+		删除找到的文件
+		下面的命令会删除 tmp 目录下扩展名为 .txt 的文件。
+		$ find /tmp -type f -name "*.txt" -exec rm -f {} \;
+		我们同样可以删除目录，只要把 -type 后面的 f 改为 d ，并且在 rm 命令后面加上 -r 即可。
+		$ find /tmp -type d -name "dirToRemove" -exec rm -r -f {} \;
+```
+## expect
+
+```
+1. send:用于向进程发送字符
+2. expect:从进程中接收字符
+3. spawn:启动新的进程
+4. interact:允许用户进行交互
+```
+
+例如以下的一个例子：
+
+{% highlight ruby %}
+
+\#！/usr/bin/expect
+spawn su root
+expect "Password:"
+send "  \r"
+send "cd ./6.828/lab\r"
+send "ls\r"
+interact
+\#文件结束
+
+{% endhighlight %}
+
+如果想要运行这个sh就要使用命令：
+/usr/bin/expect xx.sh
+这样做的原因是由于spawn是内嵌在expect内的命令如果不这样做就会出现命令找不到的情况。
+
+## ping
+```
+	ping -c 10 -i 1 www.baidu.com
+		64 bytes from 111.13.100.92: icmp_seq=1 ttl=53 time=16.6 ms
+		64 bytes from 111.13.100.92: icmp_seq=2 ttl=53 time=15.5 ms
+		64 bytes from 111.13.100.92: icmp_seq=3 ttl=53 time=15.5 ms
+
+		10 packets transmitted, 10 received, 0% packet loss, time 9015ms
+		icmpICMP是“Internet Control Message Protocol”（Internet控制消息协议）的缩写。
+		它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息
+
+```
+## netstat
+
+netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。
+
+语法
+```
+netstat  (选项)
+```
+
+选项
+```
+- a或--all：显示所有连线中的Socket；
+- A<网络类型>或--<网络类型>：列出该网络类型连线中的相关地址；
+- c或--continuous：持续列出网络状态；
+- C或--cache：显示路由器配置的快取信息；
+- e或--extend：显示网络其他相关信息；
+- F或--fib：显示FIB；
+- g或--groups：显示多重广播功能群组组员名单；
+- h或--help：在线帮助；
+- i或--interfaces：显示网络界面信息表单；
+- l或--listening：显示监控中的服务器的Socket；
+- M或--masquerade：显示伪装的网络连线；
+- n或--numeric：直接使用ip地址，而不通过域名服务器；
+- N或--netlink或--symbolic：显示网络硬件外围设备的符号连接名称；
+- o或--timers：显示计时器；
+- p或--programs：显示正在使用Socket的程序识别码和程序名称；
+- r或--route：显示Routing Table；
+- s或--statistice：显示网络工作信息统计表；
+- t或--tcp：显示TCP传输协议的连线状况；
+- u或--udp：显示UDP传输协议的连线状况；
+- v或--verbose：显示指令执行过程；
+- V或--version：显示版本信息；
+- w或--raw：显示RAW传输协议的连线状况；
+- x或--unix：此参数的效果和指定"-A unix"参数相同；
+-- ip或--inet：此参数的效果和指定"-A inet"参数相同。
+```
+实例
+
+列出所有端口 (包括监听和未监听的)
+```
+- netstat -a     #列出所有端口
+- netstat -at    #列出所有tcp端口
+- netstat -au    #列出所有udp端口     
+```                        
+列出所有处于监听状态的 Sockets
+```
+- netstat -l        #只显示监听端口
+- netstat -lt       #只列出所有监听 tcp 端口
+- netstat -lu       #只列出所有监听 udp 端口
+- netstat -lx       #只列出所有监听 UNIX 端口
+```
+在netstat输出中显示 PID 和进程名称
+```
+- netstat -pt
+```
+![详细查看](http://man.linuxde.net/netstat)
+
+
+
+## bash
+
+bash配置文件->环境变量常用变量如下：
+1. PATH  决定了shell将到那些目录中寻找命令或程序
+2. HOME  当前用户的主目录
+3. HISTSIZE  历史记录数
+4. LOGNAME  当前用户的登录名
+5. HOSTNAME  指主机的名称
+6. SHELL  当前用户的shell类型
+7. LANG  语言相关的环境变量，多语言可以修改此环境变量
+8. MAIL  当前用户的邮件存放目录
+
+
+
 
 ## 环境变量
 
@@ -232,34 +742,7 @@ Less命令
 	 $ set|sort>set.txt
 	 上述操作将命令输出通过管道|使用sort命令排序，再重定向到对象文本文件中。
 
-## 常用的命令有如下几个whereis-which-find-locate
 
-## whereis
- 	简单快捷
-         whereis who
-
-## locate快而全可以用来查找指定目录下的不同类型的文件
-
-      如locate /etc/sh 用来查找/etc下所有的sh开头的文件
-      locate /usr/share/\*jpg查找/usr/share/下的所有jpg文件
-## which
-			which 小而精通常是用来确定是否安装了某个软件
-			如 which man
-
-## rename
-
-```
-rename 用perl正则表达式来作为一个参数进行重命名
-        touch file{1..5}.txt
-       # 使用通配符批量创建 5 个文件
-       $ touch file{1..5}.txt
-
-       # 批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件
-       $ rename 's/\.txt/\.c/' *.txt
-
-       # 批量将这 5 个文件，文件名改为大写
-       $ rename 'y/a-z/A-Z/' *.c
-```
 
 ## 正则表达式
 			touch file{1..5}.txt
@@ -272,8 +755,15 @@ rename 用perl正则表达式来作为一个参数进行重命名
 			# 批量将这 5 个文件，文件名改为大写
 			$ rename 'y/a-z/A-Z/' *.c
 
+```
+	^：表示匹配开始
+	$:表示匹配结束
+	[A-Za-z0-9]匹配
+	0\{0,2\}:表示有0到2个0
+>http://www.cnblogs.com/Quincy/archive/2012/03/26/2418485.html
+```
 
-## shell用法
+## shell脚本
 1. shell脚本中最常用的命令
 ```
 	if
@@ -463,301 +953,11 @@ rename 用perl正则表达式来作为一个参数进行重命名
 ```
 > http://www.cnblogs.com/aaronLinux/p/7074725.html（条理清晰）
 
-## ls
-
-```
-ls -lR  ->R代表子目录
-ls -l|find *|wc -l
-```
-## mkdir
-```
-	1.嵌套建立文件夹(-p如果不存在父目录创建父级目录)
-	mkdir -p /home/xuyongkang/test   ->直接建立嵌套的文件夹
-	mkdir test1 test2
-```
 
 
-## ps
 
-ps命令用于查看系统中正在运行的进程
-```
-参数格式：
-- e 显示所有进程。
-- f 全格式。
-- h 不显示标题。
-- l 长格式。
-- w 宽输出。
-- a 显示终端上的所有进程，包括其他用户的进程。
-- r 只显示正在运行的进程。
-- x 显示没有控制终端的进程。
-```
 
-最常用的几个命令
-```
-- ps -ef 查看全格式的全部进程
-- ps -ax 查看全部进程
-- ps -ef|grep <进程名> 查看并筛选 跟进程名有关的进程，该进程名可以是进程的全部或者部分
-```
-例子
-```
-ps -ef|grep nginx
-```
-defunct
-```
-	表示一个进程僵尸，僵尸进程的父亲进程的查看方式
-	ps -ef | grep defunct_process_pid（从网络上查看的）
-```
 
-## and符号
-```
-	command&  将命令放入后台运行
-```
-## jobs
-```
-jobs -l显示所有的后台运行进程
-$jobs
-	[2] + running tar tv3 * &
-	[1] - running find/ -name README -print > logfile&
-```
-## fg
-```
-	jobs是和fg配合使用的
-	$ fg %find
-	find/-name README -print > logfile
-	注意,显示的命令行末尾没有&符号.下面的命令能产生同样的效果:
-	$ fg %1
-```
-## rm
-
-```
-删除一个文件或者目录
-rm test 删除test文件
-rm -f test 强制删除文件，忽视权限限制
-rm -r family 删除一个目录
-```
-## bg
-```
-	它是把前台进程换到后台执行,其使用格式是:
-	bg [job...]
-	其中,job还是一个或多个进程的PID,命令名称或作业号,在参数前要带%号.例如,在cc(C编译命令)命令执行过程中,按
-	Z键,使作业挂起.然后键入以下命令:
-	$ bg %cc
-	该挂起的作业在后台重新开始运行.........  <<<这个非常的重要能够经常的用到>>>
-```
-## export
-
-    export的作用是增加系统的环境变量
-	CPLUS_LIBRARY_PATH -> c++编译的环境变量的路径
-	LD_LIBRARY_PATH ->动态链接库的环境变量的路径
-	例子：
-	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/data
-
-## top-htop-atop
-
-```
-    top动态显示进程的运行状况
-    htop动态显示内存和CPU的占用情况
-    atop动态显示内存CPU和GPU的使用情况
-```
-## shuf-抽取随机数
-
-```
-	shuf train.txt -o test.txt -n 30 从train中随机选取30行导入到test中
-```
-## history
-
-```
-	查看历史记录
-    history 1000 >./history.txt    ->将1000条的历史命令放入到history.txt中
-```
-## apt-get
-
-```
-    sudo apt-get clean 清理以前安装过的文件
-    sudo apt-get update 更新安装的软件
-	sudo apt-get upgrade 对软件进行升级
-	apt-get install packagename
-		安装一个新软件包（参见下文的aptitude）
-	apt-get remove packagename
-		卸载一个已安装的软件包（保留配置文档）
-```
-## find
-
-使用方法
-
-```  
-	find [path] [option] [expression]
-```
-
-例子
-
-```
-	find ./total/ -name "*.tif" -exec cp {} /amyfile/train/ \;
-	这里加入了\;这样才能正常运行否则就不能正常的运行。
-	这样做能构保证当复制大量的文件的时候不会出现参数列表过长出现无法复制的情况，
-	因为使用普通的mv和cp的时候因为参数列表没法进行复制。
-```
-更详细的功能
-	
-* （0）限定搜索的层数
-
-```
-find ./ -maxdepth 1 搜索本地目录，限定搜索的层数最大层数为测层
-```
-
-* （1）反向查找
-
-```
-除了查找满足条件的文件之外，我们还可以查找不满足条件的所有文件。当我们知道要在查找中排除哪些文件时，这个选项就能发挥作用了。
-
-find ./test -not -name "*.php"
-```
-
-* （2）结合多个查找条件
-
-```		
-我们可以同时使用多个查找条件来指定文件名并排除某些文件。
-		
-find ./test -name 'abc*' ! -name '*.php'
-```  
- 	
-* （3）只查找文件或目录
-
-```
-有时我们只想通过某个名字查找对应的文件或对应的目录，我们可以很容易实现这个要求。
-	$ find ./test -name abc*
-		./test/abc.txt
-		./test/abc
-只查找文件
-	$ find ./test -type f -name "abc*"
-		./test/abc.txt
-只查找目录
-	$ find ./test -type d -name "abc*"
-		./test/abc
-```
-	
-* （4）查找属于特定用户的文件
-
-```
-查找当前目录下，属于 bob 的文件。
-	$ find . -user bob
-查找属于特定用户组的文件
-	# find /var/www -group developer
-```
-	
-* （5）查找过去的第 N 天被修改过的文件
-
-```
-# find / -mtime 50
-```
-* （6） 查找过去的 N 分钟内状态发生改变的文件
-
-```
-$ find /home/bob -cmin -60
-```
-	
-* （7）基于文件大小的查找
-
-```
-查找指定大小的文件
-	$ find / -size 50M
-查找大小在一定范围内的文件
-	$ find / -size +50M -size -100M
-```
-
-* （8）高级操作
-
-* （9）结合-exec
-
-```
-我们使用 find 命令找到文件后，只能看到文件路径。如果想进一步查看文件信息，可以结合 ls 命令来实现。
-
-$ find . -exec ls -ld {} \;
-	drwxrwxr-x 4 enlightened enlightened 4096 Aug 11 19:01 .
-	-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:25 ./abc.txt
-	drwxrwxr-x 2 enlightened enlightened 4096 Aug 11 16:48 ./abc
-	drwxrwxr-x 2 enlightened enlightened 4096 Aug 11 16:26 ./subdir
-	-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:26 ./subdir/how.php
-	-rw-rw-r-- 1 enlightened enlightened 29 Aug 11 19:13 ./abc.php
-	-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:25 ./cool.php
-```
-
-```
-		删除找到的文件
-		下面的命令会删除 tmp 目录下扩展名为 .txt 的文件。
-		$ find /tmp -type f -name "*.txt" -exec rm -f {} \;
-		我们同样可以删除目录，只要把 -type 后面的 f 改为 d ，并且在 rm 命令后面加上 -r 即可。
-		$ find /tmp -type d -name "dirToRemove" -exec rm -r -f {} \;
-```
-
-## head
-```
-	输出文件的前3000行
-	head -n 3000 test.txt >temp.txt
-```
-## tail
-```
-与head仿照相似即可的
-```
-
-## eval-执行字符串中内容
-```
-    eval  使用方法
-	command1='firstPicName="06_"$firstDirCount".tif"'
-	eval command1;
-	这个时候相当于执行了一句firstPicName="06_"$firstDirCount".tif"
-```
-
-## ssh
-```
-	远程登录
-	ssh root@47.92.83.74 -p 46907
-```
-## scp
-```
-	从远程端口拷贝到本地
-		scp -P 46907 root@47.92.83.74:/root/NETLearning/out/out_iter_500000.caffemodel  
-										/home/xuyongkang/atest/out_iter_500000.caffemodel
-		scp -P 46907 root@47.92.83.74:文件路径1 文件路径2
-	从本地拷贝到远程端口
-		scp -P 46907 /home/xuyongkang/atest/NETLearing.tar.gz root@47.92.83.74:/temp
-```
-## cmp-比较文件
-```
-比较任意两个类型的文件，把结果输出到标准输出上
-默认：文件相同不输出
-	 不同文件输出不同
-参数：
-	-c显示不同的信息
-	-l列出所有的不同信息
-	-s错误信息不提示
-```
-## diff-比较文件内容
-```
-作用：
-	用于比较文件内容，找到不同的地方
-输出：
-	diff程序的输出被成为补丁(patch)，linux系统中有一个patch命令，可以根据diff的输出将a文件内容改成b。这个功能非常有用，比如打补丁。
-命令参数：
-	-a diff预设会逐行比较文本文件
-	-b或者--ignore-blank-change 不检查空格字符的不同
-	-B或者--ignore-blank-lines  不检查空白行
-	-c 显示全部内文，并标出不同之处
-	-p 若比较文件为C语言的程序文件时，显示差异所在的函数名称
-
-格式：diff [选项]… 文件1 文件2
-常见命令选项
-	-c 显示全部内文，并标出不同之处
--b不检查空格字符的不同
--r比较子目录中的文件
--s若没有发现任何差异，仍然显示信息
-		diff  test1.c  test/test.c 命令使用的例子
-		diff –u test1.c  test/test.c显示的信息中---表示旧文件，+++表示新文件；通常是用来打补丁使用的（用来生成补丁文件，可以用patch命令来打补丁）显示的文本中带有+的表示是要增加的，如果是减的话表示是要减去的。
-		打补丁的例子
-		diff -uN test/test.c test1.c>test.c.patch生成补丁文件
-patch -p0 test1.c test.c.patch利用补丁命令进行打补丁
-
-```
 ## 文件的打包与压缩
 
 文件的打包与解压一般包括三个命令zip rar tar
@@ -787,41 +987,9 @@ tar对文件进行打包
   unzip -q shiyanlou.zip -d ziptest 解压到指定文件夹
   unrar e shiyanlou.rar tmp/  将shiyanlou文件解压到tmp/目录下
 
-## wc-查看文件中的行数或者字数
-```
-用法：wc
-	[选项]...[文件]...
-	-c打印字节数
-	-m打印字符数
-	-l打印换行数
-	-L显示最长行的长度
-	-w统计单词个数
-	eg.wc file1 file2
 
-用途：统计文件中的单词数量（Word Count）等信息
-格式:wc [选项]…  目标文件…
-	显示的是  行数量  字数量  字节数
 
-```
 
-## grep
-```
-用途：在文件中查找并显示包含制定字符串的行
-格式：grep  [选项]…. 查找条件 目标文件
-常用命令选项
-	-i:查找时忽略大小写
-	-v：反转查找，输出与查找条件不相符的行
-查找条件设置
-	要查找的字符串以双引号括起来
-	“^……”表示以……开头，”……$”表示以……结尾
-    “^$”表示空行
-grep –n  “/dev” tst(-n是显示行号的意思，整个意思是在tst文件中搜索带有/dev字符的文件
-以下是一个例子grep -n "iostream" /home/xuyongkang/Desktop/test.c)<这是grep配合字符串搜索使用>
-
-grep –n “sdc[0-6]” tst  <这是grep配合正则表达式使用>
-Eg：ls –al | grep ^d(显示以d打头的目录，grep进行筛选)
-
-```
 
 
 ## grep-sed-awk  
@@ -832,32 +1000,9 @@ Eg：ls –al | grep ^d(显示以d打头的目录，grep进行筛选)
 	sed 修改和编辑文本文件中某些行
 	awk 是访问文本文件，操纵文本文件中某些数据
 ```
-## echo
-```
-	echo 中  \b表示退格的意思因此也就可以实现原位置显示百分比了。
-	#eg:start#
-	cat dirname.txt|while read line
-	do
 
-		echo -n $line >>dirnameandnum.txt
-		echo -n "#">>dirnameandnum.txt
-		find $line |wc -l >>dirnameandnum.txt
 
-		#echo -en "\b\b\b\b\b\b\b\b\b\b" `echo $line`
-	done
-	#eg:end#
-	-n 代表不换行输出到文本文件中否则则进行换行
-```
 
-## 正则表达式
-```
-	^：表示匹配开始
-	$:表示匹配结束
-	[A-Za-z0-9]匹配
-	0\{0,2\}:表示有0到2个0
->htt
->://www.cnblogs.com/Quincy/archive/2012/03/26/2418485.html
-```
 ## 查看磁盘情况
 ```
 	df -hl  
@@ -865,109 +1010,6 @@ Eg：ls –al | grep ^d(显示以d打头的目录，grep进行筛选)
 	   -h是以人性化形式显示
 ```
 
-## ping
-```
-	ping -c 10 -i 1 www.baidu.com
-		64 bytes from 111.13.100.92: icmp_seq=1 ttl=53 time=16.6 ms
-		64 bytes from 111.13.100.92: icmp_seq=2 ttl=53 time=15.5 ms
-		64 bytes from 111.13.100.92: icmp_seq=3 ttl=53 time=15.5 ms
-		64 bytes from 111.13.100.92: icmp_seq=4 ttl=53 time=15.5 ms
-		64 bytes from 111.13.100.92: icmp_seq=5 ttl=53 time=16.2 ms
-		64 bytes from 111.13.100.92: icmp_seq=6 ttl=53 time=14.6 ms
-		64 bytes from 111.13.100.92: icmp_seq=7 ttl=53 time=14.6 ms
-		64 bytes from 111.13.100.92: icmp_seq=8 ttl=53 time=16.1 ms
-		64 bytes from 111.13.100.92: icmp_seq=9 ttl=53 time=15.7 ms
-		64 bytes from 111.13.100.92: icmp_seq=10 ttl=53 time=15.5 ms
-
-		10 packets transmitted, 10 received, 0% packet loss, time 9015ms
-		icmpICMP是“Internet Control Message Protocol”（Internet控制消息协议）的缩写。
-		它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息
-
-```
-## netstat
-
-netstat命令用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。
-
-语法
-```
-netstat  (选项)
-```
-
-选项
-```
-- a或--all：显示所有连线中的Socket；
-- A<网络类型>或--<网络类型>：列出该网络类型连线中的相关地址；
-- c或--continuous：持续列出网络状态；
-- C或--cache：显示路由器配置的快取信息；
-- e或--extend：显示网络其他相关信息；
-- F或--fib：显示FIB；
-- g或--groups：显示多重广播功能群组组员名单；
-- h或--help：在线帮助；
-- i或--interfaces：显示网络界面信息表单；
-- l或--listening：显示监控中的服务器的Socket；
-- M或--masquerade：显示伪装的网络连线；
-- n或--numeric：直接使用ip地址，而不通过域名服务器；
-- N或--netlink或--symbolic：显示网络硬件外围设备的符号连接名称；
-- o或--timers：显示计时器；
-- p或--programs：显示正在使用Socket的程序识别码和程序名称；
-- r或--route：显示Routing Table；
-- s或--statistice：显示网络工作信息统计表；
-- t或--tcp：显示TCP传输协议的连线状况；
-- u或--udp：显示UDP传输协议的连线状况；
-- v或--verbose：显示指令执行过程；
-- V或--version：显示版本信息；
-- w或--raw：显示RAW传输协议的连线状况；
-- x或--unix：此参数的效果和指定"-A unix"参数相同；
--- ip或--inet：此参数的效果和指定"-A inet"参数相同。
-```
-实例
-
-列出所有端口 (包括监听和未监听的)
-```
-- netstat -a     #列出所有端口
-- netstat -at    #列出所有tcp端口
-- netstat -au    #列出所有udp端口     
-```                        
-列出所有处于监听状态的 Sockets
-```
-- netstat -l        #只显示监听端口
-- netstat -lt       #只列出所有监听 tcp 端口
-- netstat -lu       #只列出所有监听 udp 端口
-- netstat -lx       #只列出所有监听 UNIX 端口
-```
-在netstat输出中显示 PID 和进程名称
-```
-- netstat -pt
-```
-![详细查看](http://man.linuxde.net/netstat)
-
-## expect
-
-```
-1. send:用于向进程发送字符
-2. expect:从进程中接收字符
-3. spawn:启动新的进程
-4. interact:允许用户进行交互
-```
-
-例如以下的一个例子：
-
-{% highlight ruby %}
-
-\#！/usr/bin/expect
-spawn su root
-expect "Password:"
-send "  \r"
-send "cd ./6.828/lab\r"
-send "ls\r"
-interact
-\#文件结束
-
-{% endhighlight %}
-
-如果想要运行这个sh就要使用命令：
-/usr/bin/expect xx.sh
-这样做的原因是由于spawn是内嵌在expect内的命令如果不这样做就会出现命令找不到的情况。
 
 
 ## 位左移符号
@@ -987,25 +1029,7 @@ t.sh是命令行的内容
 	rm y
 也就是运行几行命令
 ```
-## git
-```
-git add.//将代码更新
-git commit -m "commit message"//评论新新增的代码
 
-//从remote端创建一个分支
-git clone remote
-	e.g. git clone https://pdos.csail.mit.edu/6.828/2017/jos.git
-//创建分支（这个我还没有实验）
-git branch lab1
-//切换分支（我目前的经验就是在一个分支中才能切换分支）
-git checkout lab2
-//创建并切换分支(我目前的经验也是在一个分支中才能进行创建和切换)
-git checkout -b lab3
-//在远端分支origin/lab4的基础上创建一个分支并转到这个分支lab4
-git checkout -b lab4 origin/lab4
-//列出所有的分支信息
-git branch -a
-```
 ## df
 ```
 df -h人性化显示硬盘情况
@@ -1339,10 +1363,7 @@ Deleting contents of a file, but preserving the file itself, with all attendant 
 	 # 这样很合适速度要求高的数据库服务器.
 	 exit 0
 ```
-## linux中显示图片
-```
-df -h人性化显示硬盘情况
-```
+
 ## 联合命令用法
 ```
 	ls -l|find *|wc -l
@@ -1448,6 +1469,8 @@ ctrl+alt+F1-F7  ->新开shell，F7是切换回桌面
 ~代表[当前使用者身份]所在的home目录
 ```
 
+
+
 # CMD-windows命令
 
 ## netstat-选项
@@ -1504,14 +1527,12 @@ TIME-WAIT：等待足够的时间以确保远程TCP接收到连接中断请求�
 CLOSED：没有任何连接状态
 ```
 
-## dir(类似于linux中的ls命令)
-
 
 <h1 align="center"> shell脚本例子<h1>
 
 
 
-## 实例1
+### 实例1
 {% highlight ruby %}
 #apply variable
 #mkdir fakePairFolder
@@ -1561,7 +1582,7 @@ echo $countPairNum pairs
 
 {% endhighlight %}
 
-## 实例2
+### 实例2
 {% highlight ruby %}
 
 #apply variable
@@ -1604,7 +1625,7 @@ echo "done."
 
 {% endhighlight %}
 
-## 实例3
+### 实例3
 
 {% highlight ruby %}
 
