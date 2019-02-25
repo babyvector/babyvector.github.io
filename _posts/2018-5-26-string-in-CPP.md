@@ -67,3 +67,31 @@ for(auto &c:s){...}//可以改变原字符串中的字符//对象绑定
 1. 采用下标的方法
 2. 采用迭代器的方法
 
+
+### string中的拓展操作   P321
+
+1. 构造string的其他方法
+	
+	string s(cp,n)//将cp中的前n个字符拷贝到上
+	
+	string s(s2,pos2)//s是string s2从下标pos2开始的字符的拷贝。若pos2>s2.size()，构造函数的行为未定义。
+	
+	string s(s2,pos2,len2) s是string s2从下标pos2开始len2个字符的拷贝。不管len2的值是多少，构造函数至多拷贝s2.size()-pos2个字符。
+
+2. substr操作
+
+	substr操作返回一个string，它是原始string的一部分或全部的拷贝，可以传递给substr一个可选的开始位置和计数值。如果开始位置超过了string的大小则substr函数抛出一个out_of_range异常，如果开始位置加上计数值大于string的大小，则substr会调整计数值，只拷贝到string的末尾。
+
+	s.substr(pos,n)  返回一个string，包含string的一部分或者全部的拷贝。可以传递给substr一个可选的开始位置和计数值。如果开始位置超过了string的大小编译器就会抛出一个out_of_range异常。如果开始位置加上计数值超过string的大小，则substr会调整整个计数值，只拷贝到计数值的末尾。
+
+3. 改变string的其他方法
+
+	string还支持assign、insert、erase操作。
+	* assign操作
+		
+		s.assign(args)将s中的字符替换为args指定的字符，返回一个指向s的引用
+{%highlight ruby%}
+		const char *cp = "Stately,plump Buck";
+		s.assign(cp,7);
+		s.insert(s.size(),cp+7);
+{%endhighlight%}

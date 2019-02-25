@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: postl
 title: linux命令
 categories: [linux命令积累]
 ---
@@ -105,55 +105,72 @@ bash配置文件->环境变量常用变量如下：
 
 ## ls
 ls=list  -a -l -h -d -i
-  ls 显示当前目录下的文件
-  ls/显示根目录下的文件
-     ls /home
+
+  ls   显示当前目录下的文件
+
+  ls/  显示根目录下的文件
+
+	* ls /home
+
   ls -a(all)显示所有文件包括隐藏文件（前面加.表示，所以隐藏文件时候前面加点)
+
   ls -l(long长格式显示)显示较为详细的文件信息
+
   ls -h(human)更人性化的显示文件大小(ls -lh=ls -hl=显示更为详细的文件信息）
+
   ls -d指定目录查看
+
   ls -i查看文件的i节点就像省份证号一样
        一般可以组合使用 ls -asSh  为显示文件的大小 S是对文件进行大小排序
 
 ## sudo
 
 sudo 只有拥有root 权限的用户才能使用
+
      sudo adduser  创建一个新用户
-       sudo adduser lilei 创建一个lilei的新用户
+     sudo adduser lilei 创建一个lilei的新用户
      sudo usermod   为用户添加用户组
-       sudo usermod -G sudo lilei  将lilei加入sudo组
+     sudo usermod -G sudo lilei  将lilei加入sudo组
      sudo chown   变更文件所有者
-       sudo chown shiyanlou iphone6 将iphone6文件变更给shiyanlou
+     sudo chown shiyanlou iphone6 将iphone6文件变更给shiyanlou
      sudo deluser  删除一个用户
-       sudo deluser lilei  删除一个名叫lilei的用户
+     sudo deluser lilei  删除一个名叫lilei的用户
 
 ## su
+
 	su -l lilei 用lilei进行登陆
 
 ## who
 who 进行用户查看
+
      -a  能打印的全都打印  
      -d  打印死掉的进程		
      -m  
      -q  打印当前登录的用户数及用户名
      -u  打印当前登录用户的登陆信息
      -r  打印运行等级
+
 ## chmod
 chmod 对文件的权限进行修改
+
       chomd 700 iphone6 是指将iphone6文件的权限修改为-rwx------
 
 ## cat
+
 	cat进行文件的读取
 	cat 文件查看
     cat filename      //其实实际上cat有很多很多的用法
 	cat -n passwd  cat 参数  文件  -n表示列出行号
+
 ## echo
+
 	 echo 打印字符
 	 echo hello world >iphone6    向iphone6文件中写入hello world
+
 ## touch
-			touch  命令用于创建一个空白文件
-			touch test 创建一个test空白文件
-      touch zhongguo.txt
+	 touch  命令用于创建一个空白文件
+	 touch test 创建一个test空白文件
+     touch zhongguo.txt
 ## groups
 		groups  进行用户组查询
 		groups shiyanlou
@@ -167,6 +184,17 @@ chmod 对文件的权限进行修改
 		        -n rn:在行号字段最右边显示，且不加 0
 		        -n rz:在行号字段最右边显示，且加 0
 		    -w : 行号字段占用的位数(默认为 6 位)
+## mv
+
+```
+
+移动或者重命名文件
+
+mv 源目录文件  目的目录
+mv 旧的文件名  新的文件名
+
+```
+
 ## more
 more  阅读器
    more 文件名
@@ -176,31 +204,41 @@ more  阅读器
    q  quit
 ## less
 
+Less命令
+用途：跟more类似可以进行前后翻页而more只能往下进行翻页
+	 Less test.txt 显示之后需要输入q退出。
+
 ## file
 	这个功能用来显示文件类型，例如echo就是一个二进制类型文件
 
 ## 环境变量
 
-### set
+* set
+
 	显示当前 Shell 所有环境变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量
-### env
+* env
+
 	显示与当前用户相关的环境变量，还可以让命令在指定环境中运行
-### export
+* export
+
 	显示从 Shell 中导出成环境变量的变量，也能通过它将自定义变量导出为环境变量 //存在时间应该是最长的
-### 相关测试
-		$ temp=shiyanlou
-	  $ export temp_env=shiyanlou
-	  $ env|sort>env.txt
-	  $ export|sort>export.txt
-	  $ set|sort>set.txt
-	  上述操作将命令输出通过管道|使用sort命令排序，再重定向到对象文本文件中。
-## 常用的命令有如下几个whereis ;which;find;locate
+
+* 相关测试
+
+	 $ temp=shiyanlou
+	 $ export temp_env=shiyanlou
+	 $ env|sort>env.txt
+	 $ export|sort>export.txt
+	 $ set|sort>set.txt
+	 上述操作将命令输出通过管道|使用sort命令排序，再重定向到对象文本文件中。
+
+## 常用的命令有如下几个whereis-which-find-locate
 
 ## whereis
  	简单快捷
          whereis who
 
-## locate 快而全可以用来查找指定目录下的不同类型的文件
+## locate快而全可以用来查找指定目录下的不同类型的文件
 
       如locate /etc/sh 用来查找/etc下所有的sh开头的文件
       locate /usr/share/\*jpg查找/usr/share/下的所有jpg文件
@@ -209,6 +247,8 @@ more  阅读器
 			如 which man
 
 ## rename
+
+```
 rename 用perl正则表达式来作为一个参数进行重命名
         touch file{1..5}.txt
        # 使用通配符批量创建 5 个文件
@@ -219,6 +259,7 @@ rename 用perl正则表达式来作为一个参数进行重命名
 
        # 批量将这 5 个文件，文件名改为大写
        $ rename 'y/a-z/A-Z/' *.c
+```
 
 ## 正则表达式
 			touch file{1..5}.txt
@@ -420,7 +461,7 @@ rename 用perl正则表达式来作为一个参数进行重命名
 ```
    解决方法：http://blog.csdn.net/u011630575/article/details/77197349
 ```
-> https://www.cnblogs.com/aaronLinux/p/7074725.html（条理清晰）
+> http://www.cnblogs.com/aaronLinux/p/7074725.html（条理清晰）
 
 ## ls
 
@@ -430,7 +471,7 @@ ls -l|find *|wc -l
 ```
 ## mkdir
 ```
-	1.嵌套建立文件夹
+	1.嵌套建立文件夹(-p如果不存在父目录创建父级目录)
 	mkdir -p /home/xuyongkang/test   ->直接建立嵌套的文件夹
 	mkdir test1 test2
 ```
@@ -466,7 +507,8 @@ defunct
 	表示一个进程僵尸，僵尸进程的父亲进程的查看方式
 	ps -ef | grep defunct_process_pid（从网络上查看的）
 ```
-## &
+
+## and符号
 ```
 	command&  将命令放入后台运行
 ```
@@ -485,6 +527,14 @@ $jobs
 	注意,显示的命令行末尾没有&符号.下面的命令能产生同样的效果:
 	$ fg %1
 ```
+## rm
+
+```
+删除一个文件或者目录
+rm test 删除test文件
+rm -f test 强制删除文件，忽视权限限制
+rm -r family 删除一个目录
+```
 ## bg
 ```
 	它是把前台进程换到后台执行,其使用格式是:
@@ -495,27 +545,33 @@ $jobs
 	该挂起的作业在后台重新开始运行.........  <<<这个非常的重要能够经常的用到>>>
 ```
 ## export
+
     export的作用是增加系统的环境变量
 	CPLUS_LIBRARY_PATH -> c++编译的环境变量的路径
 	LD_LIBRARY_PATH ->动态链接库的环境变量的路径
 	例子：
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/data
-## top htop atop
+
+## top-htop-atop
+
 ```
     top动态显示进程的运行状况
     htop动态显示内存和CPU的占用情况
     atop动态显示内存CPU和GPU的使用情况
 ```
-## shuf 抽取随机数
+## shuf-抽取随机数
+
 ```
 	shuf train.txt -o test.txt -n 30 从train中随机选取30行导入到test中
 ```
 ## history
+
 ```
 	查看历史记录
     history 1000 >./history.txt    ->将1000条的历史命令放入到history.txt中
 ```
 ## apt-get
+
 ```
     sudo apt-get clean 清理以前安装过的文件
     sudo apt-get update 更新安装的软件
@@ -526,79 +582,104 @@ $jobs
 		卸载一个已安装的软件包（保留配置文档）
 ```
 ## find
-	使用方法
+
+使用方法
+
 ```  
 	find [path] [option] [expression]
 ```
-	例子
+
+例子
+
 ```
 	find ./total/ -name "*.tif" -exec cp {} /amyfile/train/ \;
 	这里加入了\;这样才能正常运行否则就不能正常的运行。
 	这样做能构保证当复制大量的文件的时候不会出现参数列表过长出现无法复制的情况，
 	因为使用普通的mv和cp的时候因为参数列表没法进行复制。
 ```
-	（0）限定搜索的层数
-```
-		find ./ -maxdepth 1 搜索本地目录，限定搜索的层数最大层数为测层
-```
-	（1）反向查找
-```
-		除了查找满足条件的文件之外，我们还可以查找不满足条件的所有文件。当我们知道要在查找中排除哪些文件时，这个选项就能发挥作用了。
-		find ./test -not -name "*.php"
-```
-	（2）结合多个查找条件
-```		
-		我们可以同时使用多个查找条件来指定文件名并排除某些文件。
-		find ./test -name 'abc*' ! -name '*.php'
-```   	
-	（3）只查找文件或目录
-```
-		有时我们只想通过某个名字查找对应的文件或对应的目录，我们可以很容易实现这个要求。
-		$ find ./test -name abc*
-		./test/abc.txt
-		./test/abc
-	    只查找文件
-		$ find ./test -type f -name "abc*"
-		./test/abc.txt
-	    只查找目录
-		$ find ./test -type d -name "abc*"
-		./test/abc
-```
-	（4）查找属于特定用户的文件
-```
-		查找当前目录下，属于 bob 的文件。
-		$ find . -user bob
-		查找属于特定用户组的文件
-		# find /var/www -group developer
-```
-	（5）查找过去的第 N 天被修改过的文件
-```
-		# find / -mtime 50
-```
-	（6） 查找过去的 N 分钟内状态发生改变的文件
-```
-		$ find /home/bob -cmin -60
-```
-	（7）基于文件大小的查找
-```
-		查找指定大小的文件
-		$ find / -size 50M
-		 查找大小在一定范围内的文件
-		$ find / -size +50M -size -100M
-```
-	（8）高级操作
+更详细的功能
+	
+* （0）限定搜索的层数
 
-	(9) 结合-exec
 ```
-		我们使用 find 命令找到文件后，只能看到文件路径。如果想进一步查看文件信息，可以结合 ls 命令来实现。
-		$ find . -exec ls -ld {} \;
-		drwxrwxr-x 4 enlightened enlightened 4096 Aug 11 19:01 .
-		-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:25 ./abc.txt
-		drwxrwxr-x 2 enlightened enlightened 4096 Aug 11 16:48 ./abc
-		drwxrwxr-x 2 enlightened enlightened 4096 Aug 11 16:26 ./subdir
-		-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:26 ./subdir/how.php
-		-rw-rw-r-- 1 enlightened enlightened 29 Aug 11 19:13 ./abc.php
-		-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:25 ./cool.php
+find ./ -maxdepth 1 搜索本地目录，限定搜索的层数最大层数为测层
+```
+
+* （1）反向查找
+
+```
+除了查找满足条件的文件之外，我们还可以查找不满足条件的所有文件。当我们知道要在查找中排除哪些文件时，这个选项就能发挥作用了。
+
+find ./test -not -name "*.php"
+```
+
+* （2）结合多个查找条件
+
+```		
+我们可以同时使用多个查找条件来指定文件名并排除某些文件。
+		
+find ./test -name 'abc*' ! -name '*.php'
+```  
+ 	
+* （3）只查找文件或目录
+
+```
+有时我们只想通过某个名字查找对应的文件或对应的目录，我们可以很容易实现这个要求。
+	$ find ./test -name abc*
+		./test/abc.txt
+		./test/abc
+只查找文件
+	$ find ./test -type f -name "abc*"
+		./test/abc.txt
+只查找目录
+	$ find ./test -type d -name "abc*"
+		./test/abc
+```
+	
+* （4）查找属于特定用户的文件
+
+```
+查找当前目录下，属于 bob 的文件。
+	$ find . -user bob
+查找属于特定用户组的文件
+	# find /var/www -group developer
+```
+	
+* （5）查找过去的第 N 天被修改过的文件
+
+```
+# find / -mtime 50
+```
+* （6） 查找过去的 N 分钟内状态发生改变的文件
+
+```
+$ find /home/bob -cmin -60
+```
+	
+* （7）基于文件大小的查找
+
+```
+查找指定大小的文件
+	$ find / -size 50M
+查找大小在一定范围内的文件
+	$ find / -size +50M -size -100M
+```
+
+* （8）高级操作
+
+* （9）结合-exec
+
+```
+我们使用 find 命令找到文件后，只能看到文件路径。如果想进一步查看文件信息，可以结合 ls 命令来实现。
+
+$ find . -exec ls -ld {} \;
+	drwxrwxr-x 4 enlightened enlightened 4096 Aug 11 19:01 .
+	-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:25 ./abc.txt
+	drwxrwxr-x 2 enlightened enlightened 4096 Aug 11 16:48 ./abc
+	drwxrwxr-x 2 enlightened enlightened 4096 Aug 11 16:26 ./subdir
+	-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:26 ./subdir/how.php
+	-rw-rw-r-- 1 enlightened enlightened 29 Aug 11 19:13 ./abc.php
+	-rw-rw-r-- 1 enlightened enlightened 0 Aug 11 16:25 ./cool.php
 ```
 
 ```
@@ -619,7 +700,7 @@ $jobs
 与head仿照相似即可的
 ```
 
-## eval 执行字符串中内容
+## eval-执行字符串中内容
 ```
     eval  使用方法
 	command1='firstPicName="06_"$firstDirCount".tif"'
@@ -641,7 +722,7 @@ $jobs
 	从本地拷贝到远程端口
 		scp -P 46907 /home/xuyongkang/atest/NETLearing.tar.gz root@47.92.83.74:/temp
 ```
-## cmp 比较文件
+## cmp-比较文件
 ```
 比较任意两个类型的文件，把结果输出到标准输出上
 默认：文件相同不输出
@@ -651,7 +732,7 @@ $jobs
 	-l列出所有的不同信息
 	-s错误信息不提示
 ```
-## diff 比较文件内容
+## diff-比较文件内容
 ```
 作用：
 	用于比较文件内容，找到不同的地方
@@ -663,6 +744,18 @@ $jobs
 	-B或者--ignore-blank-lines  不检查空白行
 	-c 显示全部内文，并标出不同之处
 	-p 若比较文件为C语言的程序文件时，显示差异所在的函数名称
+
+格式：diff [选项]… 文件1 文件2
+常见命令选项
+	-c 显示全部内文，并标出不同之处
+-b不检查空格字符的不同
+-r比较子目录中的文件
+-s若没有发现任何差异，仍然显示信息
+		diff  test1.c  test/test.c 命令使用的例子
+		diff –u test1.c  test/test.c显示的信息中---表示旧文件，+++表示新文件；通常是用来打补丁使用的（用来生成补丁文件，可以用patch命令来打补丁）显示的文本中带有+的表示是要增加的，如果是减的话表示是要减去的。
+		打补丁的例子
+		diff -uN test/test.c test1.c>test.c.patch生成补丁文件
+patch -p0 test1.c test.c.patch利用补丁命令进行打补丁
 
 ```
 ## 文件的打包与压缩
@@ -694,18 +787,44 @@ tar对文件进行打包
   unzip -q shiyanlou.zip -d ziptest 解压到指定文件夹
   unrar e shiyanlou.rar tmp/  将shiyanlou文件解压到tmp/目录下
 
-## wc 查看文件中的行数或者字数
+## wc-查看文件中的行数或者字数
 ```
-	用法：wc
-		[选项]...[文件]...
-		-c打印字节数
-		-m打印字符数
-		-l打印换行数
-		-L显示最长行的长度
-		-w统计单词个数
-		eg.wc file1 file2
+用法：wc
+	[选项]...[文件]...
+	-c打印字节数
+	-m打印字符数
+	-l打印换行数
+	-L显示最长行的长度
+	-w统计单词个数
+	eg.wc file1 file2
+
+用途：统计文件中的单词数量（Word Count）等信息
+格式:wc [选项]…  目标文件…
+	显示的是  行数量  字数量  字节数
+
 ```
-## grep sed awk  
+
+## grep
+```
+用途：在文件中查找并显示包含制定字符串的行
+格式：grep  [选项]…. 查找条件 目标文件
+常用命令选项
+	-i:查找时忽略大小写
+	-v：反转查找，输出与查找条件不相符的行
+查找条件设置
+	要查找的字符串以双引号括起来
+	“^……”表示以……开头，”……$”表示以……结尾
+    “^$”表示空行
+grep –n  “/dev” tst(-n是显示行号的意思，整个意思是在tst文件中搜索带有/dev字符的文件
+以下是一个例子grep -n "iostream" /home/xuyongkang/Desktop/test.c)<这是grep配合字符串搜索使用>
+
+grep –n “sdc[0-6]” tst  <这是grep配合正则表达式使用>
+Eg：ls –al | grep ^d(显示以d打头的目录，grep进行筛选)
+
+```
+
+
+## grep-sed-awk  
 ```
 	其中文本文件非常重要，因为unix提供 很多了实用程序（utility），这些程序功能相对独立，
 	但可以通过管道来实现进程间通信（IPC），这样松散的耦合可以完成复杂的操作。
@@ -736,7 +855,8 @@ tar对文件进行打包
 	$:表示匹配结束
 	[A-Za-z0-9]匹配
 	0\{0,2\}:表示有0到2个0
->https://www.cnblogs.com/Quincy/archive/2012/03/26/2418485.html
+>htt
+>://www.cnblogs.com/Quincy/archive/2012/03/26/2418485.html
 ```
 ## 查看磁盘情况
 ```
@@ -850,11 +970,11 @@ interact
 这样做的原因是由于spawn是内嵌在expect内的命令如果不这样做就会出现命令找不到的情况。
 
 
-## >>
+## 位左移符号
 ```
 cat *.txt >> out.txt 将文件夹中所有的txt中的所有行合并到out.txt中    
 ```
-## <
+## 小于号
 ```
 ./a.out <t.sh
 ./a.out是一个运行程序
@@ -1029,7 +1149,9 @@ dd应用实例
 	并可能导致I/O错误。当这种情况影响到硬盘的第一个扇区时，可能导致硬盘报废。
 	上边的命令有可能使这些数 据起死回生。并且这个过程是安全、高效的。
 ```
-15. 利用netcat远程备份
+15. 利用net
+16. 
+17. 远程备份
 ```
 	#dd if=/dev/hda bs=16065b | netcat < targethost-IP > 1234
 	在源主机上执行此命令备份/dev/hda
@@ -1069,7 +1191,7 @@ dd应用实例
 	（也就是asm_disk1、asm_disk2…asm_disk6）还不够，还必须执行losetup -d /dev/loopN，在这里N从1到6。否则，磁盘文件所占用的磁盘空间不能释放
 ```
 
-## /dev/null & /dev/zero
+## dev-null和dev-zero
 
 /dev/null，外号叫无底洞，你可以向它输出任何数据，它通吃，并且不会撑着！
 
@@ -1233,9 +1355,102 @@ df -h人性化显示硬盘情况
 ```
 ctrl+alt+F1-F7  ->新开shell，F7是切换回桌面
 ```
-# CMD(windows命令)
+## linux文件分析
 
-## netstat [选项]
+```
+
+1./bin /usr/bin  /usr/local/bin   都是放置用户可执行二进制文件。
+
+2./boot 主要是放置liunx系统启动时用到的文件。
+
+2./dev   文件夹内主要是西东外设与存储有关的一些相关文件。
+
+3./etc  放置设置文件。例如用户帐号密码文件，各种服务文件。
+	/etc/sysconfig/目录包括了在LINUX下各种系统配置文件
+	/etc/xinetd.d/这个是超级守护程序管理的各项服务的设置文件目录。
+	/etc/x11这与x window的设置有关。
+	/etc/gateways 设定路由器
+	/etc/host.conf 文件说明用户的系统如何查询节点名
+	/etc/hosts 设定用户自已的IP与名字的对应表
+	/etc/hosts.equiv 设置远端机不用密码
+	/etc/init.d/多有服务的默认启动脚本都放在这里。
+	/etc/named.boot 设定本机为名字服务器的配置文件
+	/etc/resolv.conf    设置DNS 
+	/etc/fstab    记录开机要mount的文件系统
+	/etc/inittab 设定系统启动时init进程将把系统设置成什么样的runlevel
+	/etc/issue 记录用户登录前显示的信息
+	/etc/group 设定用户的组名与相关信息
+	/etc/passwd 帐号信息
+	/etc/shadow 密码信息
+	/etc/sudoers 可以sudo命令的配置文件
+	/etc/securetty 设定哪些终端可以让root登录
+	/etc/login.defs 所有用户登录时的缺省配置
+	/etc/exports 设定NFS系统用的
+	/etc/modprobe.conf   内核模块额外参数设定
+4./home 系统默认的的用户目录。
+
+5./lib  /usr/lib  /usr/local/lib  系统使用的函数目录
+
+6./lost+found 系统出现异常，产生错误时，会将一些遗失的片段存放于此目录下。
+
+7./mnt /media 这是软盘与光盘的默认挂在点。
+
+8./opt 这是给主机额外安装软件的目录。
+
+9./root 系统管理员的家目录。
+
+10./sbin /usr/sbin /usr/local/sbin 放置一些西东管理员才会用到的命令。
+
+11./srv  一些服务启动后，这些服务需要访问的数据目录。例如：www服务器需要的网页数据就放在/srv/www中。
+
+12./tmp 这是一般用户或者正在执行的临时文件存放的地方，任何人都可以访问，需要定期清理。
+
+13./usr 包括系统的主要程序、图形界面所需要的文件、额外的函数库、本季自行安装的文件，以及共享的目录和文件。
+
+	/usr/includec/c++等程序的文件头与包含文件。
+	
+	/usr/lib各种应用软件的函数文件放置目录。
+	
+	/usr/local本机自行安装的软件放置默认目录，当前也是用/opt目录。
+	
+	/usr/share一些帮助文件。
+	
+	/usr/srcliunx程序相管的程序代码放置目录。
+	
+	/usr/X11R6程序内的X WindowSystem所需的执行文件几乎都放在此。
+
+14./var 主要放置系统执行过程中经常变化的文件。
+
+    /var/cache 程序文件行过程中的一些暂存盘。
+
+	/var/lib 程序执行过程中，使用的数据文件存至目录。
+	
+	/var/log 登录文件放置的目录。
+	
+	/var/lock 某些设备具有一次性写入的特性。
+	
+	/var/run 默写程序或服务启动后，会将它们的PID放在这一目录下。目录中有套接字。
+	
+	/var/spool 是一列队列数据存放的地方。
+
+文件颜色的含义：蓝色为文件夹；绿色是可执行文件；浅蓝色是链接文件；红框文件是加了SUID位，任意限
+
+权；红色为压缩文件；褐色为设备文件。
+
+```
+
+## 特殊符号表示不同的文件夹
+
+```
+.代表此层目录
+..代表上层目录
+-代表前一个工作目录
+~代表[当前使用者身份]所在的home目录
+```
+
+# CMD-windows命令
+
+## netstat-选项
 
 ```
 -a 显示所有socket，包括正在监听的。

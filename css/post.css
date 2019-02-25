@@ -8,17 +8,7 @@ body{
 }
 /*总体央样式*/
 @media screen and (max-width: 100px) {
-   .post-wrapper{
-	width:120%;
-	margin:0 auto;
-	background-color:white;
-	padding-left:5%;
-	padding-right:5%;
-	padding-top:50px;
-	padding-bottom:50px;
-}
-}
-.post-wrapper{
+#post-list{
 	width:70%;
 	margin:0 auto;
 	background-color:white;
@@ -27,6 +17,22 @@ body{
 	padding-top:50px;
 	padding-bottom:50px;
 }
+}
+#post-list a{
+	border:2px;
+	position:float;
+}
+.post-wrapper{
+	display:block;
+	width:70%;
+	margin:0 auto;
+	background-color:white;
+	padding-left:5%;
+	padding-right:5%;
+	padding-top:50px;
+	padding-bottom:50px;
+}
+
 .post-title{
 	margin:0 auto;
 }
