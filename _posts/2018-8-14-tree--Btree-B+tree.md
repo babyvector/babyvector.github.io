@@ -17,3 +17,10 @@ Insertion
 * Repeat until a parent is found that need not split.
 * If the root splits, treat it as if it has an empty parent and split as outline above.
 **B-trees grow at the root and not at the leaves.[1](由页节点向根部生长)**
+
+## 节点结构
+
+再B+树中的节点通常被表示为一组有序的元素和子子指针。如果此B+树的阶数是m,则除了根之外的每个节点都包含最少[m/2]个元素最多m个元素，对于任意的节点有最多m个子指针。对于所有内部节点，子指针的数目总是与元素的数目相同。所有叶子都在相同的高度上，叶子节点本身按关键字大小从小到大链接。
+
+
+
