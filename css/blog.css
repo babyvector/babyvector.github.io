@@ -672,7 +672,7 @@ code.has-jax {font: inherit;
               border: inherit;
               color: #515151;}
 
-.post > .highlight .lineno { color: #ccc; display:inline-block; padding: 0 5px; border-right:1px solid #ccc; }
+.post > .highlight .lineno { color: #ccc; display:inline-block; padding: 0 0px; border-right:1px solid #ccc; }
 .post > .highlight pre code { display: block; white-space: pre; overflow-x: auto; word-wrap: normal; }
 
 
