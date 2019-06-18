@@ -121,6 +121,42 @@ class Solution {
 	11，1，1，1，1
 * 动态规划
 	5，5，5
+接下来讲解以下动态规划：
+{%highlight ruby%}
+#include<stdio.h>
+#define MONEY_TYPE 3
+#define MAX_MONEY 15
+int main(){
+	int m_y[MONEY_TYPE];
+	int dp[MAX_MONEY+1];
+	m_y[0] = 1;
+	m_y[1] = 5;
+	m_y[2] = 11;//默认由小到大排列 
+	for(int i = 0;i<MAX_MONEY+1;i++){
+		dp[i] = 0;
+	}
+	for(int i = 1;i<MAX_MONEY+1;i++){
+		
+			int temp_min =10000;
+			for(int j = MONEY_TYPE-1;j>=0;j--){
+				if(i>=m_y[j]&&temp_min>dp[ i-m_y[j] ] +1){
+					temp_min = dp[ i-m_y[j] ] +1;
+				}
+			}
+			dp[i] = temp_min;
+	
+	}
+	for(int i = 1;i<MAX_MONEY+1;i++){
+		printf("dp[%d]:%d\n",i,dp[i]);
+	
+	}
+	return 0;
+}
+{%endhighlight%}
+
+//动态规划的过程中进行了动态剪枝，但是递归并没有做动态剪枝
+
+
 
 ## 动态规划使用条件的稍微详细的解释
 
