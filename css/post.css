@@ -4,7 +4,7 @@ body{
 	margin:0 auto;
 	background-color:white;
 	font-family: "Arial","PingHei","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
-	font-size:12px;
+	font-size:16px;
 }
 /*总体央样式*/
 @media screen and (max-width: 100px) {
