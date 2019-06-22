@@ -50,7 +50,8 @@ categories: [C/C++]
 * 关于函数封装
 	* 能封装的函数一定要封装，这样才能够结构清晰
 
-* 使用双向链表的时候可以直接使用头文件listhead.h文件
+* 使用双向链表的时候可以直接使用头文件list_head.h文件
+	list_head.h是用在操作系统中的
 * 使用malloc一次性开辟大量的空间之后再进行单个的处理，这样能够节省大量的时间
 	{%highlight ruby%}
 		/*这种形式属于一次性开辟大量的空间，就像一个内存池*/
@@ -75,3 +76,40 @@ categories: [C/C++]
 		  	但是第二种情况是刚好相反的，多次调用malloc()函数而且申请之后的变量也是不连续的无法使用索引
 		*/
 	{%endhighlight%}
+
+* 程序员要熟悉十进制和16进制的转化
+	* ff 表示-1    原因：256-1 = ff
+	* ffff也表示-1 原因：65536-1=ffff
+
+* c语言中使用klib来实现容器
+	* 就是容器中能够放置各种不同类型的东西，包括普通类型和自定义类型
+	* klib使用宏来实现这种操作的
+	{%highlight ruby%}
+		struct List_head{
+			List_head *next;
+			Listhead *pre;
+		}
+		struct Person{
+			List_head node;
+		}
+		
+		struct List_head person_list;
+		struct Person Xiao;
+		person_list.next = &
+	{%endhighlight%}
+
+* 看一下klib和list_head.h的实现
+
+下周二下午
+
+大家都用一个下klib把现在的约瑟夫环改写以下
+用klib中的链表写 klib中数组链表都有
+把容器和内容分离开了，直接用容器来操作它了
+
+person_name初始化问题
+
+再下一次我们会使用一些库
+
+
+
+/*会写 会用库 会写库 一般写程序要经过这三个步骤*/

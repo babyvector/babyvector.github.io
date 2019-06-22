@@ -150,51 +150,49 @@ $jobs
 
 ## git
 ```
-git add.//将代码更新
-git commit -m "commit message"//评论新新增的代码
-
-//从remote端创建一个分支
-git clone remote
-	e.g. git clone https://pdos.csail.mit.edu/6.828/2017/jos.git
-//创建分支（这个我还没有实验）
-git branch lab1
-//切换分支（我目前的经验就是在一个分支中才能切换分支）
-git checkout lab2
-//创建并切换分支(我目前的经验也是在一个分支中才能进行创建和切换)
-git checkout -b lab3
-//在远端分支origin/lab4的基础上创建一个分支并转到这个分支lab4
-git checkout -b lab4 origin/lab4
-//列出所有的分支信息
-git branch -a
-
-//关于git clone、git pull、git push的用法
-1、git clone 与 git pull 相同点
-相同点：都是从远程服务器拉取代码到本地
-
-2、git clone 与 git pull 不同点
-
-git clone
-是在本地没有版本库的时候，从远程服务器克隆整个版本库到本地，是一个本地从无到有的过程。
-
-git pull
-在本地有版本库的情况下，从远程库获取最新commit 数据（如果有的话），并merge（合并）到本地。
-
-git pull = git fetch + git merge
-
-3、使用场景
-通常情况下，远程操作的第一步，是使用git clone从远程主机克隆一个版本库到本地。
-
-本地修改代码后，每次从本地仓库push到远程仓库之前都要先进行git pull操作，保证push到远程仓库时没有版本冲突。
---------------------- 
-作者：媛测 
-来源：CSDN 
-原文：https://blog.csdn.net/lijing742180/article/details/84636977 
-
-
-通常的用法就是
-先使用git add filenames 将所有更改的文件保存到本地或者云端
-之后使用git commit -m "your descriptions" 记录这次的更改
-
+	git add.//将代码更新
+	git commit -m "commit message"//评论新新增的代码
+	
+	//从remote端创建一个分支
+	git clone remote
+		e.g. git clone https://pdos.csail.mit.edu/6.828/2017/jos.git
+	//创建分支（这个我还没有实验）
+	git branch lab1
+	//切换分支（我目前的经验就是在一个分支中才能切换分支）
+	git checkout lab2
+	//创建并切换分支(我目前的经验也是在一个分支中才能进行创建和切换)
+	git checkout -b lab3
+	//在远端分支origin/lab4的基础上创建一个分支并转到这个分支lab4
+	git checkout -b lab4 origin/lab4
+	//列出所有的分支信息
+	git branch -a
+	
+	//关于git clone、git pull、git push的用法
+	1、git clone 与 git pull 相同点
+	相同点：都是从远程服务器拉取代码到本地
+	
+	2、git clone 与 git pull 不同点
+	
+	git clone
+	是在本地没有版本库的时候，从远程服务器克隆整个版本库到本地，是一个本地从无到有的过程。
+	
+	git pull
+	在本地有版本库的情况下，从远程库获取最新commit 数据（如果有的话），并merge（合并）到本地。
+	
+	git pull = git fetch + git merge
+	
+	3、使用场景
+	通常情况下，远程操作的第一步，是使用git clone从远程主机克隆一个版本库到本地。
+	
+	本地修改代码后，每次从本地仓库push到远程仓库之前都要先进行git pull操作，保证push到远程仓库时没有版本冲突。
+	
+	原文：https://blog.csdn.net/lijing742180/article/details/84636977 
+	
+	
+	通常的用法就是
+	先使用git add filenames 将所有更改的文件保存到本地或者云端
+	之后使用git commit -m "your descriptions" 记录这次的更改
+	
 
 ```
 ## vim
