@@ -609,13 +609,21 @@ $ find /home/bob -cmin -60
 * （7）基于文件大小的查找
 
 ```
-查找指定大小的文件
+查找指定大小的文件(-号代表小于的意思)
 	$ find / -size 50M
-查找大小在一定范围内的文件
+查找大小在一定范围内的文件(+号代表大于的意思)
 	$ find / -size +50M -size -100M
 ```
 
 * （8）高级操作
+
+```
+	命令解释:
+	
+	find -size +20M -print0|xargs -0 du -h | sort -nr
+
+	查看当前文件下文件大小大于20M的文件，并显示大小，之后排序显式。
+```
 
 * （9）结合-exec
 
@@ -1037,16 +1045,57 @@ tar对文件进行打包
 		这个命令作用是批量杀死进程|sh这句语句才能最终起效果
 	
 ```
-
+## du文件大小
+```
+	du 是直接查看各个目录的大小，而不是从硬盘中获得信息。
+	所以有可能会遇到du df命令产生不同结果的情况。
+```
 
 
 ## 查看磁盘情况
 ```
-	df -hl  
+	df -hl(直接查询磁盘中的文件的大小信息)
 	df -m是以M的形式显示容量b k m g t
 	   -h是以人性化形式显示
 ```
 
+## xargs 和 find
+```
+	xargs:将linux命令产生的输出：文件列表，字符串列表等传递给后面相应的命令。
+	
+
+	命令解释：
+	
+	file -Lz * | grep ASCII | cut -d":" -f1 | xargs ls -ltr
+	让我们来剖析这个命令字符串。第一个，file -Lz *，用于查找是符号链接或经过压缩的文件。他将输出传递给下一个命令 grep ASCII，该命令在其中搜索 "ASCII" 字符串并产生如下所示的输出：
+	
+	alert_DBA102.log:        ASCII English text
+	alert_DBA102.log.Z:      ASCII text (compress’d data 16 bits)
+	dba102_asmb_12307.trc.Z: ASCII English text (compress’d data 16 bits)
+	dba102_asmb_20653.trc.Z: ASCII English text (compress’d data 16 bits)
+	由于我们只对文件名感兴趣，因此我们应用下一个命令 cut -d":" -f1，仅显示第一个字段：
+	
+	alert_DBA102.log
+	alert_DBA102.log.Z
+	dba102_asmb_12307.trc.Z
+	dba102_asmb_20653.trc.Z
+	目前，我们希望使用 ls -l 命令，将上述列表作为参数进行传递，一次传递一个。xargs 命令允许你这样做。最后一部分，xargs ls -ltr，用于接收输出并对其执行 ls -ltr 命令，如下所示：
+	ls -ltr alert_DBA102.log
+	ls -ltr alert_DBA102.log.Z
+	ls -ltr dba102_asmb_12307.trc.Z
+	ls -ltr dba102_asmb_20653.trc.Z
+	因此，xargs 本身虽然没有多大用处，但在和其他命令相结合时，他的功能非常强大。
+
+	命令解释:
+	
+	find -size +20M -print0|xargs -0 du -h | sort -nr
+
+	查看当前文件下文件大小大于20M的文件，并显示大小，之后排序显式。
+
+```
+转自:
+
+>https://www.cnblogs.com/Andy-Lv/p/5312597.html
 
 
 ## 位左移符号
