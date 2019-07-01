@@ -192,7 +192,10 @@ $jobs
 	通常的用法就是
 	先使用git add filenames 将所有更改的文件保存到本地或者云端
 	之后使用git commit -m "your descriptions" 记录这次的更改
-	
+	之后再git push就会将所有更改的代码提交到相应的网站上
+
+实例：将相关代码提交到github网站上
+>https://blog.csdn.net/qq_33877149/article/details/79672918
 
 ```
 ## vim
@@ -279,8 +282,18 @@ $jobs
 	:shell 可以在不关闭vi的情况下切换到shell命令行
 	:exit 从shell回到vi
 ```
-10. 保存文件到特定的路径
-: saveas 文件路径
+11. 保存文件到特定的路径
+```
+	: saveas 文件路径
+```
+12. 终端没有正常关闭后恢复文件
+```
+	vi -r filename
+
+	//不过要小心使用，而且使用之前最好先把要恢复的文件备份一下
+	//因为恢复一部分文件后，可能会造成更多内容的丢失
+
+```
 
 ## who
 who 进行用户查看
@@ -292,7 +305,38 @@ who 进行用户查看
      -u  打印当前登录用户的登陆信息
      -r  打印运行等级
 ## ssh
-```
+
+SSH是**Secure Shell**的缩写，由IETF的网络小组(Network Working Group)所制定。利用SSH协议可以有效防止远程管理过程中信息泄漏问题，简单说，SSH是一种**网络协议**，用于计算机之间的**加密登录**
+
+公钥登录：
+
+公钥登录，很多时候说public key认证，公钥登录的原理：
+
+首先用户将自己的公钥存储在需要登录的远程机器上面；
+
+登录的时候，远程主机会向用户发送一段随机字符串，接着**用户使用自己的私钥加密字符串**，并发送给主机。最后，**远程主机使用存储的公钥进行解密**，若解密成功，则说明用户可信，准许登录，不再提示输入密码。
+
+备注：
+
+1. 服务端会将客户端发的公钥写入到~/.ssh/authorized_keys文件末尾。
+2. 公钥和私钥在客户端（登录端）生成
+
+口令登录：
+
+口令登录，即登录的时候需要输入登录密码。
+
+1.客户端向服务器发出请求
+
+2.服务器将自己的公钥返回给客户端;
+
+3.客户端用服务器的公钥加密登录信息, 再将信息发送给服务器;
+
+4.服务器接收到客户端传送的登录信息, 用自己的私钥解码, 如果结果正确, 则同意登录, 建立起连接。
+
+
+原文：https://blog.csdn.net/hsd2012/article/details/79469747 
+
+```	
 	远程登录
 	ssh root@47.92.83.74 -p 46907
 ```
@@ -674,6 +718,25 @@ interact
 如果想要运行这个sh就要使用命令：
 /usr/bin/expect xx.sh
 这样做的原因是由于spawn是内嵌在expect内的命令如果不这样做就会出现命令找不到的情况。
+
+```
+看一个stackflow上的讲解：
+这个是别人的提问：
+spawn ssh -oStrictHostKeyChecking=no -oCheckHostIP=no usr@$myhost.example.com'<br>
+expect "password"<br>
+send "$PWD\n" <br>
+EOD
+这个是解释：
+It is part of an expect script:
+
+spawn opens a new process
+
+expect waits for the previous spawned process to output the "expected" string (password in this case)
+
+send writes to the spawned process stdin
+
+EOD has no meaning in expect, perhaps it is part of another script?
+```
 
 ## ping
 ```
