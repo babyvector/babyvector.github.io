@@ -98,6 +98,11 @@ defunct
 rm test 删除test文件
 rm -f test 强制删除文件，忽视权限限制
 rm -r family 删除一个目录
+//删除除了某个文件之外的所有文件
+root@ubuntu:/home/xuyongkang/6.828/lab_github# shopt -s extglob		//首先打开extglob模式 
+root@ubuntu:/home/xuyongkang/6.828/lab_github# rm -rf !(old_jos)
+rm -rf !(old_jos|new_jos)//删除除了old_jos和new_jos之外的文件
+
 ```
 ## bg
 ```
