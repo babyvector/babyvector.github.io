@@ -100,15 +100,30 @@ categories: [C/C++]
 
 * 看一下klib和list_head.h的实现
 
-下周二下午
+* 使用C语言实现继承
+```
+		person基类
 
-大家都用一个下klib把现在的约瑟夫环改写以下
-用klib中的链表写 klib中数组链表都有
-把容器和内容分离开了，直接用容器来操作它了
+        girls  boys 是派生类，有没有喉结是自己的特征类。
 
-person_name初始化问题
+        struct Boy{
+            Person parent;//共性的东西放在最前头
+            int houjie;//个性
+        }
+        这样子就实现了Boy对于Person的继承
 
-再下一次我们会使用一些库
+        Person mary;
+        boy_pee(Boy *self);
+        person_stand_up(Person *self);
+        Boy * john = boy_new("john");
+        person_stand_up(john);
+        boy_pee(john);
+
+        john 的头指针即指向Person类型，又指向Boys类型
+
+        C/C++语言中只能继承一个类，就叫做单类继承
+        glib使用C语言仿真了类的继承
+```
 
 
 
