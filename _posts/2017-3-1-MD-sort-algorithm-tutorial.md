@@ -122,6 +122,10 @@ categories: [数据结构与算法]
 
 ### 堆排序（注意查看代码，不会）
 		
+https://blog.csdn.net/u010452388/article/details/81283998
+https://www.cnblogs.com/onepixel/p/7674659.html
+https://zh.wikipedia.org/wiki/%E5%A0%86%E6%8E%92%E5%BA%8F
+
  ![](../image/sort/heap_sort_anim.gif)
 
 <center>[图的引用地址](https://www.cnblogs.com/onepixel/p/7674659.html)</center>
