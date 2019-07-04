@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1562210765 source:e:\xyk\github\babyvector.github.io\code-file\cant_delcare_char[]_in_hfile\cant_delcare_char[]_in_hfile\main.c
+	<stdio.h>
+	<stdlib.h>
+	"test.h"
+
+1562210982 e:\xyk\github\babyvector.github.io\code-file\cant_delcare_char[]_in_hfile\cant_delcare_char[]_in_hfile\test.h
+
+1562210927 source:e:\xyk\github\babyvector.github.io\code-file\cant_delcare_char[]_in_hfile\cant_delcare_char[]_in_hfile\test.c
+	"test.h"
+
