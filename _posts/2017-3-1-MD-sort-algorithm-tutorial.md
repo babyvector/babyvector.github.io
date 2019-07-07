@@ -8,7 +8,10 @@ categories: [数据结构与算法]
 
 ### 插入排序
 
- ![](../image/sort/Insertion-sort-example-300px.gif)
+| :-: | :-: |
+|  |  ![](../image/sort/Insertion-sort-example-300px.gif)  ||
+
+
 
 一般来说，插入排序都采用in-place在数组上实现。具体**算法描述如下**：
 
@@ -89,7 +92,9 @@ categories: [数据结构与算法]
 
 ### 选择排序（类似于插入排序）
 
- ![](../image/sort/Selection-Sort-Animation.gif)
+| :-: | :-: |
+|  |   ![](../image/sort/Selection-Sort-Animation.gif)  ||
+
 
 <center>选择排序的示例动画。红色表示当前最小值，黄色表示已排序序列，蓝色表示当前位置。</center>
 
@@ -123,9 +128,16 @@ categories: [数据结构与算法]
 ### 堆排序（注意查看代码，不会）
 		
 
-![](../image/sort/Sorting_heapsort_anim.gif)
 
-![](../image/sort/heap_sort_anim.gif)
+
+
+
+| :-: | :-: |
+|  |   ![](../image/sort/Sorting_heapsort_anim.gif)  ||
+
+| :-: | :-: |
+|  |  ![](../image/sort/heap_sort_anim.gif)  ||
+
 
 <center>[图的引用地址](https://www.cnblogs.com/onepixel/p/7674659.html)</center>
 
@@ -243,7 +255,9 @@ categories: [数据结构与算法]
 
 ### **快速排序**（最常用）
 
-![](../image/sort/Sorting_heapsort_anim.gif)
+| :-: | :-: |
+|  | ![](../image/sort/Sorting_heapsort_anim.gif) ||
+
 
 **快速排序**：（英语：Quicksort），又称**划分交换排序**（partition-exchange sort），简称**快排**，一种排序算法，最早由[东尼·霍尔](https://zh.wikipedia.org/wiki/%E6%9D%B1%E5%B0%BC%C2%B7%E9%9C%8D%E7%88%BE)提出。在平均状况下，排序**$n$**个项目要**$O(nlog n)$**([大O符号](https://zh.wikipedia.org/wiki/%E5%A4%A7O%E7%AC%A6%E5%8F%B7)）次比较。在最坏状况下则需要**$O(nlogn)$**次比较，但这种状况并不常见。事实上，快速排序**$O(nlogn)$****通常明显比其他算法更快，因为它的内部循环（inner loop）可以在大部分的架构上很有效率地达成**。
 
@@ -303,7 +317,10 @@ T(n)=o(N)+2T(n/2)
 T(n)=O(n)+T(1)+T(n-1)=O(n)+T(n-1)
 这与插入排序和选择排序有相同的关系式，以及它被解为T(n)=O(n^2)[点击求出这个递归（视频中）](https://www.icourse163.org/learn/ZJU-93001?tid=360003#/learn/content?type=detail&id=702111&cid=748231&replay=true)
 
-![每次让N=N/2，最终k=nlogn](../image/sort/compute_complexity.PNG)
+| :-: | :-: |
+|  | ![每次让N=N/2，最终k=nlogn](../image/sort/compute_complexity.PNG) ||
+
+
 <center>每次让N=N/2，最终k=nlogn</center>
 
 **随机数快速排序的期望复杂度:**
@@ -316,7 +333,9 @@ T(n)=O(n)+T(1)+T(n-1)=O(n)+T(n-1)
 		
 即使如果我们无法随机地选择基准数值，对于它的输入之所有可能排列，快速排序仍然只需要 O(nlog n)时间。因为这个平均是简单地将输入之所有可能排列的时间加总起来，除以n这个因数，相当于从输入之中选择一个随机的排列。当我们这样作，基准值本质上就是随机的，导致这个算法与随机数快速排序有一样的运行时间。
 更精确地说，对于输入顺序之所有排列情形的平均比较次数，可以借由解出这个递归关系式可以精确地算出来。
-![计算公式](../image/sort/compute_complexity.PNG)
+| :-: | :-: |
+|  | ![计算公式](../image/sort/compute_complexity.PNG) ||
+
 在这里，n-1是分区所使用的比较次数。因为基准值是相当均匀地落在排列好的数列次序之任何地方，总和就是所有可能分区的平均。这个意思是，平均上快速排序比理想的比较次数，也就是最好情况下，只大约比较糟39%。这意味着，它比最坏情况较接近最好情况。这个快速的平均运行时间，是快速排序比其他排序算法有实际的优势之另一个原因。
 		
 **空间复杂度:**
@@ -327,7 +346,8 @@ T(n)=O(n)+T(1)+T(n-1)=O(n)+T(n-1)
 		
 非原地版本的快速排序，在它的任何递归调用前需要使用O(n)空间。在最好的情况下，它的空间仍然限制在O(n)，因为递归的每一阶中，使用与上一次所使用最多空间的一半，且
 		
-![公式](../image/sort/qsort_formula.PNG)
+| :-: | :-: |
+|  | ![公式](../image/sort/qsort_formula.PNG) ||
 
 空间，远比数列本身还多。如果这些数列元素本身自己不是固定的大小，这个问题会变得更大；举例来说，如果数列元素的大部分都是不同的，每一个将会需要大约O(logn)为原来存储，导致最好情况是O(nlog n)和最坏情况是O(n^{2}\log n)的空间需求。
 
@@ -556,5 +576,7 @@ T约等于logB(N)*n
 （这个是间接排序是为了防止多次移动待排数列造成时间花费过大）
 
 ![](https://img-blog.csdn.net/20161009171515225)
-![所有排序算法总结](../image/sort/all_sort_algorithm.PNG)
-![维基排序算法](https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95)
+
+<center>![所有排序算法总结](../image/sort/all_sort_algorithm.PNG)</center>
+
+<center>[维基排序算法](https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95</center>
