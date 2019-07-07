@@ -1,11 +1,10 @@
-浮点数float类型
-	 double类型
-在c-knowledge中
 
 
-codeblocks中不支持char a[][]与吴小娟的那个错误
 
-声明重复文件的时候
+
+
+
+
 
 c语言中的位域
 
