@@ -517,7 +517,7 @@ int main(){
 
 * 测试的程序
 
-{%highligh ruby%}
+{%highlight ruby%}
 
 		#include <stdio.h>
 		#include <stdlib.h>
