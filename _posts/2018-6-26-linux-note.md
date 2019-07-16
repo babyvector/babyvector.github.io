@@ -3,6 +3,10 @@ layout: postl
 title: linux命令
 categories: [linux命令积累]
 ---
+## gcc
+
+gcc -c 表示只是进行编译，而不进行链接
+gcc -o 表示进行编译之后要进行链接
 
 ## ls
 ls=list  -a -l -h -d -i
