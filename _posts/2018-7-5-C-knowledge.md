@@ -631,3 +631,32 @@ int main(){
 	原因：mingw32/bin/ld.exe: obj\Debug\main.o:main.c:(.data+0x0): multiple definition of `name'; obj\Debug\jos.o:jos.c:(.data+0x0): first defined here
 
 	也就是变量出现了重定义，因为两个变量都有这个文件
+
+
+## 最恐怖的BUG
+
+1. 使用系统中的自带的字符处理函数strcpy(),strcmp()等函数
+
+{%highlight ruby%}
+
+    //在调用函数中设定的suffix_lenth是10
+    char *des_file_type[4] = {"txt","zip","gz","rar"};
+    char delim[2] = ".";
+    char *file_name_copy = (char*)malloc(sizeof(char)*(strlen(file_name)+10));
+    strcpy(file_name_copy,file_name);
+
+    //开始截取字符
+    char * token = strtok(file_name_copy, delim);
+    //继续获取其他的子字符串
+    while( token != NULL ) {
+        if(strlen(token)<max_suffix_length){
+            strcpy(suffix,token);
+        }
+        token = strtok(NULL, delim);
+    }
+    free(file_name_copy);
+
+{%endhighlight%}
+
+**注意这句：if(strlen(token)<max_suffix_length)**
+在使用strcpy()的时候如果token字符串的长度大于suffix的长度那么，就会发生莫名其妙的错误，这种错误非常难以发现，因为它不会卡死在strcpy()函数位置，而是会搅乱后续的运行的内存，会导致的情况如：在这段函数附近申请的字符数组等变量，在这个函数之后引用的时候就会发生乱码的情况。而出现这种情况的我们只有一步一步的往上屏蔽知道发现出错的这个函数。汗!!!!!
