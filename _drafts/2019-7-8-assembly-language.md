@@ -435,12 +435,210 @@ symbol的值不可以在后面被重新定义。
 
 ### 1.4.2 编译器依赖
 
+[参考网址](https://forum.nasm.us/index.php?topic=744.0)
+亲身实践：
+	
+* NASM version 2.11.08
+* ubuntu 16.04 LTS
+* 命令
+	
+		nasm -f elf -o first.o first.asm
+		nasm -f elf -d ELF_TYPE -o asm_io.o asm_io.asm
+		gcc -c -o driver.o driver.c
+		gcc -o first driver.o first.o asm_io.o
+
+能够编译运行./first；但是在windows下也是用到nasm但是生成的格式是obj格式，但是在使用cl.exe时候会出现缺失库的情况而且就算加了了相应的路径到环境变量中仍然会出现问题。就算最后不缺库了，却得到了找不到_asm_main。
+
+### 1.4.3编译汇编代码
+
+nasm -f object-format first.asm
+
+object-format 可以是coff,elf,obj或者win32,取决于使用的什么c编译器。
+
+### 1.4.4编译c代码
+
+例子：
+
+	gcc -c driver.c
+
+	-c表示只是进行编译而不进行链接
+
+### 1.4.5 链接目标文件
+
+一般使用linux下的gcc
+
+gcc -o first driver.o first.o asm_io.o
+
+在windows也可以用cl.exe
 
 		
+### 1.4.6 理解汇编生成列表
+
+在进行汇编的时候使用命令：-l listing-file 可以告诉nasm去生成一个给定名字的列表。**这个文件告诉我们汇编代码是如何被编译的。**以下表中第一列表示list-file中的行号，但是可能与源代码中的行号不同。接下来的一列（16进制表示）表示数据在段中偏移。第三列是数据或者指令的16进制表示形式（被存储在这里）（就是机器码），最后一列是源代码。**每个模块在数据段（或者其他段）定义了自己的labels。在链接的时候，所有这些段的labels的定义（definitions）组合形成新的数据段。这个<p style="color:red">新的最终的偏移是被连接器计算出来</p>**
+{%highlight ruby%}
+
+		     1                                  
+		     2                                  
+		     3                                  ;
+		     4                                  ; file: first.asm
+		     5                                  ; First assembly program. This program asks for two integers as
+		     6                                  ; input and prints out their sum.
+		     7                                  ;
+		     8                                  ; To create executable:
+		     9                                  ; Using djgpp:
+		    10                                  ; nasm -f coff first.asm
+		    11                                  ; gcc -o first first.o driver.c asm_io.o
+		    12                                  ;
+		    13                                  ; Using Linux and gcc:
+		    14                                  ; nasm -f elf first.asm
+		    15                                  ; gcc -o first first.o driver.c asm_io.o
+		    16                                  ;
+		    17                                  ; Using Borland C/C++
+		    18                                  ; nasm -f obj first.asm
+		    19                                  ; bcc32 first.obj driver.c asm_io.obj
+		    20                                  ;
+		    21                                  ; Using MS C/C++
+		    22                                  ; nasm -f win32 first.asm
+		    23                                  ; cl first.obj driver.c asm_io.obj
+		    24                                  ;
+		    25                                  ; Using Open Watcom
+		    26                                  ; nasm -f obj first.asm
+		    27                                  ; wcl386 first.obj driver.c asm_io.obj
+		    28                                  
+		    29                                  %include "asm_io.inc"
+		    30                              <1> 	extern  read_int, print_int, print_string
+		    31                              <1> 	extern	read_char, print_char, print_nl
+		    32                              <1> 	extern  sub_dump_regs, sub_dump_mem, sub_dump_math, sub_dump_stack
+		    33                              <1> 
+		    34                              <1> %macro 	dump_regs 1
+		    35                              <1> 	push	  dword %1
+		    36                              <1> 	call	  sub_dump_regs
+		    37                              <1> %endmacro
+		    38                              <1> 
+		    39                              <1> 
+		    40                              <1> ;
+		    41                              <1> ; usage: dump_mem label, start-address, # paragraphs
+		    42                              <1> %macro  dump_mem 3
+		    43                              <1> 	push	 dword %1
+		    44                              <1> 	push	 dword %2
+		    45                              <1> 	push	 dword %3
+		    46                              <1> 	call	 sub_dump_mem
+		    47                              <1> %endmacro
+		    48                              <1> 
+		    49                              <1> %macro	dump_math 1
+		    50                              <1> 	push	 dword %1
+		    51                              <1> 	call	 sub_dump_math
+		    52                              <1> %endmacro
+		    53                              <1> 
+		    54                              <1> %macro  dump_stack 3
+		    55                              <1> 	push	 dword %3
+		    56                              <1>         push     dword %2
+		    57                              <1> 	push	 dword %1
+		    58                              <1>         call     sub_dump_stack
+		    59                              <1> %endmacro
+		    60                                  ;
+		    61                                  ; initialized data is put in the .data segment
+		    62                                  ;
+		    63                                  segment .data
+		    64                                  ;
+		    65                                  ; These labels refer to strings used for output
+		    66                                  ;
+		    67 00000000 456E7465722061206E-     prompt1 db    "Enter a number: ", 0       ; don't forget nul terminator
+		    68 00000009 756D6265723A2000   
+		    69 00000011 456E74657220616E6F-     prompt2 db    "Enter another number: ", 0
+		    70 0000001A 74686572206E756D62-
+		    71 00000023 65723A2000         
+		    72 00000028 596F7520656E746572-     outmsg1 db    "You entered ", 0
+		    73 00000031 65642000           
+		    74 00000035 20616E642000            outmsg2 db    " and ", 0
+		    75 0000003B 2C207468652073756D-     outmsg3 db    ", the sum of these is ", 0
+		    76 00000044 206F66207468657365-
+		    77 0000004D 2069732000         
+		    78                                  
+		    79                                  
+		    80                                  ;
+		    81                                  ; uninitialized data is put in the .bss segment
+		    82                                  ;
+		    83                                  segment .bss
+		    84                                  ;
+		    85                                  ; These labels refer to double words used to store the inputs
+		    86                                  ;
+		    87 00000000 <res 00000004>          input1  resd 1
+		    88 00000004 <res 00000004>          input2  resd 1
+		    89                                  
+		    90                                   
+		    91                                  
+		    92                                  ;
+		    93                                  ; code is put in the .text segment
+		    94                                  ;
+		    95                                  segment .text
+		    96                                          global  asm_main
+		    97                                  asm_main:
+		    98 00000000 C8000000                        enter   0,0               ; setup routine
+		    99 00000004 60                              pusha
+		   100                                  
+		   101 00000005 B8[00000000]                    mov     eax, prompt1      ; print out prompt
+		   102 0000000A E8(00000000)                    call    print_string
+		   103                                  
+		   104 0000000F E8(00000000)                    call    read_int          ; read integer
+		   105 00000014 A3[00000000]                    mov     [input1], eax     ; store into input1
+		   106                                  
+		   107 00000019 B8[11000000]                    mov     eax, prompt2      ; print out prompt
+		   108 0000001E E8(00000000)                    call    print_string
+		   109                                  
+		   110 00000023 E8(00000000)                    call    read_int          ; read integer
+		   111 00000028 A3[04000000]                    mov     [input2], eax     ; store into input2
+		   112                                  
+		   113 0000002D A1[00000000]                    mov     eax, [input1]     ; eax = dword at input1
+		   114 00000032 0305[04000000]                  add     eax, [input2]     ; eax += dword at input2
+		   115 00000038 89C3                            mov     ebx, eax          ; ebx = eax
+		   116                                          dump_regs 1               ; dump out register values
+		   117 0000003A 6A01                <1>  push dword %1
+		   118 0000003C E8(00000000)        <1>  call sub_dump_regs
+		   119                                          dump_mem 2, outmsg1, 1    ; dump out memory
+		   120 00000041 6A02                <1>  push dword %1
+		   121 00000043 68[28000000]        <1>  push dword %2
+		   122 00000048 6A01                <1>  push dword %3
+		   123 0000004A E8(00000000)        <1>  call sub_dump_mem
+		   124                                  ;
+		   125                                  ; next print out result message as series of steps
+		   126                                  ;
+		   127 0000004F B8[28000000]                    mov     eax, outmsg1
+		   128 00000054 E8(00000000)                    call    print_string      ; print out first message
+		   129 00000059 A1[00000000]                    mov     eax, [input1]     
+		   130 0000005E E8(00000000)                    call    print_int         ; print out input1
+		   131 00000063 B8[35000000]                    mov     eax, outmsg2
+		   132 00000068 E8(00000000)                    call    print_string      ; print out second message
+		   133 0000006D A1[04000000]                    mov     eax, [input2]
+		   134 00000072 E8(00000000)                    call    print_int         ; print out input2
+		   135 00000077 B8[3B000000]                    mov     eax, outmsg3
+		   136 0000007C E8(00000000)                    call    print_string      ; print out third message
+		   137 00000081 89D8                            mov     eax, ebx
+		   138 00000083 E8(00000000)                    call    print_int         ; print out sum (ebx)
+		   139 00000088 E8(00000000)                    call    print_nl          ; print new-line
+		   140                                  
+		   141 0000008D 61                              popa
+		   142 0000008E B800000000                      mov     eax, 0            ; return back to C
+		   143 00000093 C9                              leave                     
+		   144 00000094 C3                              ret
+		   145                                  
+		   146                                  
+
+{%endhighlight%}
 
 
 
+		   94 0000002D A1[00000000]                    mov     eax, [input1]     ; eax = dword at input1
+		   95 00000032 0305[04000000]                  add     eax, [input2]     ; eax += dword at input2
+		   96 00000038 89C3                            mov     ebx, eax          ; ebx = eax
 
+对于上面的一段代码解读：第三列展示的是由汇编生成的机器码。通常一条指令的完整的代码现在还不能计算出来。例如在94行，目前还不知道input1变量的偏移（或者叫做地址）。编译器目前可以计算出mov指令的机器码（在列表中显示的是A1），但是编译器写了一个偏移在方框中，因为准确的偏移值还没有被计算出来。在着这种情况下，会使用一个临时的偏移量0，因为input1是被定义在文件中的.bss段的开头。但是这并不意味着，它将会在最终的程序的.bss段的开头。当这些代码被链接后，链接器将会将争取的偏移地址插入到相应的位置。其他像96行的指令没有引用任何的labels。因此编译器可以计算出完整的机器码。
+
+#### **大小端表示**
+
+就像95行中的内容本来应该存放的是偏移地址的大小00000004,但是最终的存储却是04000000.
+
+* 大段模式：最重要的位数先存储，
 
 
 
