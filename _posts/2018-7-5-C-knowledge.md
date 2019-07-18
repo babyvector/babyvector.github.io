@@ -5,7 +5,7 @@ categories: C/C++语言
 ---
 
 
-#<center> C语言编程原则</center>
+# C语言编程原则
 
 1. 结构清晰，mindMaster辅助更好
 2. KISS原则（函数尽量小而简单代替注释）
@@ -21,7 +21,7 @@ categories: C/C++语言
 **写程序时注意：使用2和6来降低程序的耦合度，从而使得程序更加容易测试**
 
 
-#<center> 计算机原理</center>
+# 计算机原理
 
 ## 关于程序编译后生成的各种段
 
@@ -167,9 +167,9 @@ categories: C/C++语言
 	所以当存储浮点数时，只需要将上述三个数字保存起来，就可以了。 
 	对于但精度浮点数，其存储模型为：
 
-	![图在这里](https://img-blog.csdn.net/20180724144456190?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2FpeGlhb2Rlc2h1c2h1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图在这里](https://img-blog.csdn.net/20180724144456190?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2FpeGlhb2Rlc2h1c2h1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-	![](https://img-blog.csdn.net/2018072414585611?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2FpeGlhb2Rlc2h1c2h1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![图](https://img-blog.csdn.net/2018072414585611?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2FpeGlhb2Rlc2h1c2h1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 
 	所以二进制存储中只要储存起来**S、M、E**三段即可
@@ -214,8 +214,7 @@ categories: C/C++语言
 		* **E全为1**
 		
 			此时，如果有效数字M全为0，表示+无穷或-无穷（正负取决于S）。
-
-<center>[原文](https://blog.csdn.net/aixiaodeshushu/article/details/81186397) </center>
+[原文](https://blog.csdn.net/aixiaodeshushu/article/details/81186397) 
 
 * 常见的浮点类型
 
@@ -254,7 +253,7 @@ categories: C/C++语言
 
 ### 浮点类型的讲解
 
-<center>[好的讲解在这里！](https://blog.csdn.net/aixiaodeshushu/article/details/81186397)</center>
+[好的讲解在这里！](https://blog.csdn.net/aixiaodeshushu/article/details/81186397)
 
 <p style="color:red">
 注意：
@@ -268,7 +267,7 @@ categories: C/C++语言
 
 
 
-#<center>函数</center>
+# 函数
 * 计算机中的参数
 
 	计算机中的形参和实参，**实际**存在的参数叫做实参，否则叫做形参
@@ -307,7 +306,7 @@ categories: C/C++语言
 * static在函数中的用法
 	static的作用是限制作用域，所以**函数之前加static表示函数只能在这个文件中使用**
 
-# <center>变量<center>
+# 变量
 * 变量命名的约定规则
 	* 宏定义变量全部大写
 	* 全局变量首字母大写
@@ -315,89 +314,70 @@ categories: C/C++语言
 * static
 	将变量限定在相应的作用域中
 * 数组的初始化
-```
 
-	申请内存并进行初始化的时候
-	int container[500] = {0};
-	//这样的初始化是正确的，里面的所
-	int container[500] = {-1};
-	//这样的初始化是错误的只有第一个数字被初始化成为-1其余的全部被初始化为0
+	```
+	
+		申请内存并进行初始化的时候
+		int container[500] = {0};
+		//这样的初始化是正确的，里面的所
+		int container[500] = {-1};
+		//这样的初始化是错误的只有第一个数字被初始化成为-1其余的全部被初始化为0
+	
+		测试代码：
+			#include <stdio.h>
+			#include <stdlib.h>
+			
+			int main()
+			{
+			    int array_not_init[10];
+			    printf("print the not init one.\n");
+			    for(int i = 0;i<10;i++){
+			        printf("%d\n",array_not_init[i]);
+			    }
+			    int array_init[10] = {-1};
+			    printf("print the init one.\n");
+			    for(int i = 0;i<10;i++){
+			        printf("%d\n",array_init[i]);
+			    }
+			    int *created_array = (int*)malloc(10*sizeof(int));
+			    printf("print the malloced one.\n");
+			    for(int i = 0;i<10;i++){
+			        printf("%d\n",created_array[i]);
+			    }
+			    return 0;
+			}
+	
+		测试结果：
+	
+			1966698477
+			4200848
+			6422352
+			4200955
+			print the init one.
+			-1
+			0
+			0
+			0
+			0
+			0
+			0
+			0
+			0
+			0
+			print the malloced one.
+			13241968
+			13238464
+			67108868
+			34988
+			13241968
+			13238464
+			13242360
+			1398230852
+			0
+			0
+	
+	```
 
-	测试代码：
-		#include <stdio.h>
-		#include <stdlib.h>
-		
-		int main()
-		{
-		    int array_not_init[10];
-		    printf("print the not init one.\n");
-		    for(int i = 0;i<10;i++){
-		        printf("%d\n",array_not_init[i]);
-		    }
-		    int array_init[10] = {-1};
-		    printf("print the init one.\n");
-		    for(int i = 0;i<10;i++){
-		        printf("%d\n",array_init[i]);
-		    }
-		    int *created_array = (int*)malloc(10*sizeof(int));
-		    printf("print the malloced one.\n");
-		    for(int i = 0;i<10;i++){
-		        printf("%d\n",created_array[i]);
-		    }
-		    return 0;
-		}
-
-	测试结果：
-
-		1966698477
-		4200848
-		6422352
-		4200955
-		print the init one.
-		-1
-		0
-		0
-		0
-		0
-		0
-		0
-		0
-		0
-		0
-		print the malloced one.
-		13241968
-		13238464
-		67108868
-		34988
-		13241968
-		13238464
-		13242360
-		1398230852
-		0
-		0
-
-```
-```
-
-		int main(){
-		//	int a = 0;
-		
-		//	(a++)++;
-			//********************//要改动自己网站上的错误因为a++就已经不是左值了
-		
-		
-			float b;
-			int a = 2;
-			b = 1.0 /(float) a;
-			printf("%f\n",b);
-		
-			int c = 1, d = 0;
-			printf("%d",c--||d);
-			//continue 是提前结束本次循环
-			return 0;
-		}
-
-```
 
 * char *a[]与char a[][len]
 	* char *name[10] 
@@ -417,53 +397,54 @@ categories: C/C++语言
 		char name[3][10]是一个二维字符串数组，由于已经初始化了，所以放在程序的.bss段（Block Started by Symbol）属于静态内容分配；所以其形参类型必须是char[][10],或者char[3][10]
 
 	* 测试的程序
-	{%highlight ruby%}
 	
-			#include <stdio.h>
-			#include <stdlib.h>
-			
-			#define STRING_NUM 3
-			#define STRING_LENGTH 5
-			
-			char *string_pointer[STRING_NUM] = {"hello","what is","yourname."};
-			
-			char db_array[STRING_NUM][STRING_LENGTH] = {"my name","is","yaoming"};
-			void print_s(char *s){
-			    printf("%s\n",s);
-			}
-			
-			void print_string_pointer(char **input_string_pointer){
-			    for(int i = 0;i<STRING_NUM;i++){
-			        print_s(input_string_pointer[i]);
-			    }
-			}
-			void print_db_array(char input_db_array[][STRING_LENGTH]){
-			    for(int i = 0;i<STRING_NUM;i++){
-			        print_s(input_db_array[i]);
-			    }
-			}
-			void gen_print(char ** in){
-			    for(int i = 0;i<STRING_NUM;i++){
-			        print_s(in[i]);
-			    }
-			}
-			int main()
-			{
-			    putchar('\n');
-			    print_string_pointer(string_pointer);
-			    putchar('\n');
-			    print_db_array(db_array);
-			
-			    putchar('\n');
-			    gen_print(string_pointer);
-			    putchar('\n');
-			    gen_print(db_array);
-			    return 0;
-			}
-	
-	{%endhighlight%}
+		{%highlight ruby%}
+		
+				#include <stdio.h>
+				#include <stdlib.h>
+				
+				#define STRING_NUM 3
+				#define STRING_LENGTH 5
+				
+				char *string_pointer[STRING_NUM] = {"hello","what is","yourname."};
+				
+				char db_array[STRING_NUM][STRING_LENGTH] = {"my name","is","yaoming"};
+				void print_s(char *s){
+				    printf("%s\n",s);
+				}
+				
+				void print_string_pointer(char **input_string_pointer){
+				    for(int i = 0;i<STRING_NUM;i++){
+				        print_s(input_string_pointer[i]);
+				    }
+				}
+				void print_db_array(char input_db_array[][STRING_LENGTH]){
+				    for(int i = 0;i<STRING_NUM;i++){
+				        print_s(input_db_array[i]);
+				    }
+				}
+				void gen_print(char ** in){
+				    for(int i = 0;i<STRING_NUM;i++){
+				        print_s(in[i]);
+				    }
+				}
+				int main()
+				{
+				    putchar('\n');
+				    print_string_pointer(string_pointer);
+				    putchar('\n');
+				    print_db_array(db_array);
+				
+				    putchar('\n');
+				    gen_print(string_pointer);
+				    putchar('\n');
+				    gen_print(db_array);
+				    return 0;
+				}
+		
+		{%endhighlight%}
 
-# <center>内存</center>
+# 内存
 
 * 内存池式和单个式申请内存
 	* 内存池式：由于申请的是一整块连续的内存，所以释放的时候也要一整块释放，而**不能分块释放**。
@@ -481,7 +462,7 @@ categories: C/C++语言
 
 * 高级语言如java等已经在语言内部已经通过垃圾处理机制实现了内存管理
 
-# <center>宏</center>
+# 宏
 * 宏定义中的**'\#\#'**用法
 
 	作用：
@@ -509,15 +490,15 @@ categories: C/C++语言
 
 
 
-# <center>错误处理</center>
+# 错误处理
 * 错误处理机制的比较常用的方法是：
 	* 对函数的输入参数进行检查
 	* 利用函数的返回值
 		* 一般情况下函数的返回值已经在业内形成了不成文的规定，返回**0表示成功**，返回正数表示这个**函数处理的涉及的个数**，返回**负数表示错误类型**
 
-# <center>接口设计</center>
+# 接口设计
 在程序设计的时候，要从变化的角度来看待问题；任何一件事情都有恒定不变的部分，和经常变化的部分。比如造一个普通的杯子都要有盖子和杯体。但是盖子千变万化，杯体也是千变万化。这些不变的部分就是机制，机制永远运行；一直在变化的部分叫做策略，策略经常发生变化。**通过接口的方式将机制和策略分离可以从容应对变化**
-# <center>库</center>
+# 库
 
 * 动态库和静态库
 	* 静态库是被编到了exe文件中
@@ -540,7 +521,7 @@ categories: C/C++语言
 	* .a相当于windows中的.lib
 	* .so相当于windows中的.so
 
-# <center>测试</center>
+# 测试
 
 * 测试一般使用cbehave进行c语言函数测试（大量的使用到mock思想）
 * 测试范围：（仍有待总结）
@@ -548,7 +529,7 @@ categories: C/C++语言
 	* 文件测试的时候要考虑更多的情况比如奇怪的字符，内容的多少
 	* 在进行数据的测试的时候没有必要进行非常大的数据量的测试。
 
-# <center> BUG</center>
+# BUG
 
 *  使用系统中的自带的字符处理函数strcpy(),strcmp()等函数
 
@@ -573,45 +554,48 @@ categories: C/C++语言
 	
 	{%endhighlight%}
 	
-	**注意这句：if(strlen(token)<max_suffix_length)**
-	在使用strcpy()的时候如果token字符串的长度大于suffix的长度那么，就会发生莫名其妙的错误，这种错误非常难以发现，因为它不会卡死在strcpy()函数位置，而是会搅乱后续的运行的内存，会导致的情况如：在这段函数附近申请的字符数组等变量，在这个函数之后引用的时候就会发生乱码的情况。而出现这种情况的我们只有一步一步的往上屏蔽知道发现出错的这个函数。汗!!!!!
+**注意这句：if(strlen(token)<max_suffix_length)**
+	
+在使用strcpy()的时候如果token字符串的长度大于suffix的长度那么，就会发生莫名其妙的错误，这种错误非常难以发现，因为它不会卡死在strcpy()函数位置，而是会搅乱后续的运行的内存，会导致的情况如：在这段函数附近申请的字符数组等变量，在这个函数之后引用的时候就会发生乱码的情况。而出现这种情况的我们只有一步一步的往上屏蔽知道发现出错的这个函数。汗!!!!!
 
 
 * 另外注意在for循环中的++号的使用
 
-	{%highlight ruby%}
+{%highlight ruby%}
+
+for (position_to_insert,increments = 0; increments<porper_number;
+
+//这一步成立就行，自己使用break_if_repeat特别容易犯错
+increments++){
+	position_to_insert = (input_num_container[i] + increments*increments) % porper_number;
+	/*
+	以上for语句与下面的for语句不同：
+	for (position_to_insert,increments = 0; increments<porper_number;//这一步成立就行，自己使用break_if_repeat特别容易犯错
+			position_to_insert = (input_num_container[i] + increments*increments++) % porper_number;){
+	这样执行下来一定会比上的少一步，因为得到position之后increments就+1；
+	而上面的的是先+1之后再得到position
+		
+	*/
 	
-		for (position_to_insert,increments = 0; increments<porper_number;//这一步成立就行，自己使用break_if_repeat特别容易犯错
-					increments++){
-				position_to_insert = (input_num_container[i] + increments*increments) % porper_number;
-				/*
-				以上for语句与下面的for语句不同：
-				for (position_to_insert,increments = 0; increments<porper_number;//这一步成立就行，自己使用break_if_repeat特别容易犯错
-						position_to_insert = (input_num_container[i] + increments*increments++) % porper_number;){
-				这样执行下来一定会比上的少一步，因为得到position之后increments就+1；
-				而上面的的是先+1之后再得到position
-					
-				*/
-				
-				printf("position_to_insert:%d\n",position_to_insert);
-			
-				if (!is_be_filled[position_to_insert]){
+	printf("position_to_insert:%d\n",position_to_insert);
+
+	if (!is_be_filled[position_to_insert]){
+
 	
-				
-					//result[i] = position_to_insert;
-					is_be_filled[position_to_insert] = 1;
-					p = position_to_insert;
-	
-					break;
-				}
-			}
-	
-	{%endhighlight%}
+		//result[i] = position_to_insert;
+		is_be_filled[position_to_insert] = 1;
+		p = position_to_insert;
+
+		break;
+	}
+}
+
+{%endhighlight%}
 
 
 
 
-# <center>程序</center>
+# 程序
 
 1.汉诺塔
 
@@ -758,9 +742,9 @@ categories: C/C++语言
 6.求前n项的平方和
 7.判断是否是素数
 
-# <center>IDE</center>
+# IDE
 
 * 无论那个IDE在使用过程中涉及到相关文件的配置的时候一定要使用相对路径，为了避免在不同的电脑上打不开文件。
 * codeblocks
 	* codeblocks中的Match case表示是否匹配大小写
-	* $(TARGET_NAME)//codeblocks在编译的时候会自动将$(TARGET_NAME)换成Debug和Release
+	* \$(TARGET_NAME)//codeblocks在编译的时候会自动将\$(TARGET_NAME)换成Debug和Release
