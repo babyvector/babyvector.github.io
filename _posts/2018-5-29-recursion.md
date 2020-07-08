@@ -1,7 +1,7 @@
 ---
 layout: post
-title: C/C++中的递归
-categories: [C/C++]
+title: 递归
+categories: [数据结构与算法]
 tags: CBIR
 ---
 ### 代码部分（merge_pass由自己实现）
@@ -32,7 +32,7 @@ tags: CBIR
 * 将n-1个盘从一个座移动到另一个座上（n>1）.这就是大和尚让小和尚做的工作，它是一个递归的过程，即和尚将任务层层下放，直到第64个和尚为止。
 * 将1个盘子从一个座上移动到另一个座上。这是大和尚自己做的工作。
 
-```
+{% highlight c++ %}
 #include<stdio.h>
 int main(){
 	void hanoi(int n,char one,char two,char three);
@@ -54,7 +54,8 @@ void hanoi(int n,char one,char two,char three){
 void move(char x,char y){
 	printf("%c->%c\n",x,y);
 }
-```
+{% endhighlight %}
+
 
  
 

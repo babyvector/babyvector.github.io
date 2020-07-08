@@ -170,18 +170,7 @@ nav a.selected:hover {
 
 .pull-right { float: right; }
 
-img.inline.pull-right {
-  margin-left: 1em;
-}
 
-img.inline.pull-left {
-  margin-right: 1em;
-  max-width: 30%;
-}
-
-img {
-  max-width: 100%;
-}
 
 .clear { clear: both; }
 
@@ -192,12 +181,7 @@ img {
     float: right;
 }
 
-.post img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 1.5em auto 1.6em auto;
-}
+
 
 .sidebox {
     overflow: auto;
@@ -644,11 +628,13 @@ figure .two-third {
   padding: 0 1em;
   background-color: #fefefe;
 }
+
 .post-footer-self-promotion img {
   float: left;
   margin-left: -84px;
   margin-top: 16px;
 }
+
 .post-footer-self-promotion strong {
   background-color: lightyellow;
 }
@@ -662,9 +648,11 @@ img.inline.pull-left {
   max-width: 22%;
 }
 
+
 img {
-  max-width: 100%;
+  width: 80%;
 }
+
 
 code.has-jax {font: inherit;
               font-size: 100%;

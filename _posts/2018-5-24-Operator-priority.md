@@ -100,7 +100,8 @@ e.g.
 
 ```
 #### 3. 一个= 和 >=号没有分辨而造成的错误实例
-```
+
+{% highlight c++ %}
 int a,b,c;
 while(a=b>c){
 	//code here
@@ -110,31 +111,32 @@ while( (a=b)>c ){
 }
 //以上两种情况产生的最后结果是不同的，逻辑运算符还是大于赋值运算符的优先级的
 
-	#include<iostream>
+#include<iostream>
+
+using namespace std;
+
+int test_return_value(int input_num){
 	
-	using namespace std;
 	
-	int test_return_value(int input_num){
-		
-		
-		return input_num;
-	}
+	return input_num;
+}
+
+int main(){
 	
-	int main(){
-		
-		int testa = 10;
-		int testb = 20;
-		cout<< "testa=test_return_value(30):" << test_return_value(30) <<endl;
-		cout<< "(testa=testb):" << (testa=testb) <<endl;
-		//测试点1 
-		cout<<"testa=test_return_value(30)<10:"<< ( (testa=test_return_value(30)) <10) <<endl;
-		cout<<"now for testa is:"<<testa<<endl;
-		//测试点2 
-		cout<<"(testa=test_return_value(30)<10):"<< ( (testa=test_return_value(30)<10) ) <<endl;
-		cout<<"now for testa is:"<<testa<<endl;
-		//测试点1和测试点2的最终结果不相同还是因为运算符的优先级不同造成的结果
-		//所以优先级这一关不过不要想着能写出复杂的 C 语句 
-		return 0;
-	}
-```
+	int testa = 10;
+	int testb = 20;
+	cout<< "testa=test_return_value(30):" << test_return_value(30) <<endl;
+	cout<< "(testa=testb):" << (testa=testb) <<endl;
+	//测试点1 
+	cout<<"testa=test_return_value(30)<10:"<< ( (testa=test_return_value(30)) <10) <<endl;
+	cout<<"now for testa is:"<<testa<<endl;
+	//测试点2 
+	cout<<"(testa=test_return_value(30)<10):"<< ( (testa=test_return_value(30)<10) ) <<endl;
+	cout<<"now for testa is:"<<testa<<endl;
+	//测试点1和测试点2的最终结果不相同还是因为运算符的优先级不同造成的结果
+	//所以优先级这一关不过不要想着能写出复杂的 C 语句 
+	return 0;
+}
+{% endhighlight %}
+
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AVL树和旋转操作
+title: 树-avl树
 categories: [数据结构与算法]
 tags: CBIR
 ---

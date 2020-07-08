@@ -1,7 +1,10 @@
 ---
 layout: post
-title: 计算机操作系统
+title: cpu寄存器
+categories: [操作系统]
+tags: CBIR
 ---
+
 
 计算机中的寄存器手心intel芯片的寄存器
 

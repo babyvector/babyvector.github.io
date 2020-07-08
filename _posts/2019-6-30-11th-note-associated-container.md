@@ -1,7 +1,7 @@
 ---
 layout: post
 title: C++ Primer第11章|关联容器
-categories: C/C++语言
+categories: [C/C++]
 ---
 
 ## 关联容器类型

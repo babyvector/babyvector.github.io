@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 迪杰斯特拉算法以及四种应用拓展
+title: 图-迪杰斯特拉
 categories: [数据结构与算法]
 tags: CBIR
 ---

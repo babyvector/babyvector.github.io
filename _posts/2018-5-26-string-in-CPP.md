@@ -88,10 +88,12 @@ for(auto &c:s){...}//可以改变原字符串中的字符//对象绑定
 
 	string还支持assign、insert、erase操作。
 	* assign操作
-		
+		{% highlight c++ %}
 		s.assign(args)将s中的字符替换为args指定的字符，返回一个指向s的引用
-{%highlight ruby%}
 		const char *cp = "Stately,plump Buck";
 		s.assign(cp,7);
 		s.insert(s.size(),cp+7);
-{%endhighlight%}
+		{% endhighlight %}
+		
+
+

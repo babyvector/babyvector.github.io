@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 一些常用的电脑和软件快捷键
+title: 常用软件快捷键
 categories: [电脑和软件相关技巧]
 ---
 

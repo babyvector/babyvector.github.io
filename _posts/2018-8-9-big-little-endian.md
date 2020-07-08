@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 操作系统|大小端问题解读
+title: 操作系统-大小端问题解读
 categories: [操作系统]
 ---
 

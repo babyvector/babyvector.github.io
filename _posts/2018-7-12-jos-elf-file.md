@@ -1,3 +1,9 @@
+---
+layout: post
+title: elf文件构成
+categories: [操作系统]
+---
+
 ##jos中的有关elf文件
 
 一般用于获取elf文件的详细信息的两个命令

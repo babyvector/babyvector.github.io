@@ -11,16 +11,17 @@ permalink: /blog/:title.html
 safe: true
 lsi: false
 
-markdown: kramdown 
-#由于使用的是markdown pad为了适应kramdown语法在使用# header的时候要有空格且要空一行
-#highlighter:  pygments
 
-#kramdown:
- #   input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
-  #  extensions:
-    #- autolink
-   # - footnotes
-    #- smart
+
+#由于使用的是markdown pad为了适应kramdown语法在使用# header的时候要有空格且要空一行
+highlighter:  rouge
+markdown: kramdown
+kramdown:
+    highlighter: rouge
+    syntax_highlighter_opts:
+        block:
+            line_numbers: false
+      
 encoding: utf-8
 
 #hard_wrap: false

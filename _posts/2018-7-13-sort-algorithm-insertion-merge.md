@@ -1,14 +1,14 @@
 ---
 layout: post
-title: 排序算法总结-插入和归并排序
+title: 排序-插入和归并排序
 categories: [数据结构与算法]
 ---
 
 
 ## 问题的具体描述见PAT7-13
 这一次的插入排序和归并排序都是自己手动完成的，之前也遇到过考察归并排序，希望以后能够见到更好的算法
-```
 
+{% highlight c++ %}
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -155,5 +155,4 @@ int main(){
 	
 	return 0;
 }
-
-```
+{% endhighlight %}

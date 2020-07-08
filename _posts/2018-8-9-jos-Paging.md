@@ -1,6 +1,6 @@
 ---
 layout: post
-title: jos|paging
+title: jos-paging
 categories: [操作系统]
 ---
 

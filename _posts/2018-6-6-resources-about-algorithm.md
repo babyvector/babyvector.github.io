@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 一些数据结构和算法的资源
+title: 资源-资源链接
 categories: [数据结构与算法]
 tags: CBIR
 ---

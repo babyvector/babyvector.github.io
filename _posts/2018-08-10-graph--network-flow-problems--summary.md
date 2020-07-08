@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 图|网络流问题|总结
+title: 图-网络流问题
 categories: [数据结构与算法]
 ---
 

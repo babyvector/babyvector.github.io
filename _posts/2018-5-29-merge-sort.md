@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 归并排序(merge sort)
+title: 排序-归并排序
 categories: [数据结构与算法]
 tags: CBIR
 mathjax: true
@@ -42,7 +42,8 @@ $\sum_{i=0}^N\int_{a}^{b}g(t,i)\text{d}t$
 
 
 ### 代码部分（merge_pass由自己实现）
-```
+
+{% highlight c++ %}
 #include <stdio.h>
 
 #define ElementType int
@@ -97,12 +98,14 @@ void merge_pass(ElementType list[], ElementType sorted[], int N, int length){
 
 	int anchor1 = start_pos;
 	int anchor2 = next_pos;
-	while (N>anchor1+length){//（1）漏掉了N = start_pos情况 会出现这种情况 1 2 3 4 5 6 7 8 0 9  这种情况能混乱过关（加在了下面）
-							 //（2）最初写的时候是写成了start_pos+length,但是start_pos是一直会变化的。
+	while (N>anchor1+length){
+		//（1）漏掉了N = start_pos情况 会出现这种情况 1 2 3 4 5 6 7 8 0 9  这种情况能混乱过关（加在了下面）
+		//（2）最初写的时候是写成了start_pos+length,但是start_pos是一直会变化的。
 		if( list[start_pos] < list[next_pos] ){
 			sorted[sorted_sp++] = list[start_pos];
 			if (start_pos+1 == anchor2){
-				while (next_pos<N && next_pos<anchor2+length){//（3）next_pos<anchor2+length这一步没写造成无法将前段处理
+				while (next_pos<N && next_pos<anchor2+length){
+				//（3）next_pos<anchor2+length这一步没写造成无法将前段处理
 					sorted[sorted_sp++] = list[next_pos++];
 				}
 				anchor1 = start_pos = anchor2 + length;
@@ -136,14 +139,14 @@ void merge_pass(ElementType list[], ElementType sorted[], int N, int length){
 	}
 	
 }
+{% endhighlight %}
 
-```
 
 ### 维基百科上的相关代码
 
 #### 代码1：迭代版
 
-```
+{% highlight c++ %}
 template<typename T> //整數或浮點數皆可使用,若要使用物件(class)時必須設定"小於"(<)的運算子功能
 void merge_sort(T arr[], int len) {
 	T* a = arr;
@@ -172,11 +175,12 @@ void merge_sort(T arr[], int len) {
 	}
 	delete[] b;
 }
-```
+{% endhighlight %}
+
 
 #### 代码2：递归版
 
-```
+{% highlight c++ %}
 template<typename T>
 void merge_sort_recursive(T arr[], T reg[], int start, int end) {
 	if (start >= end)
@@ -202,5 +206,4 @@ void merge_sort(T arr[], const int len) {
 	merge_sort_recursive(arr, reg, 0, len - 1);
 	delete[] reg;
 }
-
-```
+{% endhighlight %}

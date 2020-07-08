@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 最大子列和的四种算法
+title: 动态规划-连续序列
 categories: [数据结构与算法]
 tags: CBIR
 ---
@@ -22,40 +22,41 @@ tags: CBIR
 
 ### 第一种算法  复杂度 $O(N^3)$
 
-```
+{% highlight c++ %}
 int max = 0;
-	int temp_max = 0;
-	for (int i = 0; i < container.size();i++){
-		for (int j = i; j < container.size();j++){
-			for (int k = i; k <= j;k++){
-				temp_max += container[k];
-			}
-			
-			if (temp_max>=max){
-				max = temp_max;
-			}
-			temp_max = 0;
+int temp_max = 0;
+for (int i = 0; i < container.size();i++){
+	for (int j = i; j < container.size();j++){
+		for (int k = i; k <= j;k++){
+			temp_max += container[k];
 		}
-	}
-```
-
-### 第二种算法   复杂度 $O(N^3)$
-
-```
-	int max = 0;
-	int temp_max = 0;
-	for (int i = 0; i < container.size(); i++){
-		for (int j = i; j < container.size(); j++){
-				
-			temp_max += container[j];
-
-			if (temp_max >= max){
-				max = temp_max;
-			}
+		
+		if (temp_max>=max){
+			max = temp_max;
 		}
 		temp_max = 0;
 	}
-```
+}
+{% endhighlight %}
+
+### 第二种算法   复杂度 $O(N^3)$
+
+{% highlight c++ %}
+int max = 0;
+int temp_max = 0;
+for (int i = 0; i < container.size(); i++){
+	for (int j = i; j < container.size(); j++){
+			
+		temp_max += container[j];
+
+		if (temp_max >= max){
+			max = temp_max;
+		}
+	}
+	temp_max = 0;
+}
+{% endhighlight %}
+
 
 ### 第三种算法   复杂度 $O(NlogN)$
 
@@ -63,7 +64,7 @@ int max = 0;
 | :-: |
 |![](../image/sort/mooc-merge-sort.JPG)|
 
-```
+{% highlight c++ %}
 struct Return_value{
 	int left;
 	int right;
@@ -182,39 +183,41 @@ Return_value return_max_sum_sequence(vector<int>&input_container,int start,int e
 	}
 
 }
-```
+{% endhighlight %}
+
 ### 第四种算法在线处理算法   算法复杂度（O(N)）
 
-```
+{% highlight c++ %}
 int temp_max = 0;
-	int max = 0;
+int max = 0;
 
-	int temp_position1 = -1;
-	int temp_position2 = -1;
+int temp_position1 = -1;
+int temp_position2 = -1;
 
-	int real_position1 = -1;
-	int real_position2 = -1;
+int real_position1 = -1;
+int real_position2 = -1;
 
-	for (int i = 0; i < container.size();i++){
-		temp_max += container[i];
-		if (temp_position1 == -1){
-			temp_position1 = i;
-			temp_position2 = i;
-		}
-		else{
-			temp_position2 = i;
-		}
-
-		if (temp_max<0){
-			temp_max = 0;
-			temp_position1 = -1;
-			temp_position2 = -1;
-		}
-		else if (temp_max>max){
-			max = temp_max;
-			real_position1 = temp_position1;
-			real_position2 = temp_position2;
-		}
+for (int i = 0; i < container.size();i++){
+	temp_max += container[i];
+	if (temp_position1 == -1){
+		temp_position1 = i;
+		temp_position2 = i;
 	}
-```
+	else{
+		temp_position2 = i;
+	}
+
+	if (temp_max<0){
+		temp_max = 0;
+		temp_position1 = -1;
+		temp_position2 = -1;
+	}
+	else if (temp_max>max){
+		max = temp_max;
+		real_position1 = temp_position1;
+		real_position2 = temp_position2;
+	}
+}
+{% endhighlight %}
+
 

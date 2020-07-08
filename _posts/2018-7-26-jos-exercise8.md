@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 求素数的方法
+title: jos-exercise8
 categories: [操作系统]
 ---
 #start

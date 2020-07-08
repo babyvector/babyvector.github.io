@@ -3,32 +3,278 @@ layout: postl
 title: linux命令
 categories: [linux命令积累]
 ---
+
+## man 
+
+* 功能：查看命令手册，取自(manual)
+
+* 用法：
+	* man name(命令，库函数，系统调用，配置文件)
+	* man section name(指定章节号,因为有的时候一个名字可以在不同的章节里出现比如sleep在不同的章节里都会有) 
+		* 章节编号：常见
+			* 1.命令
+			* 2.系统调用
+			* 3.库函数
+			* 4.配置文件
+	* man -k regexp(列出关键字(keyword)与正则表达式regexp匹配的手册像目录)
+	* 空格进行翻页
+* 列出的内容：
+	* 列出基本功能和语法
+	* 对于c语言的函数调用，列出头文件和链接函数库
+	* 功能说明
+	* SEE ALSO：有关的其他项目的名字和章节号(**这是一些重要的交叉信息**)
+
+## netstat
+
+## ln
+
+* 功能：
+
+	建立文件（硬/软连接）或文件夹（软链接）
+
+* 链接的概念：
+
+	linux中的链接分为两种：
+	* 硬链接，默认情况下就是硬链接，在linux系统中保存在磁盘分区中的文件都有一个索引节点号。**多个文件名指向同一个索引节点号是存在的这就是硬链接**。这样用户就可以建立硬链接到重要文件，以防止误删。多个目录名对应一个索引节点的时候，删除一个目录名并不影响索引节点和其他目录名的链接。只有删除所有的目录名之后才会删除对应的索引节点。
+	* 软连接：可以按照windows系统中的快捷方式来理解（文件或者文件夹都可以建立软连接）
+
+* 简单用法示例：
+  * ln filename link_name//通过硬连接将filename文件连接到link_name上；之后任何对二者的任何一个文件操作，另一个也发生相应的改变;但是删除任意一个文件并不会对另一个文件造成影响。
+  * ln -s filename soft_link_name//改变任何一个文件内容，另一个文件也会发生相应的改变，但是删除filename的时候，soft_link_name也会失效，反之不会。
+
+* 注意：windows文件夹与VMware上跑的操作系统的文件夹无法建立连接。
+
+
+
+## date
+
+* 功能：显示日期
+
+## cal
+
+* 功能：打印日历
+
+* 用法：cal year
+
+## bc
+
+* 功能：计算器(基本计算器功能，支持变量，函数，条件和循环等编程功能<类似C语言的小型编程语言，可以进行任意精度的计算>)
+
+* 精度
+	* 缺省精度
+		* bc 缺省精度为小数后面**0**位
+		* bc -l 缺省精度位小数点后**20**位
+	* 可以通过设置scale自行决定精度(小数点位数)
+		* scale = 10000
+
+## passwd
+
+* 功能：更改口令
+	* 普通用户可以更改自己的口令
+	* 超级用户：
+		修改口令之前不验证旧的口令
+		可修改自己的口令，还可强迫设置其他用户的口令，但是也不能读出其他用户的口令，系统中不存在明码指令
+		如果忘记了自己超级用户的口令会比较麻烦
+
+### ntpdate
+
+* 功能：通过NTP协议校对系统时间
+
+* 用法：
+	* ntpdate -q 0.pool.ntp.org//来查询时间，普通用户也可以完成
+
+## 正则表达式
+
+* 基本元字符：. * [ \ ^ $
+* 其他字符与其自身匹配
+
+## od
+
+* 功能：dump files in octal and other formats;将文件转换为规定进制的数字
+* 示例：cat main.c | od -t x1
+
+## iconv
+
+* 功能：中文字符编码的转换
+* 示例：
+	* iconv -f gbk -t utf8 (from GBK to UTF8)
+	* iconv -f gbk -t gbk (from UTF8 to GBK)
+
+## ldd
+
+* 功能：动态链接命令ldd，暂时还不完全
+* 使用方法：任何一个运行的程序使用ldd programme就可以看到他所需要的动态链接库。
+* 示例：
+	文件：main.c
+	文件内容：
+		#include<stdio.h>
+		int main(){
+			return 0;
+		}
+	@1：gcc main.c -o main
+	@2: ldd main
+	显示结果：
+		linux-gate.so.1 => (0xb7f8f000)
+		libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0xb7dbb000)
+		/lib/ld-linux.so.2 (0xb7f91000)
+
+## touch
+* 功能：生成新的文件；或者更新文件的时间戳
+
+## rsync
+* 功能：远程同步remote sync，可以镜像整个目录树；当更新同一个文件，但是时间戳不相同的时候，如果文件太大，rsync只对文件发生变化的部分进行更新。
+
+## copy
+* copy -u 
+-u选项进行增量拷贝(update)，就是两个相同的文件夹中有相同的文件，但是时间戳是不相同的，所以在进行增量拷贝的时候只将最新的时间戳的文件拷贝过去，进行更新。
+
+## xargs
+* 功能：将标准输入构造成为命令的命令行参数。当需要进行处理的文件数目过多的话，xargs会自行启动多线程。
+**注意：这个叫做批处理**,当在命令中使用这个参数的时候会极大的加快命令的运行速度，因为这个时将标准输入进行成批的操作，极大的加快速度。
+
+## time
+* 功能：显示一个命令执行过程所用的时间
+* 示例： time find ./ -name '*.c'
+	如果运行的命令是一个组合的功能，就要time （find ... -exec ...）
+
+## tar
+* 功能：进行文件的**归档**，和抽取（一开始是用在磁带文件上的）
+
+* -c Create创建新磁带。从头开始写，以前存于磁带上的数据会被覆盖掉
+* -t Table列表。磁带上的文件名列表，当不指定文件名时，将列出所有文件
+* -x eXTract抽取。从磁带中抽取指定的文件。当不指定文件名时，抽取所有的文件。 
+* v Verbose冗长。每处理一个文件，就打印出文件名，并在该名前冠以功能字母
+* **f**这个字母非常的重要，用来指定设备文件名
+* z 采用gzip压缩算法
+* j 采用bzip2压缩算法
+
+用例：
+	tar cvf /dev/rct0 .
+	将当前目录树备份到设备/dev/rct0中，圆点表示的目录是当前目录
+	tar tvf /dev/rct0
+	查看磁带设备/dev/rct0上的文件目录
+	tar xvf /dev/rct0
+	将磁带设备/dev/rct0上的文件恢复到文件系统中
+
+## gzip
+
+* 功能：进行压缩操作，压缩速度比较快，但是效率比较低
+## gunzip
+
+## bzip2
+
+* 功能：进行压缩，压缩速度比较慢但是，压缩效率比较高
+## bunzip2
+
+## export
+* 功能：可以设置永久的环境变量
+  例如：export SERVER=1.2.34.4
+
+## env
+* 功能：可以查看本机中的环境变量
+
+## dd
+
+**注意：**这个命令是一种特殊风格的命令
+* 功能：磁盘的拷贝功能
+* 示例：
+	dd if=/dev/urandom of=test.dat bs=1024 count=512
+	用dd命令，生成512KB测试数据文件test.dat
+	命令行参数中：if,of,bs,count分别指定输入文件，输出文件，块大小(block size)，以及块计数。
+
+## /dev
+
+* 作用：这个东西是一个设备驱动
+* /dev/null 这个是一个文件驱动
+* /dev/urandom 这个相当于一个无限的产生随机数的堆
+
 ## gcc
+* 示例：
+
+		gcc -O0 -Wall -g -masm=intel -Wa,-ahl -c main_old.c
+		gcc -O0 -Wall -g 
+		-g生成调试信息
+		-masm=intel 生成的汇编格式文件按照intel方式进行输出
+		-Wa, -ahl 
+			-Wa,说明后面这些命令都是给汇编文件说的a高级语言,h汇编语言l将这些文件进行列表
+
+		命令总体：编译c语言源程序文件mytest.c并生成c程序与汇编代码对比
+## 命令风格
+* 风格1：dd 之类的功能
+* 风格2：find gcc之类
+		特点:以减号打头的一个**由多个字符构成的单词**用作选项
+		find src -name '*.c' -type f -exec dos2unix --keepdate {} \;
+		将所有拓展名.c的普通文件由windows文本格式转换为Linux格式
+
+		gcc -O0 -Wall -g -masm=intel -Wa,-ahl -c main_old.c
+		gcc -O0 -Wall -g 
+		-g生成调试信息
+		-masm=intel 生成的汇编格式文件按照intel方式进行输出
+		-Wa, -ahl 
+			-Wa,说明后面这些命令都是给汇编文件说的a高级语言,h汇编语言l将这些文件进行列表
+
+		命令总体：编译c语言源程序文件mytest.c并生成c程序与汇编代码对比
+* 风格3：ls grep 当今比较流行的格式
+		特点：长选项与短选项，有的选项同时有两种格式，也有的选项仅有长格式或仅有短格式
+		ls --classify --all --size --human-readable --width=80 /home/jiang 长选项的方式
+		ls -Fashw80 /home/jiang 多个选项挤在一起
+		ls -F -a -s -h -w 80 /home/jiang 多个选项分开
+		ls -F -w80 /home/jiang -has 可以把选项放到后面
+
+## mkfs
+
+* 功能：执行此命令的时候是对文件系统进行初始化。
+
+## df
+
+* 功能：df命令读出部分信息
+* 示例：df -i和df
+
+
+
+## gcc
+
+* gcc主要包括:
+	* cpp（预处理器）
+	* gcc(c编译器),g++(c++编译器)等编译器
+		* binutils等二进制工具
+			* as(汇编器)
+			* ld（链接器）
+			* ...
+
+* 在linux下面编译的过程：
+	* 源文件 -> 预处理 -> 编译 -> 汇编 -> 链接 -> 可执行
+	* cpp -o hello.i hello.c  预处理
+	* ccl -o hello.s hello.i  编译
+	* as -o hello.o hello.s	  汇编
+	* ld -o hello hello.o     链接
+
+* gcc命令格式：gcc [选项]<文件名>
+	* -o filename：指定输出文件为filename.该选项gcc产生什么输出，无论是可执行文件，目标文件，汇编文件还是预处理后的c代码
+	* 如果没有使用-o选项，默认的输出结果是：可执行文件为"a.out"，编译后产生的目标文件是"sourcename.o"，汇编文件是"sourcename.s",而预处理后的C源代码送往标准输出。
+	* 对于源代码main.c，可以通过如下命令编译成最终可执行文件（默认包含了预处理、编译、汇编及链接四个阶段）
+		
+* gcc main.c -o main
 
 gcc -c 表示只是进行编译，而不进行链接
 gcc -o 表示进行编译之后要进行链接
 
 ## ls
-ls=list  -a -l -h -d -i
 
-  ls   显示当前目录下的文件
+* 功能说明
+  
+	ls=list  -a -l -h -d -i
 
-  ls/  显示根目录下的文件
-
-	* ls /home
-
-  ls -a(all)显示所有文件包括隐藏文件（前面加.表示，所以隐藏文件时候前面加点)
-
-  ls -l(long长格式显示)显示较为详细的文件信息
-
-  ls -h(human)更人性化的显示文件大小(ls -lh=ls -hl=显示更为详细的文件信息）
-
-  ls -d指定目录查看
-
-  ls -i查看文件的i节点就像省份证号一样
+* 参数说明
+  * ls -a(all)显示所有文件包括隐藏文件（前面加.表示，所以隐藏文件时候前面加点)
+  * ls -l(long长格式显示)显示较为详细的文件信息
+  * ls -h(human)更人性化的显示文件大小(ls -lh=ls -hl=显示更为详细的文件信息）
+  * ls -d指定目录查看
+  * ls -i查看文件的i节点就像省份证号一样（查看文件的文件描述符，每两个不同的文件描述符不相同）
        一般可以组合使用 ls -asSh  为显示文件的大小 S是对文件进行大小排序
 
-例子：
+* 例子：
+
 ```
 ls -lR  ->R代表子目录
 ls -l|find *|wc -l
@@ -124,10 +370,12 @@ rm -rf !(old_jos|new_jos)//删除除了old_jos和new_jos之外的文件
 
 ## cat
 
-	cat进行文件的读取
-	cat 文件查看
-    cat filename      //其实实际上cat有很多很多的用法
-	cat -n passwd  cat 参数  文件  -n表示列出行号
+* 命令的功能：cat进行文件的读取,文件查看
+* 例子：
+  * cat filename      //其实实际上cat有很多很多的用法
+  * cat -n filename1 filename2 > filename3 	//合并两个文件到filename3,并在filename3中显示行号
+  * cat -n passwd  //cat 参数  文件  -n表示列出行号
+  * cat > main.c	//使用键盘在终端中创建一个新文件
 ## wc
 查看文件中的行数或者字数
 ```
@@ -305,7 +553,7 @@ $jobs
 ```
 
 ## who
-who 进行用户查看
+who 进行用户查看;列出当前已经登陆入系统的用户
 
      -a  能打印的全都打印  
      -d  打印死掉的进程		
@@ -401,7 +649,7 @@ sudo 只有拥有root 权限的用户才能使用
      sudo adduser  创建一个新用户
      sudo adduser lilei 创建一个lilei的新用户
      sudo usermod   为用户添加用户组
-     sudo usermod -G sudo lilei  将lilei加入sudo组
+     sudo usermtouchod -G sudo lilei  将lilei加入sudo组
      sudo chown   变更文件所有者
      sudo chown shiyanlou iphone6 将iphone6文件变更给shiyanlou
      sudo deluser  删除一个用户
@@ -431,7 +679,9 @@ Less命令
 
 ## file
 	这个功能用来显示文件类型，例如echo就是一个二进制类型文件
+	
 ## chmod
+
 chmod 对文件的权限进行修改
 
       chomd 700 iphone6 是指将iphone6文件的权限修改为-rwx------
@@ -567,41 +817,69 @@ rename 用perl正则表达式来作为一个参数进行重命名
 		卸载一个已安装的软件包（保留配置文档）
 ```
 ## grep
-```
-用途：在文件中查找并显示包含制定字符串的行
-格式：grep  [选项]…. 查找条件 目标文件
-常用命令选项
-	-i:查找时忽略大小写
-	-v：反转查找，输出与查找条件不相符的行
-查找条件设置
-	要查找的字符串以双引号括起来
-	“^……”表示以……开头，”……$”表示以……结尾
-    “^$”表示空行
-grep –n  “/dev” tst(-n是显示行号的意思，整个意思是在tst文件中搜索带有/dev字符的文件
-以下是一个例子grep -n "iostream" /home/xuyongkang/Desktop/test.c)<这是grep配合字符串搜索使用>
 
-grep –n “sdc[0-6]” tst  <这是grep配合正则表达式使用>
-Eg：ls –al | grep ^d(显示以d打头的目录，grep进行筛选)
+grep 这个命令有一个特点，因为当查找的文件是只有一个的时候，他列出信息的时候只是列出行号，而不会显示出文件文件名。因此可以在查找时并上/dev/null这样就能够显示出文件了。
 
-```
+* 用途：在文件中查找并显示包含制定字符串的行
+* 格式：grep  [选项]…. 查找条件 目标文件
+* 常用命令选项
+	* -i:查找时忽略大小写
+	* -v：反转查找，输出与查找条件不相符的行
+	* 查找条件设置，正则表达式
+		* 要查找的字符串以双引号括起来
+		* “^……”表示以……开头，”……$”表示以……结尾
+		* “^$”表示空行
+	* -H , 意思是：with-filename
+	* -h , 意思是: no-filename
+* 使用实例：
+	* grep –n  “/dev” tst(-n是显示行号的意思，整个意思是在tst文件中搜索带有/dev字符的文件
+	* 以下是一个例子grep -n "iostream" /home/xuyongkang/Desktop/test.c)<这是grep配合字符串搜索使用>
+
+	* grep –n “sdc[0-6]” tst  <这是grep配合正则表达式使用>
+	* Eg：ls –al | grep ^d(显示以d打头的目录，grep进行筛选)
+
+
 ## find
 
 使用方法
 
 ```  
 	find [path] [option] [expression]
+	@1:首先确定查找范围
+	@2:满足条件的目录或者文件的条件
+	@3:满足要求之后执行的动作
 ```
 
 例子
 
 ```
+	例子1：
 	find ./total/ -name "*.tif" -exec cp {} /amyfile/train/ \;
 	这里加入了\;这样才能正常运行否则就不能正常的运行。
 	这样做能构保证当复制大量的文件的时候不会出现参数列表过长出现无法复制的情况，
 	因为使用普通的mv和cp的时候因为参数列表没法进行复制。
+	例子2：
+	find ver1.d ver2.d -name '*.c' -print
+	1. 范围:当前目录的子目录ver1.d和ver2.d
+	2. 条件：与名字*.c匹配。注：*.c应当用引号括起来
+	3. 动作：把查找到的文件的路径打印出来
 ```
 更详细的功能
 	
+* ()表示与但是要加上反斜线进行转义 \(\)反斜线必须要加，因为shell会对圆括号进行特殊的处理.
+	一般情况下 find ! -type d -links +2 -print这种情况下也是与
+
+* -o 表示或
+* ！表示非
+
+* -mtime 
+	表示最近的修改的时间
+	find / -type f -mtime -10 -print
+	从根目录开始检索最近10天之内曾经修改过的普通磁盘文件（目录不算）
+* -size
+	表示体积+-表示大于和小于
+	find ~ -size +100k \(-name core -o -name '*.tmp'\) -print
+	找文件大于100k名字叫做core 或者能够匹配'*.tmp',然后打印出来
 * （0）限定搜索的层数
 
 ```
@@ -678,7 +956,7 @@ $ find /home/bob -cmin -60
 	查看当前文件下文件大小大于20M的文件，并显示大小，之后排序显式。
 ```
 
-* （9）结合-exec
+* （9）结合-exec(-exec \;二者要配对进行使用，并且可以使用很多对)
 
 ```
 我们使用 find 命令找到文件后，只能看到文件路径。如果想进一步查看文件信息，可以结合 ls 命令来实现。
@@ -835,6 +1113,19 @@ bash配置文件->环境变量常用变量如下：
 
 ## 环境变量
 
+* 环境变量一般情况下存放的文件夹
+  * /etc/profile
+  * bash与bash profile
+  * 在当前用户文件夹下面建一个./bash/profile
+  * 改/etc/profile中的文件
+    * vi /etc/profile
+    * 然后往文件中加入export JAVA_HOME=/usr/local/jdk1.7.0.05
+					
+					export PATH=$PATH:$JAVA_HOME/bin
+    * 然后执行source /etc/profile让其生效
+    * 然后写java --version就可以看到有没有生效
+    * 如果还不能及时生效请重启
+
 * set
 
 	显示当前 Shell 所有环境变量，包括其内建环境变量（与 Shell 外观等相关），用户自定义变量及导出的环境变量
@@ -857,6 +1148,7 @@ bash配置文件->环境变量常用变量如下：
 
 
 ## 正则表达式
+
 			touch file{1..5}.txt
 			# 使用通配符批量创建 5 个文件
 			$ touch file{1..5}.txt
@@ -1132,6 +1424,7 @@ tar对文件进行打包
 ```
 
 ## xargs 和 find
+
 ```
 	xargs:将linux命令产生的输出：文件列表，字符串列表等传递给后面相应的命令。
 	
@@ -1194,184 +1487,208 @@ df -h人性化显示硬盘情况
 ```
 ## dd
 
-参数注释：
+* 参数注释：
+  1. **if=文件名：输入文件名，缺省为标准输入。即指定源文件。**< if=input file >
 
-```
-1. if=文件名：输入文件名，缺省为标准输入。即指定源文件。< if=input file >
+  2. **of=文件名：输出文件名，缺省为标准输出。即指定目的文件。**< of=output file >
 
-2. of=文件名：输出文件名，缺省为标准输出。即指定目的文件。< of=output file >
+  3. ibs=bytes：一次读入bytes个字节，即指定一个块大小为bytes个字节。
 
-3. ibs=bytes：一次读入bytes个字节，即指定一个块大小为bytes个字节。
+  	 obs=bytes：一次输出bytes个字节，即指定一个块大小为bytes个字节。
 
-   obs=bytes：一次输出bytes个字节，即指定一个块大小为bytes个字节。
+   	 **bs=bytes：同时设置读入/输出的块大小为bytes个字节。**
 
-   bs=bytes：同时设置读入/输出的块大小为bytes个字节。
+  4. cbs=bytes：一次转换bytes个字节，即指定转换缓冲区大小。
 
-4. cbs=bytes：一次转换bytes个字节，即指定转换缓冲区大小。
+  5. skip=blocks：从输入文件开头跳过blocks个块后再开始复制。
 
-5. skip=blocks：从输入文件开头跳过blocks个块后再开始复制。
+  6. seek=blocks：从输出文件开头跳过blocks个块后再开始复制。
 
-6. seek=blocks：从输出文件开头跳过blocks个块后再开始复制。
+	**注意：通常只用当输出文件是磁盘或磁带时才有效，即备份到磁盘或磁带时才有效**。
 
-注意：通常只用当输出文件是磁盘或磁带时才有效，即备份到磁盘或磁带时才有效。
+  7. **count=blocks：仅拷贝blocks个块，块大小等于ibs指定的字节数。**
 
-7. count=blocks：仅拷贝blocks个块，块大小等于ibs指定的字节数。
+  8. conv=conversion：用指定的参数转换文件。
 
-8. conv=conversion：用指定的参数转换文件。
+  	 ascii：转换ebcdic为ascii
 
-    ascii：转换ebcdic为ascii
+     ebcdic：转换ascii为ebcdic
 
-    ebcdic：转换ascii为ebcdic
+     ibm：转换ascii为alternate ebcdic
 
-    ibm：转换ascii为alternate ebcdic
+     block：把每一行转换为长度为cbs，不足部分用空格填充
 
-    block：把每一行转换为长度为cbs，不足部分用空格填充
+     unblock：使每一行的长度都为cbs，不足部分用空格填充
 
-    unblock：使每一行的长度都为cbs，不足部分用空格填充
+     lcase：把大写字符转换为小写字符
 
-    lcase：把大写字符转换为小写字符
+     ucase：把小写字符转换为大写字符
 
-    ucase：把小写字符转换为大写字符
+     swab：交换输入的每对字节
 
-    swab：交换输入的每对字节
+     noerror：出错时不停止
 
-    noerror：出错时不停止
+     notrunc：不截短输出文件
 
-    notrunc：不截短输出文件
+     sync：将每个输入块填充到ibs个字节，不足部分用空（NUL）字符补齐。
 
-    sync：将每个输入块填充到ibs个字节，不足部分用空（NUL）字符补齐。
-```
-dd应用实例
+	**注意：关于dd命令最常用的几个参数是:if of bs count.**
 
-1. 将本地的/dev/hdb整盘备份到/dev/hdd
-```
-#dd if=/dev/hdb of=/dev/hdd
-```
+* dd应用实例
+  1. 将本地的/dev/hdb整盘备份到/dev/hdd
 
-2. 将/dev/hdb全盘数据备份到指定路径的image文件
-```
-#dd if=/dev/hdb of=/root/image
-```
+		```
+		#dd if=/dev/hdb of=/dev/hdd
+		```
+  
+   2. 将/dev/hdb全盘数据备份到指定路径的image文件
 
-3. 将备份文件恢复到指定盘
-```
-#dd if=/root/image of=/dev/hdb
-```
+		```
+		#dd if=/dev/hdb of=/root/image
+		```
 
-4. 备份/dev/hdb全盘数据，并利用gzip工具进行压缩，保存到指定路径
-```
-#dd if=/dev/hdb | gzip > /root/image.gz
-```
+   1. 将备份文件恢复到指定盘
 
 
-5. 将压缩的备份文件恢复到指定盘
-```
-#gzip -dc /root/image.gz | dd of=/dev/hdb
-```
+		```
+		#dd if=/root/image of=/dev/hdb
+		```
 
+   1. 备份/dev/hdb全盘数据，并利用gzip工具进行压缩，保存到指定路径
 
-6. 备份与恢复MBR
-```
-备份磁盘开始的512个字节大小的MBR信息到指定文件：
-#dd if=/dev/hda of=/root/image count=1 bs=512
-   count=1指仅拷贝一个块；bs=512指块大小为512个字节。
-恢复：
-#dd if=/root/image of=/dev/had
-将备份的MBR信息写到磁盘开始部分
-```
+		```
+		#dd if=/dev/hdb | gzip > /root/image.gz
+		```
 
-7. 备份软盘
-```
-#dd if=/dev/fd0 of=disk.img count=1 bs=1440k (即块大小为1.44M)
-```
+   1. 将压缩的备份文件恢复到指定盘
 
-8. 拷贝内存内容到硬盘
-```
-#dd if=/dev/mem of=/root/mem.bin bs=1024 (指定块大小为1k)  
-```
+		```
+		#gzip -dc /root/image.gz | dd of=/dev/hdb
+		```
 
-9. 拷贝光盘内容到指定文件夹，并保存为cd.iso文件
-```
-#dd if=/dev/cdrom(hdc) of=/root/cd.iso
-```
-10. 增加swap分区文件大小
-```
-	第一步：创建一个大小为256M的文件：
-	#dd if=/dev/zero of=/swapfile bs=1024 count=262144
-	第二步：把这个文件变成swap文件：
-	#mkswap /swapfile
-	第三步：启用这个swap文件：
-	#swapon /swapfile
-	第四步：编辑/etc/fstab文件，使在每次开机时自动加载swap文件：
-	/swapfile    swap    swap    default   0 0
-```
-11. 销毁磁盘数据
-```
-#dd if=/dev/urandom of=/dev/hda1
-注意：利用随机的数据填充硬盘，在某些必要的场合可以用来销毁数据。
-```
-12. 测试硬盘的读写速度
-```
-#dd if=/dev/zero bs=1024 count=1000000 of=/root/1Gb.file
-#dd if=/root/1Gb.file bs=64k | dd of=/dev/null
-通过以上两个命令输出的命令执行时间，可以计算出硬盘的读、写速度。
-```
-13. 确定硬盘的最佳块大小：
-```
-	#dd if=/dev/zero bs=1024 count=1000000 of=/root/1Gb.file
-	#dd if=/dev/zero bs=2048 count=500000 of=/root/1Gb.file
-	#dd if=/dev/zero bs=4096 count=250000 of=/root/1Gb.file
-	#dd if=/dev/zero bs=8192 count=125000 of=/root/1Gb.file
-	通过比较以上命令输出中所显示的命令执行时间，即可确定系统最佳的块大小。
-```
-14. 修复硬盘：
-```
-	#dd if=/dev/sda of=/dev/sda 或dd if=/dev/hda of=/dev/hda
-	当硬盘较长时间(一年以上)放置不使用后，磁盘上会产生magnetic flux point，当磁头读到这些区域时会遇到困难，
-	并可能导致I/O错误。当这种情况影响到硬盘的第一个扇区时，可能导致硬盘报废。
-	上边的命令有可能使这些数 据起死回生。并且这个过程是安全、高效的。
-```
-15. 利用net
-16. 
-17. 远程备份
-```
-	#dd if=/dev/hda bs=16065b | netcat < targethost-IP > 1234
-	在源主机上执行此命令备份/dev/hda
-	#netcat -l -p 1234 | dd of=/dev/hdc bs=16065b
-	在目的主机上执行此命令来接收数据并写入/dev/hdc
-	#netcat -l -p 1234 | bzip2 > partition.img
-	#netcat -l -p 1234 | gzip > partition.img
-	以上两条指令是目的主机指令的变化分别采用bzip2、gzip对数据进行压缩，并将备份文件保存在当前目录。
-```
-16. 将一个大视频文件的第i个字节的值改成0x41（大写字母A的ASCII值）
-```
-#echo A | dd of=bigfile seek=$i bs=1 count=1 conv=notrunc
-```
-17. 建立linux虚拟盘，用文件模拟磁盘
-```
-	在进行linux的实验中，如果没有多余的硬盘来做测试。则可以在linux下使用文件来模拟磁盘，以供测试目的。
-	其模拟过程如下所示，摘录自《Oracle数据库核心技术与实务详解－教你如何成为Oracle 10g OCP》一书。
-	1)以root用户创建一个ASM磁盘所在的目录。
-	# mkdir –p /u01/asmdisks
-	2)通过dd命令创建6个400M大小的文件，每个文件代表一块磁盘。
-	[root@book u01]# cd asmdisks
-	[root@book asmdisks]# dd if=/dev/zero of=asm_disk1 bs=1024k count=400
-	[root@book asmdisks]# dd if=/dev/zero of=asm_disk2 bs=1024k count=400
-	[root@book asmdisks]# dd if=/dev/zero of=asm_disk3 bs=1024k count=400
-	[root@book asmdisks]# dd if=/dev/zero of=asm_disk4 bs=1024k count=400
-	[root@book asmdisks]# dd if=/dev/zero of=asm_disk5 bs=1024k count=400
-	[root@book asmdisks]# dd if=/dev/zero of=asm_disk6 bs=1024k count=400
-	3)将这些文件与裸设备关联。
-	[root@book asmdisks]# chmod 777 asm_disk*
-	[root@book asmdisks]# losetup /dev/loop1 asm_disk1
-	[root@book asmdisks]# losetup /dev/loop2 asm_disk2
-	[root@book asmdisks]# losetup /dev/loop3 asm_disk3
-	[root@book asmdisks]# losetup /dev/loop4 asm_disk4
-	[root@book asmdisks]# losetup /dev/loop5 asm_disk5
-	[root@book asmdisks]# losetup /dev/loop6 asm_disk6
-	注意：如果要删除通过dd模拟出的虚拟磁盘文件的话，直接删除模拟出的磁盘文件
-	（也就是asm_disk1、asm_disk2…asm_disk6）还不够，还必须执行losetup -d /dev/loopN，在这里N从1到6。否则，磁盘文件所占用的磁盘空间不能释放
-```
+   1. 备份与恢复MBR
+      1. 备份磁盘开始的512个字节大小的MBR信息到指定文件：
+		
+			#dd if=/dev/hda of=/root/image count=1 bs=512
+		
+			count=1指仅拷贝一个块；bs=512指块大小为512个字节。
+		
+	  2. 恢复：
+		
+			#dd if=/root/image of=/dev/had
+			
+			将备份的MBR信息写到磁盘开始部分
+		
+
+   1. 备份软盘
+
+		```
+		#dd if=/dev/fd0 of=disk.img count=1 bs=1440k (即块大小为1.44M)
+		```
+
+   1. 拷贝内存内容到硬盘
+
+		```
+		#dd if=/dev/mem of=/root/mem.bin bs=1024 (指定块大小为1k)  
+		```
+
+  1. 拷贝光盘内容到指定文件夹，并保存为cd.iso文件
+
+		```
+		#dd if=/dev/cdrom(hdc) of=/root/cd.iso
+		```
+
+  1.  增加swap分区文件大小
+
+		```
+			第一步：创建一个大小为256M的文件：
+			#dd if=/dev/zero of=/swapfile bs=1024 count=262144
+			第二步：把这个文件变成swap文件：
+			#mkswap /swapfile
+			第三步：启用这个swap文件：
+			#swapon /swapfile
+			第四步：编辑/etc/fstab文件，使在每次开机时自动加载swap文件：
+			/swapfile    swap    swap    default   0 0
+		```
+
+  1.  销毁磁盘数据
+
+		```
+		#dd if=/dev/urandom of=/dev/hda1
+		注意：利用随机的数据填充硬盘，在某些必要的场合可以用来销毁数据。
+		```
+
+  1.  测试硬盘的读写速度
+
+		```
+		#dd if=/dev/zero bs=1024 count=1000000 of=/root/1Gb.file
+		#dd if=/root/1Gb.file bs=64k | dd of=/dev/null
+		通过以上两个命令输出的命令执行时间，可以计算出硬盘的读、写速度。
+		```
+
+  1.  确定硬盘的最佳块大小：
+
+		```
+			#dd if=/dev/zero bs=1024 count=1000000 of=/root/1Gb.file
+			#dd if=/dev/zero bs=2048 count=500000 of=/root/1Gb.file
+			#dd if=/dev/zero bs=4096 count=250000 of=/root/1Gb.file
+			#dd if=/dev/zero bs=8192 count=125000 of=/root/1Gb.file
+			通过比较以上命令输出中所显示的命令执行时间，即可确定系统最佳的块大小。
+		```
+
+  1.  修复硬盘：
+
+		```
+			#dd if=/dev/sda of=/dev/sda 或dd if=/dev/hda of=/dev/hda
+			当硬盘较长时间(一年以上)放置不使用后，磁盘上会产生magnetic flux point，当磁头读到这些区域时会遇到困难，
+			并可能导致I/O错误。当这种情况影响到硬盘的第一个扇区时，可能导致硬盘报废。
+			上边的命令有可能使这些数 据起死回生。并且这个过程是安全、高效的。
+		```
+
+  1.  利用net远程备份
+
+		```
+			#dd if=/dev/hda bs=16065b | netcat < targethost-IP > 1234
+			在源主机上执行此命令备份/dev/hda
+			#netcat -l -p 1234 | dd of=/dev/hdc bs=16065b
+			在目的主机上执行此命令来接收数据并写入/dev/hdc
+			#netcat -l -p 1234 | bzip2 > partition.img
+			#netcat -l -p 1234 | gzip > partition.img
+			以上两条指令是目的主机指令的变化分别采用bzip2、gzip对数据进行压缩，并将备份文件保存在当前目录。
+		```
+
+  1.  将一个大视频文件的第i个字节的值改成0x41（大写字母A的ASCII值）
+
+		```
+		#echo A | dd of=bigfile seek=$i bs=1 count=1 conv=notrunc
+		```
+
+  1.  建立linux虚拟盘，用文件模拟磁盘
+
+		```
+			在进行linux的实验中，如果没有多余的硬盘来做测试。则可以在linux下使用文件来模拟磁盘，以供测试目的。
+			其模拟过程如下所示，摘录自《Oracle数据库核心技术与实务详解－教你如何成为Oracle 10g OCP》一书。
+			1)以root用户创建一个ASM磁盘所在的目录。
+			# mkdir –p /u01/asmdisks
+			2)通过dd命令创建6个400M大小的文件，每个文件代表一块磁盘。
+			[root@book u01]# cd asmdisks
+			[root@book asmdisks]# dd if=/dev/zero of=asm_disk1 bs=1024k count=400
+			[root@book asmdisks]# dd if=/dev/zero of=asm_disk2 bs=1024k count=400
+			[root@book asmdisks]# dd if=/dev/zero of=asm_disk3 bs=1024k count=400
+			[root@book asmdisks]# dd if=/dev/zero of=asm_disk4 bs=1024k count=400
+			[root@book asmdisks]# dd if=/dev/zero of=asm_disk5 bs=1024k count=400
+			[root@book asmdisks]# dd if=/dev/zero of=asm_disk6 bs=1024k count=400
+			3)将这些文件与裸设备关联。
+			[root@book asmdisks]# chmod 777 asm_disk*
+			[root@book asmdisks]# losetup /dev/loop1 asm_disk1
+			[root@book asmdisks]# losetup /dev/loop2 asm_disk2
+			[root@book asmdisks]# losetup /dev/loop3 asm_disk3
+			[root@book asmdisks]# losetup /dev/loop4 asm_disk4
+			[root@book asmdisks]# losetup /dev/loop5 asm_disk5
+			[root@book asmdisks]# losetup /dev/loop6 asm_disk6
+			注意：如果要删除通过dd模拟出的虚拟磁盘文件的话，直接删除模拟出的磁盘文件
+			（也就是asm_disk1、asm_disk2…asm_disk6）还不够，还必须执行losetup -d /dev/loopN，在这里N从1到6。否则，磁盘文件所占用的磁盘空间不能释放
+		```
 
 ## dev-null和dev-zero
 
@@ -1536,55 +1853,102 @@ ctrl+alt+F1-F7  ->新开shell，F7是切换回桌面
 ```
 ## linux文件分析
 
-```
 
-1./bin /usr/bin  /usr/local/bin   都是放置用户可执行二进制文件。
+1. /bin /usr/bin  /usr/local/bin   
+	
+	都是放置用户可执行二进制文件。
 
-2./boot 主要是放置liunx系统启动时用到的文件。
+2. /boot 
 
-2./dev   文件夹内主要是西东外设与存储有关的一些相关文件。
+	主要是放置liunx系统启动时用到的文件。
 
-3./etc  放置设置文件。例如用户帐号密码文件，各种服务文件。
+2. /dev   
+
+	文件夹内主要是西东外设与存储有关的一些相关文件。
+
+3. /etc  
+
+	放置设置文件。例如用户帐号密码文件，各种服务文件。
+	
 	/etc/sysconfig/目录包括了在LINUX下各种系统配置文件
+	
 	/etc/xinetd.d/这个是超级守护程序管理的各项服务的设置文件目录。
+	
 	/etc/x11这与x window的设置有关。
+	
 	/etc/gateways 设定路由器
+	
 	/etc/host.conf 文件说明用户的系统如何查询节点名
+	
 	/etc/hosts 设定用户自已的IP与名字的对应表
+	
 	/etc/hosts.equiv 设置远端机不用密码
+	
 	/etc/init.d/多有服务的默认启动脚本都放在这里。
+	
 	/etc/named.boot 设定本机为名字服务器的配置文件
+	
 	/etc/resolv.conf    设置DNS 
+	
 	/etc/fstab    记录开机要mount的文件系统
 	/etc/inittab 设定系统启动时init进程将把系统设置成什么样的runlevel
+	
 	/etc/issue 记录用户登录前显示的信息
+	
 	/etc/group 设定用户的组名与相关信息
+	
 	/etc/passwd 帐号信息
+	
 	/etc/shadow 密码信息
+	
 	/etc/sudoers 可以sudo命令的配置文件
+	
 	/etc/securetty 设定哪些终端可以让root登录
+	
 	/etc/login.defs 所有用户登录时的缺省配置
+	
 	/etc/exports 设定NFS系统用的
+	
 	/etc/modprobe.conf   内核模块额外参数设定
-4./home 系统默认的的用户目录。
+4. /home 
 
-5./lib  /usr/lib  /usr/local/lib  系统使用的函数目录
+	系统默认的的用户目录。
 
-6./lost+found 系统出现异常，产生错误时，会将一些遗失的片段存放于此目录下。
+5. /lib  /usr/lib  /usr/local/lib  
 
-7./mnt /media 这是软盘与光盘的默认挂在点。
+	系统使用的函数目录
 
-8./opt 这是给主机额外安装软件的目录。
+6. /lost+found 
 
-9./root 系统管理员的家目录。
+	系统出现异常，产生错误时，会将一些遗失的片段存放于此目录下。
 
-10./sbin /usr/sbin /usr/local/sbin 放置一些西东管理员才会用到的命令。
+7. /mnt /media 
 
-11./srv  一些服务启动后，这些服务需要访问的数据目录。例如：www服务器需要的网页数据就放在/srv/www中。
+	这是软盘与光盘的默认挂在点。
 
-12./tmp 这是一般用户或者正在执行的临时文件存放的地方，任何人都可以访问，需要定期清理。
+8. /opt 
 
-13./usr 包括系统的主要程序、图形界面所需要的文件、额外的函数库、本季自行安装的文件，以及共享的目录和文件。
+	这是给主机额外安装软件的目录。
+
+9. /root 
+
+	系统管理员的家目录。
+
+10. /sbin /usr/sbin /usr/local/sbin 
+
+	放置一些西东管理员才会用到的命令。
+
+11. /srv  
+
+	一些服务启动后，这些服务需要访问的数据目录。例如：www服务器需要的网页数据就放在/srv/www中。
+
+12. /tmp 
+
+	这是一般用户或者正在执行的临时文件存放的地方，任何人都可以访问，需要定期清理。
+
+13. /usr 
+
+	包括系统的主要程序、图形界面所需要的文件、额外的函数库、本季自行安装的文件，以及共享的目录和文件。
 
 	/usr/includec/c++等程序的文件头与包含文件。
 	
@@ -1598,7 +1962,9 @@ ctrl+alt+F1-F7  ->新开shell，F7是切换回桌面
 	
 	/usr/X11R6程序内的X WindowSystem所需的执行文件几乎都放在此。
 
-14./var 主要放置系统执行过程中经常变化的文件。
+14. /var 
+
+	主要放置系统执行过程中经常变化的文件。
 
     /var/cache 程序文件行过程中的一些暂存盘。
 
@@ -1612,11 +1978,9 @@ ctrl+alt+F1-F7  ->新开shell，F7是切换回桌面
 	
 	/var/spool 是一列队列数据存放的地方。
 
-文件颜色的含义：蓝色为文件夹；绿色是可执行文件；浅蓝色是链接文件；红框文件是加了SUID位，任意限
+文件颜色的含义：**蓝色为文件夹；绿色是可执行文件；浅蓝色是链接文件；红框文件是加了SUID位，任意限权；红色为压缩文件；褐色为设备文件**。
 
-权；红色为压缩文件；褐色为设备文件。
 
-```
 
 ## 特殊符号表示不同的文件夹
 
@@ -1634,7 +1998,7 @@ ctrl+alt+F1-F7  ->新开shell，F7是切换回桌面
 ## netstat-选项
 
 ```
--a 显示所有socket，包括正在监听的。
+-a 显示所有socket，��括正在监听的。
 -c 每隔1秒就重新显示一遍，直到用户中断它。
 -i 显示所有网络接口的信息，格式同“ifconfig -e”。
 -n 以网络IP地址代替名称，显示出网络连接情形。
@@ -1685,10 +2049,73 @@ TIME-WAIT：等待足够的时间以确保远程TCP接收到连接中断请求�
 CLOSED：没有任何连接状态
 ```
 
+## 静态和动态库
+
+* 静态库
+  * 静态库的制作
+
+	count.c
+		
+		int mul(int a, int b){
+			return a*b;
+		}
+	
+	gcc -c count.c		//先生成.o文件
+
+	ar crv countlib.a count.o//将.o文件归档
+
+  *	静态库的使用
+
+	main.c
+
+		#include <stdio.h>
+		#include <stdlib.h>
+
+		int main(char argc, int **argv){
+
+				int a,b;
+				sscanf(argv[1], "%d", &a);
+				sscanf(argv[2], "%d", &b);
+				printf("the result is:%d\n",count(a,b));
+				return 0;
+		}
+
+	gcc main.c -L ./ countlib.a -o cal			//生成可执行文件
+
+	./cal 3 16		//使用可执行文件进行计算
+
+
+* 动态链接库
+  * 动态链接库的制作
+
+	gcc -fPIC -c countlib.c		
+	//先生成与位置无关的目标文件
+
+	gcc -shared countlib.o -o countlib.so
+	//生成动态链接库
+
+  * 动态链接库的使用
+
+	gcc main.c -o cal2 -L ./ countlib.so
+
+	//编译的时候没有什么错误生成
+
+	//但是在运行的时候会有错误，说找不到相应的库
+
+	./cal2 2 4
+
+	//发生这个错误的原因是：这个程序在运行的时候找不到对应的动态链接的库
+	//要想正确运行这个程序的方法是：
+	//1. 执行命令：./cal2 2 4 -L ./ countlib.so
+	//2. 将countlib.so文件拷贝到/usr/lib下；当程序运行的时候系统会自动到路径下找动态链接
+	//3. 将当前countlib.so的路径加入到系统在运行程序时会去自动找的文件的路径。这些文件夹的路径存放在etc/ld.so.conf.d/*.conf文件中
+	//以上三种方法能够让依赖动态库的cal2程序运行
+
+
+
+
 
 <h1 align="center"> shell脚本例子<h1>
-
-
 
 ### 实例1
 {% highlight ruby %}
@@ -1743,43 +2170,43 @@ echo $countPairNum pairs
 ### 实例2
 {% highlight ruby %}
 
-#apply variable
-mkdir realPairFolder
-countPairNum=4200
-maxPicNum=10
-countMax=40
+	#apply variable
+	mkdir realPairFolder
+	countPairNum=4200
+	maxPicNum=10
+	countMax=40
 
-#nameInFind="FERET-*"
-#nameInGrep='FERET-0\{0,2\}'
-for nowInThisFolderNum in $(seq 1 $countMax)
-	do
-		#nowInThisFolderName=`find -name "FERET-*"| grep 'FERET-0\{0,2\}'$nowInThisFolderNum'$'`
-		nowInThisFolderName=$nowInThisFolderNum
-		let maxPicNumForLoopOne=maxPicNum-1
-		for firstPicNum in $(seq 1 $maxPicNumForLoopOne)
-			do
-				firstPicName=$firstPicNum".bmp"
-				firstPicSrc=$nowInThisFolderName"/"$firstPicName
-				let startNumForLoopTwo=firstPicNum+1
-				for secondPicNum in $(seq $startNumForLoopTwo $maxPicNum)
-					do
-						secondPicName=$secondPicNum".bmp"
-						secondPicSrc=$nowInThisFolderName"/"$secondPicName
-						let countPairNum+=1
-						cp $firstPicSrc ./realPairFolder/"ATRealPair"$countPairNum"_1.bmp"
-						echo -n "ATRealPair"$countPairNum"_1.bmp ">>realPairFolder/realPairTxt.txt
+	#nameInFind="FERET-*"
+	#nameInGrep='FERET-0\{0,2\}'
+	for nowInThisFolderNum in $(seq 1 $countMax)
+		do
+			#nowInThisFolderName=`find -name "FERET-*"| grep 'FERET-0\{0,2\}'$nowInThisFolderNum'$'`
+			nowInThisFolderName=$nowInThisFolderNum
+			let maxPicNumForLoopOne=maxPicNum-1
+			for firstPicNum in $(seq 1 $maxPicNumForLoopOne)
+				do
+					firstPicName=$firstPicNum".bmp"
+					firstPicSrc=$nowInThisFolderName"/"$firstPicName
+					let startNumForLoopTwo=firstPicNum+1
+					for secondPicNum in $(seq $startNumForLoopTwo $maxPicNum)
+						do
+							secondPicName=$secondPicNum".bmp"
+							secondPicSrc=$nowInThisFolderName"/"$secondPicName
+							let countPairNum+=1
+							cp $firstPicSrc ./realPairFolder/"ATRealPair"$countPairNum"_1.bmp"
+							echo -n "ATRealPair"$countPairNum"_1.bmp ">>realPairFolder/realPairTxt.txt
 
-						cp $secondPicSrc ./realPairFolder/"ATRealPair"$countPairNum"_2.bmp"
-						echo  "ATRealPair"$countPairNum"_2.bmp  1">>realPairFolder/realPairTxt.txt
+							cp $secondPicSrc ./realPairFolder/"ATRealPair"$countPairNum"_2.bmp"
+							echo  "ATRealPair"$countPairNum"_2.bmp  1">>realPairFolder/realPairTxt.txt
 
 
-						#echo "pair"$countPairNum
-						#echo "pair 1:"$firstPicSrc
-						#echo "pair 2:"$secondPicSrc
-					done
-			done
-	done
-echo "done."
+							#echo "pair"$countPairNum
+							#echo "pair 1:"$firstPicSrc
+							#echo "pair 2:"$secondPicSrc
+						done
+				done
+		done
+	echo "done."
 
 {% endhighlight %}
 
@@ -1787,18 +2214,20 @@ echo "done."
 
 {% highlight ruby %}
 
-for folderName in $(seq 1 40)
-	do
-		cd $folderName
-		for picName in `find -name "*.bmp"`
-			do
-				let count+=1
-				mv $picName $count".bmp"
-			done
-		let count=0
-		cd ..
+	for folderName in $(seq 1 40)
+		do
+			cd $folderName
+			for picName in `find -name "*.bmp"`
+				do
+					let count+=1
+					mv $picName $count".bmp"
+				done
+			let count=0
+			cd ..
 
-	done
+		done
 
 
 {% endhighlight %}
+
+

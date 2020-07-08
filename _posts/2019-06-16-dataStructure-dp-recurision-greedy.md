@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 数据结构与算法|动态规划、贪心和递归
+title: 动态规划-贪心-递归
 categories: [数据结构与算法]
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: C语言知识
-categories: C/C++语言
+categories: [C/C++]
 ---
 
 
@@ -307,6 +307,10 @@ categories: C/C++语言
 	static的作用是限制作用域，所以**函数之前加static表示函数只能在这个文件中使用**
 
 # 变量
+* volatile变量
+	一个定义为volatile的变量是说这变量可能会被意想不到地改变，这样编译器就不会去假设这个变量的值了。精确地说就是，优化器在用到这个变量时必须每次都小心地重新读取这个变量的值(**From Memory**),而不是使用保存在寄存器里的备份。一般CPU读取数据不是直接从内存中读取，而是先在cache中查找，如果找到这个变量就直接使用否则再从内存中重新加载。如果使用volatile修饰一个共享的变量，再转为汇编代码的时候，涉及到操作这个变量的时候，编译指令前会增加一个lock命令；lock前缀的指令在多核处理器下会引发两件事情。**将当前处理器缓存行的数据写回到系统内存，写回的同时回引起其他CPU里缓存了该地址的数据无效。**从而下次再使用的时候就要重新加载。
+
+>https://blog.csdn.net/holandstone/article/details/8596871
 * 变量命名的约定规则
 	* 宏定义变量全部大写
 	* 全局变量首字母大写
@@ -314,10 +318,8 @@ categories: C/C++语言
 * static
 	将变量限定在相应的作用域中
 * 数组的初始化
-
-	```
-	
-		申请内存并进行初始化的时候
+	{% highlight c++ %}
+	申请内存并进行初始化的时候
 		int container[500] = {0};
 		//这样的初始化是正确的，里面的所
 		int container[500] = {-1};
@@ -375,8 +377,7 @@ categories: C/C++语言
 			1398230852
 			0
 			0
-	
-	```
+	{% endhighlight %}
 
 
 * char *a[]与char a[][len]
@@ -397,52 +398,49 @@ categories: C/C++语言
 		char name[3][10]是一个二维字符串数组，由于已经初始化了，所以放在程序的.bss段（Block Started by Symbol）属于静态内容分配；所以其形参类型必须是char[][10],或者char[3][10]
 
 	* 测试的程序
+	{% highlight c++ %}
+	#include <stdio.h>
+	#include <stdlib.h>
 	
-		{%highlight ruby%}
-		
-				#include <stdio.h>
-				#include <stdlib.h>
-				
-				#define STRING_NUM 3
-				#define STRING_LENGTH 5
-				
-				char *string_pointer[STRING_NUM] = {"hello","what is","yourname."};
-				
-				char db_array[STRING_NUM][STRING_LENGTH] = {"my name","is","yaoming"};
-				void print_s(char *s){
-				    printf("%s\n",s);
-				}
-				
-				void print_string_pointer(char **input_string_pointer){
-				    for(int i = 0;i<STRING_NUM;i++){
-				        print_s(input_string_pointer[i]);
-				    }
-				}
-				void print_db_array(char input_db_array[][STRING_LENGTH]){
-				    for(int i = 0;i<STRING_NUM;i++){
-				        print_s(input_db_array[i]);
-				    }
-				}
-				void gen_print(char ** in){
-				    for(int i = 0;i<STRING_NUM;i++){
-				        print_s(in[i]);
-				    }
-				}
-				int main()
-				{
-				    putchar('\n');
-				    print_string_pointer(string_pointer);
-				    putchar('\n');
-				    print_db_array(db_array);
-				
-				    putchar('\n');
-				    gen_print(string_pointer);
-				    putchar('\n');
-				    gen_print(db_array);
-				    return 0;
-				}
-		
-		{%endhighlight%}
+	#define STRING_NUM 3
+	#define STRING_LENGTH 5
+	
+	char *string_pointer[STRING_NUM] = {"hello","what is","yourname."};
+	
+	char db_array[STRING_NUM][STRING_LENGTH] = {"my name","is","yaoming"};
+	void print_s(char *s){
+		printf("%s\n",s);
+	}
+	
+	void print_string_pointer(char **input_string_pointer){
+		for(int i = 0;i<STRING_NUM;i++){
+			print_s(input_string_pointer[i]);
+		}
+	}
+	void print_db_array(char input_db_array[][STRING_LENGTH]){
+		for(int i = 0;i<STRING_NUM;i++){
+			print_s(input_db_array[i]);
+		}
+	}
+	void gen_print(char ** in){
+		for(int i = 0;i<STRING_NUM;i++){
+			print_s(in[i]);
+		}
+	}
+	int main()
+	{
+		putchar('\n');
+		print_string_pointer(string_pointer);
+		putchar('\n');
+		print_db_array(db_array);
+	
+		putchar('\n');
+		gen_print(string_pointer);
+		putchar('\n');
+		gen_print(db_array);
+		return 0;
+	}
+	{% endhighlight %}
 
 # 内存
 
@@ -532,28 +530,25 @@ categories: C/C++语言
 # BUG
 
 *  使用系统中的自带的字符处理函数strcpy(),strcmp()等函数
+{% highlight c++ %}
+//在调用函数中设定的suffix_lenth是10
+char *des_file_type[4] = {"txt","zip","gz","rar"};
+char delim[2] = ".";
+char *file_name_copy = (char*)malloc(sizeof(char)*(strlen(file_name)+10));
+strcpy(file_name_copy,file_name);
 
-	{%highlight ruby%}
-	
-	    //在调用函数中设定的suffix_lenth是10
-	    char *des_file_type[4] = {"txt","zip","gz","rar"};
-	    char delim[2] = ".";
-	    char *file_name_copy = (char*)malloc(sizeof(char)*(strlen(file_name)+10));
-	    strcpy(file_name_copy,file_name);
-	
-	    //开始截取字符
-	    char * token = strtok(file_name_copy, delim);
-	    //继续获取其他的子字符串
-	    while( token != NULL ) {
-	        if(strlen(token)<max_suffix_length){
-	            strcpy(suffix,token);
-	        }
-	        token = strtok(NULL, delim);
-	    }
-	    free(file_name_copy);
-	
-	{%endhighlight%}
-	
+//开始截取字符
+char * token = strtok(file_name_copy, delim);
+//继续获取其他的子字符串
+while( token != NULL ) {
+	if(strlen(token)<max_suffix_length){
+		strcpy(suffix,token);
+	}
+	token = strtok(NULL, delim);
+}
+free(file_name_copy);
+{% endhighlight %}
+
 **注意这句：if(strlen(token)<max_suffix_length)**
 	
 在使用strcpy()的时候如果token字符串的长度大于suffix的长度那么，就会发生莫名其妙的错误，这种错误非常难以发现，因为它不会卡死在strcpy()函数位置，而是会搅乱后续的运行的内存，会导致的情况如：在这段函数附近申请的字符数组等变量，在这个函数之后引用的时候就会发生乱码的情况。而出现这种情况的我们只有一步一步的往上屏蔽知道发现出错的这个函数。汗!!!!!
@@ -561,8 +556,7 @@ categories: C/C++语言
 
 * 另外注意在for循环中的++号的使用
 
-{%highlight ruby%}
-
+{% highlight c++ %}
 for (position_to_insert,increments = 0; increments<porper_number;
 
 //这一步成立就行，自己使用break_if_repeat特别容易犯错
@@ -589,156 +583,143 @@ increments++){
 		break;
 	}
 }
-
-{%endhighlight%}
-
-
-
+{% endhighlight %}
 
 # 程序
 
 1.汉诺塔
 
-```
+{% highlight c++ %}
+int main(){
+		
+	void hanoi(int n,char one,char two,char three);
+	int m;
+	printf("input the number of diskes:");
+	scanf("%d",&m);
+	printf("The step to move %d diskes:\n",m);
+	hanoi(m,'A','B','C');
 
-	int main(){
-		
-		void hanoi(int n,char one,char two,char three);
-		int m;
-		printf("input the number of diskes:");
-		scanf("%d",&m);
-		printf("The step to move %d diskes:\n",m);
-		hanoi(m,'A','B','C');
-	
-	
-		return 0;
-	}
-	void move(char x,char y){
-		printf("%c->%c\n",x,y);
-	}
-	void hanoi(int n,char one,char two,char three){
-		
-		//将n-1个盘子挪动到two上，再将最后一个盘子从one移动到three，最后再将two上的n-1个盘子移动到three上去就行了 
-		if (n == 1){
-			move(one,three);
-			return;
-		}
-		else{
-			hanoi(n - 1, one, three, two);
-			move(one, three);
-			hanoi(n - 1, two, one, three);
-		}
-		
-	}
 
-```
+	return 0;
+}
+void move(char x,char y){
+	printf("%c->%c\n",x,y);
+}
+void hanoi(int n,char one,char two,char three){
+	
+	//将n-1个盘子挪动到two上，再将最后一个盘子从one移动到three，最后再将two上的n-1个盘子移动到three上去就行了 
+	if (n == 1){
+		move(one,three);
+		return;
+	}
+	else{
+		hanoi(n - 1, one, three, two);
+		move(one, three);
+		hanoi(n - 1, two, one, three);
+	}
+	
+}
+{% endhighlight %}
+
 
 2.冒泡排序
 
-```
-
-	int main(){
+{% highlight c++ %}
+int main(){
 		
-		int  container[10] = {10,9,8,7,6,5,4,3,2,1};
-		int N = 10;
-		for (int j = N-1; j >= 1;j--){
-			for (int i = 0; i < j; i++){
-	
-				if (container[i]<container[i + 1]){
-					continue;
-				}
-				else{
-					int temp = container[i];
-					container[i] = container[i + 1];
-					container[i + 1] = temp;
-				}
+	int  container[10] = {10,9,8,7,6,5,4,3,2,1};
+	int N = 10;
+	for (int j = N-1; j >= 1;j--){
+		for (int i = 0; i < j; i++){
+
+			if (container[i]<container[i + 1]){
+				continue;
+			}
+			else{
+				int temp = container[i];
+				container[i] = container[i + 1];
+				container[i + 1] = temp;
 			}
 		}
-		
-		for (int i = 0; i < N;i++){
-			printf("%d\n",container[i]);
-		}
-		return 0;
 	}
-
-```
+	
+	for (int i = 0; i < N;i++){
+		printf("%d\n",container[i]);
+	}
+	return 0;
+}
+{% endhighlight %}
 
 3.求闰年
-
-```
-
-	int main(){
-		int is_leap = -1;//初始化为即不是闰年也不是平常的年份，设这个值为1的时候就是闰年
-		int year = -1;
-		scanf("%d",&year);
-		
-		if (year%4 == 0 && year % 100 || year%400 == 0){
-			is_leap = 1;
-		}
-		else{
-			is_leap = 0;
-		}
+{% highlight c++ %}
+int main(){
+	int is_leap = -1;//初始化为即不是闰年也不是平常的年份，设这个值为1的时候就是闰年
+	int year = -1;
+	scanf("%d",&year);
 	
-		if (is_leap){
-			printf("the year is.\n");
-		}
-		else{
-			printf("the year is not.\n");
-		}
-	
-		return 0;
+	if (year%4 == 0 && year % 100 || year%400 == 0){
+		is_leap = 1;
+	}
+	else{
+		is_leap = 0;
 	}
 
-```
+	if (is_leap){
+		printf("the year is.\n");
+	}
+	else{
+		printf("the year is not.\n");
+	}
+
+	return 0;
+}
+{% endhighlight %}
 
 4.常数转化为2进制
 
-```
-
-	#include<math.h>
-	int main(){
-		
-		int n;
-		scanf("%d",&n);
-		int y_num = -1;
-		int y_c = -1;
-		while (n != 0){
-			printf("%d",n%2);
-			n /= 2;
-		}
-		printf("\n");
+{% highlight c++ %}
+#include<math.h>
+int main(){
 	
-	
-		return 0;
+	int n;
+	scanf("%d",&n);
+	int y_num = -1;
+	int y_c = -1;
+	while (n != 0){
+		printf("%d",n%2);
+		n /= 2;
 	}
+	printf("\n");
 
-```
+
+	return 0;
+}
+{% endhighlight %}
+
 
 5.求最大公约数
+{% highlight c++ %}
+int gcd(int a,int b){
+	while (b != 0){
+		int temp = b;
+		b = a%b;
+		a = temp;
 
-```
-
-	int gcd(int a,int b){
-		while (b != 0){
-			int temp = b;
-			b = a%b;
-			a = temp;
-	
-		}
-		return a;
 	}
-	int main(){
-		
-		int a, b;
-		scanf("%d %d",&a,&b);
-		int c = -1;
-		c = gcd(a,b);
-		printf("%d\n",c);
+	return a;
+}
+int main(){
 	
-		return 0;
-	}
+	int a, b;
+	scanf("%d %d",&a,&b);
+	int c = -1;
+	c = gcd(a,b);
+	printf("%d\n",c);
 
-```
+	return 0;
+}
+{% endhighlight %}
+
 6.求前n项的平方和
 7.判断是否是素数
 

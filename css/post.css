@@ -1,7 +1,7 @@
 /*header and body css*/
 body{
 	width:100%;
-	margin:0 auto;
+	
 	background-color:white;
 	font-family: "Arial","PingHei","Helvetica Neue","Helvetica","Arial","Verdana","sans-serif";
 	font-size:16px;
@@ -22,10 +22,45 @@ body{
 	border:2px;
 	position:float;
 }
+
+H1 {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    margin-bottom: 60px;
+    margin-bottom: 40px;
+    padding: 5px;
+    width: 98%;
+    line-height: 150%;
+    color: #666666;
+}
+
+H2 {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    margin-bottom: 60px;
+    margin-bottom: 40px;
+    padding: 5px;
+    border-bottom: 2px LightGrey solid;
+    width: 98%;
+    line-height: 150%;
+    color: #666666;
+}
+
+H3 {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    border-bottom: 1px LightGrey solid;
+    width: 98%;
+    line-height: 150%;
+    color: #666666;
+}
+
 .post-wrapper{
 	display:block;
-	width:70%;
-	margin:0 auto;
+	width:75%;
+	border:1px solid LightGrey;
+	margin-top:20px;
+	margin-bottom:10px;
+	margin:10px auto;
 	background-color:white;
 	padding-left:5%;
 	padding-right:5%;
@@ -48,11 +83,22 @@ body{
 	border:1px solid #000000;
 	
 }
-img{
-	width:100%;
-	vertical-align:middle;
-	
+
+.post-wrapper img { 
+  /* 图片居中 */
+  clear: both;
+  margin: 0 auto;
+  display: block;
+
+  /* 添加图片阴影 */
+  box-shadow:0px 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
+  webkit-box-shadow:0px 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
+  moz-box-shadow:0px 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
+  o-box-shadow:0px 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
 }
+
+
+
 /*部件的相关样式*/
 a{
 	text-decoration: none;
@@ -63,7 +109,7 @@ a:visited {color: blue}?/* 已被访问过的链接 蓝色 */
 a:hover {color: blue}?/* 鼠标悬浮在上的链接 蓝色 */
 a:active {color: blue} /* 鼠标点中激活链接 蓝色 */
 
-
+/*
 blockquote {
  width:100%;
  background-color: #eae6f3;
@@ -77,6 +123,7 @@ blockquote a{
 	text-decoration:none;
 	
 }
+*/
 /*
 blockquote:before {
   color: #392570;
@@ -101,21 +148,38 @@ h1{
 }
 
 code{
-	#background-color:;
+	
+	font-family: Menlo,Monaco,Consolas,"Andale Mono","lucida console","Courier New",monospace;
+	overflow:hidden;
+	scroll:"no";
 }
 
 pre{
-	font:black;
-	font-size: 14px; font-family: "consolas"; color:black;
+	counter-increment:none;
+	tab-size: 4;
+	font-size: 16px; 
+	font-family: Menlo,Monaco,Consolas,"Andale Mono","lucida console","Courier New",monospace;
+	color:black;
 	border:1px solid #ccc;
-	#box-shadow: -10px 10px 5px #888888;
 	border-radius:3.5px;
-	background-color:#f5f5f5;
+	background-color:#fafafa;
 	width:100%;
 	margin:0 auto;
+	margin-top:10px;
+	margin-bottom:10px;
+	padding-left:10px;
+	padding-top:10px;
+	padding-bottom:10px;
 	overflow:auto;
+	line-height:17px;
+	overflow:hidden;
+	scroll:"no";
 	}
 
+ol{
+   list-style-type: none;
+	
+}
 	/*
 .highlight{
 	background-color:#eee

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 求素数的方法
+title: 哈希
 categories: [数据结构与算法]
 ---
 

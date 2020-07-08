@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 数组实现循环队列
+title: 队列-数组实现循环队列
 categories: [数据结构与算法]
 tags: CBIR
 ---
@@ -13,25 +13,25 @@ tags: CBIR
 
 ## 简单的代码实现
 
-```
-	int queue[MaxVertexNum + 1];
-	int head = 0;
-	int rear = 0;
-	int push(int queue[],int input_element){
-		
-		if ( (head + 1) % (MaxVertexNum + 1)  == rear){
-			return -1;
-		}
-		else{
-			queue[head = (++head) % (MaxVertexNum + 1)] = input_element;
-		}	
+{% highlight c++ %}
+int queue[MaxVertexNum + 1];
+int head = 0;
+int rear = 0;
+int push(int queue[],int input_element){
+	
+	if ( (head + 1) % (MaxVertexNum + 1)  == rear){
+		return -1;
 	}
-	int pop(int queue[]){
-		if (head == rear){
-			return -1;
-		}
-		else{
-			return queue[rear = (++rear) % (MaxVertexNum + 1)];
-		}
+	else{
+		queue[head = (++head) % (MaxVertexNum + 1)] = input_element;
+	}	
+}
+int pop(int queue[]){
+	if (head == rear){
+		return -1;
 	}
-```
+	else{
+		return queue[rear = (++rear) % (MaxVertexNum + 1)];
+	}
+}
+{% endhighlight %}
