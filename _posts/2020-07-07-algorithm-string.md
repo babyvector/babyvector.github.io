@@ -47,6 +47,8 @@ categories: [数据结构与算法]
 
 ### [力扣-13-罗马数字转整数](https://leetcode-cn.com/problems/roman-to-integer/)
 
+### [力扣-14-最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/)
+
 ### [力扣-17-电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/)
   可以使用哈希表-映射表
 
@@ -127,21 +129,25 @@ categories: [数据结构与算法]
 ### [面试题 17.22. 单词转换](https://leetcode-cn.com/problems/word-transformer-lcci/)[en][dfs][graph]
   这个题的整个搜索过程是一个图的搜索过程，比较奇葩的一点在于，在dfs的过程中如果不进行剪就无法AC，而剪枝的方式就是访问过的结点不再重新恢复没有访问过
 
-困难程度：
-[hard]：难
-[medium]：中等
-[sample]：简单
-题目状态和作用：
-[co]->still confused:仍然有些不清晰的
-[en]->enlightening:有启发意义的
-[nf]->not-finished-yet：到目前为止还没有完全靠自己AC的
-解题思路：
-[graph]
-[dfs]
-[dp]：动态规划
-[map]：映射表
-[recu]：递归
-[reca]：回溯
-[mems]：记忆化搜索
+
+|分类|声明|意义|
+|:-:|:-:|:-:|
+|困难程度|||
+||[hard]|困难|
+||[medium]|中等|
+||[sample]|简单|
+|题目状态和作用|||
+||[co]|still confused:仍然有些不清晰的|
+||[en]|enlightening:有启发意义的|
+||[nf]|not-finished-yet：到目前为止还没有完全靠自己AC的|
+|解题思路|||
+||[graph]|图|
+||[dfs]|深度优先搜索|
+||[dp]|动态规划|
+||[map]|映射表|
+||[recu]|递归|
+||[reca]|回溯|
+||[mems]|记忆化搜索|
+||[double-pointer]|双指针|
 
 
