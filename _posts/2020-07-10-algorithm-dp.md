@@ -189,6 +189,46 @@ public:
 };
 {% endhighlight %}
 
+## 有后效型转化为无后效型dp
+
+动态规划只能解决无后效性的带有重复子的问题，所以当遇到一个有后效性的重复子问题的时候，就无法解决，但是一般情况下可以逆向思维去看看倒着求的过程是不是一个无后效性的重复子问题，如果是就能够求解了，如果不是只能另想其他办法了。
+
+关于什么是有后效性：通俗点来讲，我们当前确定的最优状态可能无法用来让下一个状态最优
+
+>https://leetcode-cn.com/problems/dungeon-game/solution/di-xia-cheng-you-xi-by-leetcode-solution/
+
+### [力扣-174-地下城游戏](https://leetcode-cn.com/problems/dungeon-game/)[en][co][hard]
+
+这道题非常有启发性，首先是如何理解倒着求这个过程怎么就是一个无后效型的问题了，然后是这道题的初始化条件的给出非常的巧妙！
+
+简单说一下：正着的一个求解过程，的最终结果是要受两个条件控制才能达到最优的，一个是让到当前位置的和尽量大，一个是让整个过程中需要的能量最小；正是这两个变量决定了最优，所以会有后效性。
+
+而反过来的思考过程，不必看整个矩阵，只考虑一个2x2的矩阵，我们就能知道，倒着思考的过程只需要一个变量就能决定最优值！
+
+{% highlight c++ %}
+class Solution {
+public:
+    int calculateMinimumHP(vector<vector<int>>& dungeon) {
+        if(dungeon.empty())return 0;
+        //给无效值赋值INT_MAX，值得学习
+        vector<vector<int>> f(dungeon.size()+1, vector<int>(dungeon.front().size()+1, INT_MAX));
+        int m = dungeon.size();
+        int n = dungeon.front().size();
+        //先给无效值赋值，值得学习，为什么赋值1也值得学习
+        f[m][n-1] = f[m-1][n] = 1;
+        //无后效性时，倒着dp，什么时间没有后效性值得学习
+        for(int i = m-1; i>=0; --i)
+        {
+            for(int j = n -1; j>=0; --j)
+            {
+                f[i][j] = max(min(f[i][j+1], f[i+1][j])-dungeon[i][j], 1);
+            }
+        }
+        return f[0][0];
+    }
+};
+{% endhighlight %}
+
 |分类|声明|意义|
 |:-:|:-:|:-:|
 |困难程度|||

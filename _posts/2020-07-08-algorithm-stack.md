@@ -84,6 +84,7 @@ public:
 ||[en]|enlightening:有启发意义的|
 ||[nf]|not-finished-yet：到目前为止还没有完全靠自己AC的|
 |解题思路|||
+||[string]|字符串|
 ||[graph]|图|
 ||[dfs]|深度优先搜索|
 ||[dp]|动态规划|
