@@ -57,6 +57,52 @@ public:
 };
 {% endhighlight %}
 
+### [力扣-40-组合总和II](https://leetcode-cn.com/problems/combination-sum-ii/)
+
+这个问题的基本思路还是使用回溯的方法，由于这一次求得也是组合得个数不是一个二叉树，所以也采用数组标记得方法。
+
+关键点还是在于如何去重，这个解决方案得去重代码是放在递归函数后面得while(i+1<nums.size() && nums[i] == nums[i+1])i++;
+
+去重语句放在递归函数得后面意味着，在进行递归得时候我们可以使用一次重复得元素，但是只能使用一次，使用完之后就要跳过
+
+{% highlight c++ %}
+class Solution {
+public:
+    void get(int index, int tmp, int target, vector<int>&nums, vector<bool>& record, vector<int>& tarr, vector<vector<int>>& res)
+    {
+        if(tmp >= target || index == nums.size())
+        {
+            if(tmp == target)
+                res.push_back(tarr);
+            return;
+        }
+        for(int i = index; i<nums.size(); ++i)
+        {
+            if(!record[i])
+            {
+                record[i] = true;
+                tarr.push_back(nums[i]);
+                get(i+1, tmp+nums[i], target, nums, record, tarr, res);
+                record[i] = false;
+                tarr.pop_back();
+                //这个剪枝就是放在了后面，意思是只能先用一次，用一次之后就要往后退
+                while(i+1<nums.size() && nums[i] == nums[i+1])i++;
+            }
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target)
+    {
+        if(candidates.empty())return {};
+        sort(candidates.begin(), candidates.end());
+        vector<vector<int>> res;
+        vector<int> tarr;
+        vector<bool> record(candidates.size(), false);
+        get(0, 0, target, candidates, record, tarr, res);
+        return res;
+    }
+};
+{% endhighlight %}
+
 ### [力扣-46-全排列](https://leetcode-cn.com/problems/permutations/)
 
 这个没有难度，因为元素都是不重复的！
@@ -169,6 +215,95 @@ public:
 };
 {% endhighlight %}
 
+### [力扣-51-N皇后](https://leetcode-cn.com/problems/n-queens/)
+
+N皇后问题是一个普通的回溯问题，但是在处理横、竖、斜的时候要注意处理的细节，这些处理是一块比较多的程序，越多越容易出错，因此越多代码越要清晰！
+
+* 变量定义：用变量n记录当前要填皇后的行，tmp表示正在求得一个解决方案，res放置返回结果
+* 函数逻辑：n从0开始，每次get()填一行，如果填入成功进入下一行，否则返回上一层
+* 终止条件：如果n == (N皇后的规模)则证明填完了，保存这次结果
+
+{% highlight c++ %}
+class Solution {
+public:
+    void get(int n, vector<string>& tmp, vector<vector<string>>& res)
+    {
+        if(n == tmp.size())
+        {
+            res.push_back(tmp);
+            return;
+        }
+        int m = tmp.size();
+        for(int i = 0; i<tmp.size(); ++i)
+        {
+            bool canInsert = true;
+            //竖行
+            for(int v = 0; v<m && canInsert; ++v)
+            {
+                if(tmp[v][i] == 'Q')
+                    canInsert = false;
+            }
+            //横行
+            for(int h = 0; h<m && canInsert; ++h)
+            {
+                if(tmp[n][h] == 'Q')
+                    canInsert = false;
+            }
+            //斜行有两个
+            int sx = n-1;
+            int sy = i-1;
+            while(canInsert && sx>=0 && sy>=0)
+            {
+                if(tmp[sx][sy] == 'Q')
+                    canInsert = false;
+                sx--;
+                sy--;
+            }
+            sx = n+1;
+            sy = i+1;
+            while(canInsert && sx<m && sy<m)
+            {
+                if(tmp[sx][sy] == 'Q')
+                    canInsert = false;
+                sx++;
+                sy++;
+            }
+            sx = n-1;
+            sy = i+1;
+            while(canInsert && sx>=0 && sy<m)
+            {
+                if(tmp[sx][sy] == 'Q')
+                    canInsert = false;
+                sx--;
+                sy++;
+            }
+            sx = n+1;
+            sy = i-1;
+            while(canInsert && sx<m && sy>=0)
+            {
+                if(tmp[sx][sy] == 'Q')
+                    canInsert = false;
+                sx++;
+                sy--;
+            }
+            if(canInsert)
+            {
+                tmp[n][i] = 'Q';
+                get(n+1, tmp, res);
+                tmp[n][i] = '.';
+            }
+        }
+        return;//false;
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> res;
+        string oneLine = string(n, '.');
+        vector<string> tmp(n, oneLine);
+        get(0, tmp, res);
+        return res;
+    }
+};
+{% endhighlight %}
 
 
 
