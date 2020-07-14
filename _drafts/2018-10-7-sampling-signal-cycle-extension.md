@@ -55,23 +55,4 @@ categories: [信号与系统]
 
 	2fH/(m+1)<=fs<=2fL/m,   0<=m<=N-1
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 >https://wenku.baidu.com/view/32d200d80740be1e640e9aa8.html

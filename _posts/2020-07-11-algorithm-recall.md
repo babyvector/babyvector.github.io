@@ -10,9 +10,9 @@ categories: [数据结构与算法]
 
 其中排列问题，又可以分为指数型枚举，组合型枚举和排列型枚举。
 
-* 指数型枚举-是选不选的问题-整个过程是一个完整的二叉树-去重就是剪枝的过程（可以剪掉不选的那一只具体做法就是跳到最后重复的那个位置见四数之和）
-* 组合型枚举-是选定哪几个的问题-使用位运算来进行标记
-* 排列型枚举-是选定所有的然后顺序不同的问题-也可以使用位运算来进行标记-过程是一个分支越来越少的树-剪枝过程也是如果有重复的直接跳到最后那个重复的位置
+* 指数型枚举-是选不选的问题-整个过程是一个**完整的选和不选二叉树**-去重就是剪枝的过程（可以剪掉不选的那一只具体做法就是跳到最后重复的那个位置见四数之和）
+* 组合型枚举-是选定哪几个的问题-使用**位运算来进行标记**
+* 排列型枚举-是选定所有的然后顺序不同的问题-**也可以使用位运算来进行标记**-过程是一个分支越来越少的树-剪枝过程也是如果有重复的直接跳到最后那个重复的位置
 
 ### [力扣-18-四数之和](https://leetcode-cn.com/problems/4sum/)
 
@@ -23,7 +23,8 @@ categories: [数据结构与算法]
 {% highlight c++ %}
 class Solution {
 public:
-    void get(vector<int>& nums, int index, int target, int tupleLen, int tmp, vector<vector<int>>&res, vector<int> tmpRes)
+    void get(vector<int>& nums, int index, int target, int tupleLen, 
+             int tmp, vector<vector<int>>&res, vector<int> tmpRes)
     {
         if(index == nums.size() && tupleLen == 4)
         {
@@ -57,6 +58,16 @@ public:
 };
 {% endhighlight %}
 
+### [面试题-08-04-幂集](https://leetcode-cn.com/problems/power-set-lcci/)
+
+由于题目中给定的条件是给定的数组中不含重复元素，所以可以使用**指数型枚举的递归**方式来做
+
+而更加直观但是不容易想到的方法是：
+
+[1,2,3] 可以分为000 001 010 011 100 101 110 111  0-7共8中二进制的组合
+
+这样更加直观易懂，但是不易想到！
+
 ### [力扣-40-组合总和II](https://leetcode-cn.com/problems/combination-sum-ii/)
 
 这个问题的基本思路还是使用回溯的方法，由于这一次求得也是组合得个数不是一个二叉树，所以也采用数组标记得方法。
@@ -68,7 +79,8 @@ public:
 {% highlight c++ %}
 class Solution {
 public:
-    void get(int index, int tmp, int target, vector<int>&nums, vector<bool>& record, vector<int>& tarr, vector<vector<int>>& res)
+    void get(int index, int tmp, int target, vector<int>&nums, 
+             vector<bool>& record, vector<int>& tarr, vector<vector<int>>& res)
     {
         if(tmp >= target || index == nums.size())
         {
@@ -113,7 +125,8 @@ vector<bool> record(32, false);
 class Solution {
 public:
     
-    void get(int index, vector<int>& nums, vector<int>& tmp, vector<vector<int>>& res)
+    void get(int index, vector<int>& nums, 
+             vector<int>& tmp, vector<vector<int>>& res)
     {
         if(index == nums.size())
         {
@@ -156,6 +169,7 @@ public:
 
 
 ### [力扣-37-解数独](https://leetcode-cn.com/problems/sudoku-solver/)[co][en]
+
 这道题的思想并不难，但是难在细节的处理上，因为这个递归涉及到很多层，所以每一层都要把握好！注意下面代码中的注释行！
 
 {% highlight c++ %}

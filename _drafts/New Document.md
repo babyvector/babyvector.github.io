@@ -1,15 +1,18 @@
 
-#Phil Storrs PC Hardware book
-##Hardware types
+# Phil Storrs PC Hardware book
+
+## memory
+
+### Hardware types
 - RAM
 - ROM
-##Memory allocations
+### Memory allocations
 - Base Memory
 - ExTended memory
 - Expanded(EMS) memory
 - XMS memory
 - Virtul memory
-- 
+
 
 
 +------------------+  <- 0xFFFFFFFF (4GB)
@@ -65,6 +68,6 @@ Conventional memory is especially at a premium when the computer is running on a
 
 ## 硬盘都带有告诉RAM缓存例如16M的
 
-##计算机中的中断号一共16个
+## 计算机中的中断号一共16个
 
 
