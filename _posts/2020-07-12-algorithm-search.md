@@ -51,3 +51,42 @@ mid = (i+j)/2这一句在i和j过大时会发生溢出，所以最好写成mid =
 ### [力扣-1095-山脉数组中查找目标值](https://leetcode-cn.com/problems/find-in-mountain-array/)
 
 这是一个交互式的查找问题，访问提供的函数的次数受限，因此必须使用二分查找法来降低复杂度。
+
+### [面试题-17-08-马戏团人塔](https://leetcode-cn.com/problems/circus-tower-lcci/)
+
+这道题两个注意点：
+
+* std::lower_bound(con.begin(), con.end(), target);->采用二分查找的方式找到第一个>=target的iterator
+* [](const vector<int>& a, const vector<int>& b)   函数中如果不使用引用来传参，将带来极大的效率问题，对于本题而言，如果不用应用传参这题无法AC
+* 另外，体重暗含这一个求最长上升子序列的问题，如果用普通的动态规划会超时->所以借用了二分查找
+{% highlight c++ %}
+class Solution {
+public:
+    int bestSeqAtIndex(vector<int>& height, vector<int>& weight) {
+        if(height.empty())return 0;
+        vector<vector<int>> con;
+        for(int i = 0; i<height.size(); ++i)
+        {
+            con.push_back({height[i], weight[i]});
+        }
+        sort(con.begin(), con.end(), [](const vector<int>& a, const vector<int>& b){
+            if(a[0] < b[0])
+                return true;
+            else if(a[0] == b[0])
+                return a[1]>b[1];
+            else 
+                return false;
+        });
+     
+        vector<int> res1;
+
+        for(int i = 0; i<con.size(); ++i)
+        {
+            vector<int>::iterator p = lower_bound(res1.begin(), res1.end(), con[i][1]);
+            if(p == res1.end())res1.push_back(con[i][1]);
+            else *p = con[i][1];
+        }
+        return res1.size();
+    }
+};
+{% endhighlight %}

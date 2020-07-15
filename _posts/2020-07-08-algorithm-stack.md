@@ -32,7 +32,7 @@ public:
                 result[handling.back().first.first] += tmp;
                 handling.pop_back();
                 index++;
-                return tmp+regin_length;//返回的是时间段
+                return tmp+regin_length;
             }else{
                 handling.push_back(info[index]);
                 regin_length += fun(info, ++index, result, handling);
@@ -55,9 +55,8 @@ public:
             
             string state = scon[1];
             int time = atoi(scon[2].c_str());
-            //将每次的输入分解好，之后再用栈进行处理
             
-            info.push_back({{id, time}, state});
+            info.push_back(\{\{id, time\}, state\});
         }
 
         int index = 0;
@@ -65,7 +64,6 @@ public:
         {
             vector<pair<pair<int, int>, string>>handling;
             handling.push_back(info[index++]);
-            //使用函数操作代替栈操作，简化代码和逻辑
             fun(info, index, result, handling);
         }
 
@@ -95,6 +93,7 @@ public:
 ### [面试题-03-03-堆盘子](https://leetcode-cn.com/problems/stack-of-plates-lcci/)
 
 ### [面试题-16-26-计算器](https://leetcode-cn.com/problems/calculator-lcci/submissions/)
+
 这一题自己使用了链表来处理，即优先处理乘除，处理完乘除之后，再处理加减。实际上使用栈来处理这个过程更加简单。即遇到数字就压栈，如果遇到-号就把下一个数字变成-num压入栈，如果遇到乘除号，就直接弹栈之后和后面的一个数字进行运算，运算完之后把结果压栈，最后求和栈中的所有数即可。
 
 {% highlight c++ %}
